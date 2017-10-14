@@ -3,6 +3,8 @@ package ked.pts3g10.Gameplay;
 
 import java.util.ArrayList;
 
+import ked.pts3g10.Gameplay.CardPackage.Card;
+
 public class Player {
     private Deck deck;
     private int crystals;

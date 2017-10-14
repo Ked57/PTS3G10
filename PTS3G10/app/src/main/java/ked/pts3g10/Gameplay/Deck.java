@@ -3,6 +3,8 @@ package ked.pts3g10.Gameplay;
 
 import java.util.ArrayList;
 
+import ked.pts3g10.Gameplay.CardPackage.Card;
+
 public class Deck {
 
     private int playerId;
@@ -47,5 +49,12 @@ public class Deck {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void addCard(Card card){
+        if(cardList.size() < 15) //TODO: Une classe/Enum avec ces paramètres
+        {
+            cardList.add(card);
+        }
     }
 }
