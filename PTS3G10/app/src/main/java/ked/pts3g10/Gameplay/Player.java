@@ -29,6 +29,11 @@ public class Player {
         this.crystals = crystals;
     }
 
+    public void setCrystals(int id,int crystals) {
+        this.crystals = crystals;
+        context.updateText(id,crystals);
+    }
+
     public int getHealthPoints() {
         return healthPoints;
     }

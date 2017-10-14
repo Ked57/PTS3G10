@@ -27,6 +27,7 @@ public class Board {
     private int seconds; //Temps du tour
     private boolean endRound;
     private boolean playersTurn; // true -> le joueur, false -> l'adversaire
+    private int roundNumber;
 
 
     private LinearLayout V1,V2,V3,V4,V5;//V pour verical, le nombre pour le numéro de colonne
@@ -71,6 +72,8 @@ public class Board {
                 endRound = true;
             }
         });
+
+        roundNumber = 0;
         seconds = DEFAULT_SECONDS;
         endRound = false;
         playersTurn = false; // Valeur acheminée du serveur, implémenté plus tard
@@ -91,6 +94,17 @@ public class Board {
     }
 
     public void newRound(){
+        ++roundNumber;
+
+        if(player.getCrystals() <= 9) { // TODO: Un paramètre avec le nombre maximum de crystaux, ici un dira que c'est 9
+            player.setCrystals(R.id.PlayerCrystalsText,roundNumber); //Pas besoin de vérifier les crystaux de l'aversaire
+            adversary.setCrystals(R.id.ADVCrystalsText,roundNumber);//Chaque joueur voit ses crystaux remis au nombre initial +1 (donc au n° de tour)
+        }
+        else{
+            player.setCrystals(R.id.PlayerCrystalsText,9);
+            adversary.setCrystals(R.id.ADVCrystalsText,9);
+        }
+
         seconds = DEFAULT_SECONDS;
         endRound = false;
         playersTurn = !playersTurn;
@@ -124,8 +138,6 @@ public class Board {
                             cancel();
                         }
 
-
-
                     }
 
                 });
@@ -134,4 +146,6 @@ public class Board {
         }, 0, 1000);
 
     }
+
+   
 }
