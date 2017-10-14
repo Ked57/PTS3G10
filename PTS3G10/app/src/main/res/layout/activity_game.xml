@@ -22,7 +22,7 @@
             android:layout_weight="1">
 
             <TextView
-                android:id="@+id/IACrystalsText"
+                android:id="@+id/ADVCrystalsText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -50,17 +50,18 @@
                 app:srcCompat="@drawable/card" />
 
             <TextView
-                android:id="@+id/IACardsLeftText"
+                android:id="@+id/ADVCardsLeftText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="9"
                 android:textAlignment="viewStart"
+                android:layout_gravity="start"
                 android:textSize="24sp" />
         </FrameLayout>
 
         <TextView
-            android:id="@+id/IANick"
+            android:id="@+id/ADVNick"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -645,6 +646,7 @@
                     android:layout_weight="1"
                     android:text="9"
                     android:textAlignment="viewStart"
+                    android:layout_gravity="start"
                     android:textSize="24sp" />
             </FrameLayout>
 

@@ -3,6 +3,7 @@ package ked.pts3g10.Gameplay;
 
 import java.util.ArrayList;
 
+import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 
 public class Player {
@@ -10,12 +11,14 @@ public class Player {
     private int crystals;
     private int healthPoints;
     private String nickName;
+    private GameActivity context;
 
-    public Player(String nick){
+    public Player(GameActivity context,String nick){
         nickName = nick;
         crystals = 0;
         healthPoints = 30; //A définir
-        deck = new Deck(1,1,new ArrayList<Card>(), "Un deck");//Valeurs exemple
+        this.context = context;
+        deck = new Deck(context,1,1,new ArrayList<Card>(), "Un deck");//Valeurs exemple
     }
 
     public int getCrystals() {
