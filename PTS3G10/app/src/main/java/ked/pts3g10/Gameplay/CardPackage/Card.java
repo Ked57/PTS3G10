@@ -5,13 +5,17 @@ import android.widget.ImageView;
 
 public abstract class Card {
     protected String name;
+    protected String description;
     protected int attactPoints;
+    protected int crystalCost;
     protected int rangePoints;
     protected ImageView background;// L'image qui s'affiche quand on regarde la carte
     protected ImageView thumbnail;// L'image affichée sur le board
 
-    public Card(String name, int ap, int rp, ImageView bg, ImageView thmbn){
+    public Card(String name,String description,int crystalCost, int ap, int rp, ImageView bg, ImageView thmbn){
         this.name = name;
+        this.description = description;
+        this.crystalCost = crystalCost;
         attactPoints = ap;
         rangePoints = rp;
         background = bg;
@@ -20,6 +24,14 @@ public abstract class Card {
 
     public String getName() {
         return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getCrystalCost() {
+        return crystalCost;
     }
 
     public int getAttactPoints() {
@@ -36,5 +48,14 @@ public abstract class Card {
 
     public ImageView getThumbnail() {
         return thumbnail;
+    }
+
+    @Override
+    public String toString() {
+        return "name='" + name + '\'' +
+                ", attactPoints=" + attactPoints +
+                ", rangePoints=" + rangePoints +
+                ", background=" + background.getTag().toString() +
+                ", thumbnail=" + thumbnail.getTag().toString()+",";
     }
 }

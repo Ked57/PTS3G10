@@ -148,6 +148,7 @@
                 android:textAlignment="center" />
 
             <FrameLayout
+                android:id="@+id/playerCardsFrame"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1">
@@ -163,10 +164,10 @@
                     android:id="@+id/PlayerCardsLeftText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="start"
                     android:layout_weight="1"
                     android:text="9"
                     android:textAlignment="viewStart"
-                    android:layout_gravity="start"
                     android:textSize="24sp" />
             </FrameLayout>
 

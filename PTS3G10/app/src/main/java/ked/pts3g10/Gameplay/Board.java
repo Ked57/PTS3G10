@@ -76,6 +76,8 @@ public class Board {
         newRound();
     }
 
+    public Player getPlayer(){ return player;}
+
     public void initLayout(LinearLayout V){
         for(int i = 0; i < 5; ++i){
             Case c = new Case(context);

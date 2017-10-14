@@ -9,8 +9,12 @@ public class Hero extends BoardCard {
 
     private Ability ability;
 
-    public Hero(String name, int ap, int rp, int hp, int mp, ImageView bg, ImageView thmbn, Ability ability){
-        super(name,ap,rp,hp,mp,bg,thmbn);
+    public Hero(String name,String description,int crystalCost, int ap, int rp, int hp, int mp, ImageView bg, ImageView thmbn, Ability ability){
+        super(name,description,crystalCost,ap,rp,hp,mp,bg,thmbn);
         this.ability = ability;
+    }
+    @Override
+    public String toString() {
+        return "Hero{"+super.toString()+","+ability.toString()+"}";
     }
 }
