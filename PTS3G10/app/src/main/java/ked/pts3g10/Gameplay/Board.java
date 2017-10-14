@@ -66,12 +66,7 @@ public class Board {
         context.updateText(R.id.PlayerNick,player.getNickName());
 
         endRoundButton = (Button) context.findViewById(R.id.EndButton);
-        endRoundButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                endRound = true;
-            }
-        });
+
 
         roundNumber = 0;
         seconds = DEFAULT_SECONDS;
@@ -147,5 +142,7 @@ public class Board {
 
     }
 
-   
+    public void onEndRoundButtonClick(){
+        endRound = true;
+    }
 }
