@@ -2,5 +2,6 @@ package ked.pts3g10.Gameplay;
 
 
 
-public class Card {
+public abstract class Card {
+
 }
