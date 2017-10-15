@@ -32,12 +32,12 @@ public class Deck{
 
     public Deck(GameActivity context, int pId, int dId, ArrayList<Card> cards, String name){
         this(pId,dId,cards,name);
-        initPlaceholder(context);
+        //initPlaceholder(context);
     }
 
     public Deck(DeckActivity context, int pId, int dId, ArrayList<Card> cards, String name){
         this(pId,dId,cards,name);
-        initPlaceholder(context);
+        //initPlaceholder(context);
     }
 
     public void initPlaceholder(GameActivity context){

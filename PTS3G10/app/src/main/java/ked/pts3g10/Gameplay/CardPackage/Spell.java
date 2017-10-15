@@ -13,6 +13,11 @@ public class Spell extends Card {
         super(name,description,crystalCost,ap,rp,bg,thmbn);
         this.ability = ability;
     }
+
+    public Ability getAbility() {
+        return ability;
+    }
+
     @Override
     public String toString() {
         return "Army{"+super.toString()+","+ability.toString()+"}";

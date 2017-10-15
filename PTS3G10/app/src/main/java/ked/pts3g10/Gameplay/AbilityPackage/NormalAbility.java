@@ -8,8 +8,8 @@ public abstract class NormalAbility extends Ability {
     protected int radius;
     protected int amount;
 
-    public NormalAbility(int id, String name, String description, int radius, int amount, Case target) {
-        super(id,name,description,target);
+    public NormalAbility(int id, String name, String description, int radius, int amount) {
+        super(id,name,description);
         this.radius = radius;
         this.amount = amount;
     }

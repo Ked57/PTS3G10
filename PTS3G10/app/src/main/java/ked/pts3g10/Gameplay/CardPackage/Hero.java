@@ -13,6 +13,11 @@ public class Hero extends BoardCard {
         super(name,description,crystalCost,ap,rp,hp,mp,bg,thmbn);
         this.ability = ability;
     }
+
+    public Ability getAbility() {
+        return ability;
+    }
+
     @Override
     public String toString() {
         return "Hero{"+super.toString()+","+ability.toString()+"}";

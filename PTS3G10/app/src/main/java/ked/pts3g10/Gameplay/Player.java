@@ -21,6 +21,14 @@ public class Player {
         deck = new Deck(context,1,1,new ArrayList<Card>(), "Un deck");//Valeurs exemple
     }
 
+    public Player(GameActivity context,String nick,ArrayList<Card> cards){
+        nickName = nick;
+        crystals = 0;
+        healthPoints = 30; //A définir
+        this.context = context;
+        deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
+    }
+
     public int getCrystals() {
         return crystals;
     }

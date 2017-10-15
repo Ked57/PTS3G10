@@ -7,13 +7,12 @@ public abstract class Ability {
     protected int id;
     protected String name;
     protected String description;
-    protected Case target;
+    protected Case target;//A voir comment on implémente ça
 
-    public Ability(int id, String name, String description, Case target){
+    public Ability(int id, String name, String description){
         this.id = id;
         this.name = name;
         this.description = description;
-        this.target = target;
     }
 
     public int getId() {

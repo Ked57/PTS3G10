@@ -1,6 +1,7 @@
 package ked.pts3g10.Gameplay.CardPackage;
 
 
+import android.util.Log;
 import android.widget.ImageView;
 
 public abstract class BoardCard extends Card {

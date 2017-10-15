@@ -33,7 +33,7 @@
                 android:id="@+id/deckBackgroundImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/crystal" />
+                android:background="@drawable/crystal" />
         </FrameLayout>
 
         <TextView
