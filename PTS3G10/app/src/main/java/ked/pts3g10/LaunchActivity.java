@@ -23,8 +23,7 @@ public class LaunchActivity extends AppCompatActivity {
         cardDb = new CardDB(this);
         if(cardDb.select().isEmpty()){
             /* TODO: récupérer les cartes via le serveur (Json) */
-            int i = 0;
-            while( i < 4) {
+
                 ImageView bg = new ImageView(this);
                 bg.setBackgroundResource(R.drawable.bow);
                 bg.setTag(R.drawable.bow);//A ne pas oublier
@@ -40,8 +39,6 @@ public class LaunchActivity extends AppCompatActivity {
                 thmbn2.setBackgroundResource(R.drawable.sword);
                 thmbn2.setTag(R.drawable.sword);
                 cardDb.insert(new Army("Légion","Une armée de légionnaires",1,2,1,2,1,bg2,thmbn2));
-                ++i;
-            }
         }
 
 
@@ -52,6 +49,8 @@ public class LaunchActivity extends AppCompatActivity {
                                startActivity(intent);
                            }
          });
+
+        ActivityMgr.launchActivity = this;
     }
 
     @Override

@@ -36,7 +36,8 @@ public class DeckActivity extends AppCompatActivity {
         int deckId = i.getIntExtra("deckId", 0);
         int pId = i.getIntExtra("pId", 0);
         String dName = i.getStringExtra("dName");
-        deck = new Deck(this, deckId, pId, cardDb.select(), dName);//Pour l'instant il n'y a que des placeholders mais la classe devra aller chercher les infos sur le serveur
+        GameActivity gameActivity = ActivityMgr.gameActivity;
+        deck = gameActivity.getBoard().getPlayer().getDeck();//Java .................
 
         deckCrystalCost = (TextView) findViewById(R.id.deckCrystalCost);
         deckCardName = (TextView) findViewById(R.id.deckCardName);
@@ -49,6 +50,8 @@ public class DeckActivity extends AppCompatActivity {
 
         currIndex = 0;
         displayCardForIndex(currIndex);
+
+        ActivityMgr.deckActivity = this;
 
     }
 

@@ -15,27 +15,16 @@ public class GameActivity extends AppCompatActivity {
     private Board board;
     private GameTouchEventMgr temgr;
 
-    private CardDB cardDb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
 
-        cardDb = new CardDB(this);
-
-
-        board = new Board(this, new Player(this,"Ked",cardDb.select()), new Player(this,"Shyndard",cardDb.select())); //Valeurs d'exemple
+        board = new Board(this, new Player(this,"Ked"), new Player(this,"Shyndard")); //Valeurs d'exemple
         temgr = new GameTouchEventMgr(this);
 
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        cardDb.disconnect();
-        super.onDestroy();
+        ActivityMgr.gameActivity = this;
     }
 
     public void updateText(int id,String str){

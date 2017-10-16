@@ -3,6 +3,7 @@ package ked.pts3g10.Gameplay;
 
 import java.util.ArrayList;
 
+import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 
@@ -18,7 +19,13 @@ public class Player {
         crystals = 0;
         healthPoints = 30; //A définir
         this.context = context;
-        deck = new Deck(context,1,1,new ArrayList<Card>(), "Un deck");//Valeurs exemple
+        ArrayList<Card> cards = new ArrayList<Card>();
+        CardDB cardDB = new CardDB(context);
+        for(int i = 0; i < 4; ++i){//Pour peupler en attendant de récupérer les decks du serveur
+            cards.add(cardDB.select().get(0));
+            cards.add(cardDB.select().get(1));
+        }
+        deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
     }
 
     public Player(GameActivity context,String nick,ArrayList<Card> cards){
