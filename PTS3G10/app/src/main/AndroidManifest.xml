@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".GameActivity" />
-        <activity android:name=".DeckActivity"></activity>
+        <activity android:name=".DeckActivity"
+            android:theme="@style/DeckActivity"></activity>
     </application>
 
 </manifest>
