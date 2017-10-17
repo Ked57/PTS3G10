@@ -13,6 +13,7 @@ public class Player {
     private int healthPoints;
     private String nickName;
     private GameActivity context;
+    private PlayerAction playerAction;
 
     public Player(GameActivity context,String nick){
         nickName = nick;
@@ -26,6 +27,7 @@ public class Player {
             cards.add(cardDB.select().get(1));
         }
         deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
+        playerAction = new PlayerAction(this);
     }
 
     public Player(GameActivity context,String nick,ArrayList<Card> cards){
@@ -72,4 +74,6 @@ public class Player {
     public void setDeck(Deck deck) {
         this.deck = deck;
     }
+
+    public PlayerAction getPlayerAction() { return playerAction; }
 }

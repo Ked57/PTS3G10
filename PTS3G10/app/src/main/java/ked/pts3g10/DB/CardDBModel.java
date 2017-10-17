@@ -52,5 +52,4 @@ public final class CardDBModel {
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + CardDbEntry.TABLE_NAME;
 
-
 }
