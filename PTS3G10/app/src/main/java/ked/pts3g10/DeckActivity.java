@@ -76,7 +76,6 @@ public class DeckActivity extends AppCompatActivity {
         if (card instanceof BoardCard) {
             deckHealthPoints.setText(((BoardCard) card).getHealthPoints() + "");
             deckMovementPoints.setText(((BoardCard) card).getMovementPoints() + "");
-            //Log.i("MP",""+((BoardCard) card).getMovementPoints());
         }
         deckRangePoints.setText(card.getRangePoints() + "");
         deckAttackPoints.setText(card.getAttactPoints() + "");

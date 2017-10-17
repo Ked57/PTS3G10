@@ -59,13 +59,7 @@ public class Board {
         getCaseWithLinearLayoutNumber(2,4).setCardThumbnail(R.drawable.castle);
 
         /*Init des text view */
-        context.updateText(R.id.ADVCardsLeftText,adversary.getDeck().getCardList().size()); // Par défaut pour le moment
-        context.updateText(R.id.ADVCrystalsText,adversary.getCrystals());
-        context.updateText(R.id.ADVNick,adversary.getNickName());
-
-        context.updateText(R.id.PlayerCardsLeftText,player.getDeck().getCardList().size());
-        context.updateText(R.id.PlayerCrystalsText,player.getCrystals());
-        context.updateText(R.id.PlayerNick,player.getNickName());
+        updateTexts();
 
         endRoundButton = (Button) context.findViewById(R.id.EndButton);
 
@@ -92,21 +86,36 @@ public class Board {
         return cases.get(linearLayoutNumber*5+caseNumber);
     }
 
+    public void updateTexts(){
+        context.updateText(R.id.ADVCardsLeftText,adversary.getDeck().getCardList().size()); // Par défaut pour le moment
+        context.updateText(R.id.ADVCrystalsText,adversary.getCrystals());
+        context.updateText(R.id.ADVNick,adversary.getNickName());
+
+        context.updateText(R.id.PlayerCardsLeftText,player.getDeck().getCardList().size());
+        context.updateText(R.id.PlayerCrystalsText,player.getCrystals());
+        context.updateText(R.id.PlayerNick,player.getNickName());
+    }
+
     public void newRound(){
         ++roundNumber;
 
-        if(player.getCrystals() <= 9) { // TODO: Un paramètre avec le nombre maximum de crystaux, ici un dira que c'est 9
-            player.setCrystals(R.id.PlayerCrystalsText,roundNumber); //Pas besoin de vérifier les crystaux de l'aversaire
-            adversary.setCrystals(R.id.ADVCrystalsText,roundNumber);//Chaque joueur voit ses crystaux remis au nombre initial +1 (donc au n° de tour)
+        seconds = DEFAULT_SECONDS;
+        endRound = false;
+        playersTurn = !playersTurn;
+
+        if(roundNumber < 2)
+        {
+            player.setCrystals(R.id.PlayerCrystalsText,1);
+            adversary.setCrystals(R.id.ADVCrystalsText,1);
+        }
+        else if(roundNumber < 18) { // TODO: Un paramètre avec le nombre maximum de crystaux, ici un dira que c'est 9
+            player.setCrystals(R.id.PlayerCrystalsText,roundNumber/2); //Pas besoin de vérifier les crystaux de l'aversaire
+            adversary.setCrystals(R.id.ADVCrystalsText,roundNumber/2);//Chaque joueur voit ses crystaux remis au nombre initial +1 (donc au n° de tour)
         }
         else{
             player.setCrystals(R.id.PlayerCrystalsText,9);
             adversary.setCrystals(R.id.ADVCrystalsText,9);
         }
-
-        seconds = DEFAULT_SECONDS;
-        endRound = false;
-        playersTurn = !playersTurn;
 
         if(playersTurn){
             endRoundButton.setBackgroundColor(Color.rgb(76,49,35));

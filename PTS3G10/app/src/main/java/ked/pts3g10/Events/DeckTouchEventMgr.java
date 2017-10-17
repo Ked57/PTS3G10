@@ -34,11 +34,16 @@ public class DeckTouchEventMgr implements GestureDetector.OnGestureListener, Ges
             public void onClick(View v) {
                 Player player = ActivityMgr.gameActivity.getBoard().getPlayer();
                 Board board = ActivityMgr.gameActivity.getBoard();
-                if(board.isPlayersTurn() && player.getCrystals() > player.getDeck().getCardList().get(context.getCurrIndex()).getCrystalCost()) {
+                if(board.isPlayersTurn() && player.getCrystals() >= player.getDeck().getCardList().get(context.getCurrIndex()).getCrystalCost()) {
                     player.getPlayerAction().chooseInitialCase(player.getDeck().getCardList().get(context.getCurrIndex()));
                     context.finish();
-                }else {
-                    Toast t = Toast.makeText(context,context.getResources().getString(R.string.deck_choice_wrong), Toast.LENGTH_SHORT);
+                }
+                else if(board.isPlayersTurn() && player.getCrystals() < player.getDeck().getCardList().get(context.getCurrIndex()).getCrystalCost()){
+                    Toast t = Toast.makeText(context,R.string.deck_choice_crystals, Toast.LENGTH_SHORT);
+                    t.show();
+                }
+                else {
+                    Toast t = Toast.makeText(context,R.string.deck_choice_wrong, Toast.LENGTH_SHORT);
                     t.show();
                 }
             }

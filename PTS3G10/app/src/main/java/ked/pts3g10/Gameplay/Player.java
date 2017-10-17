@@ -17,7 +17,7 @@ public class Player {
 
     public Player(GameActivity context,String nick){
         nickName = nick;
-        crystals = 0;
+        crystals = 1;
         healthPoints = 30; //A définir
         this.context = context;
         ArrayList<Card> cards = new ArrayList<Card>();
