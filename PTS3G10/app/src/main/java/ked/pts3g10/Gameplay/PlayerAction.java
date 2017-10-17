@@ -23,6 +23,7 @@ public class PlayerAction {
 
     public void placeBoardCard(Card card, Case new_case) {
         new_case.setCard(card);
+        player.setCrystals(player.getCrystals()-card.getCrystalCost());
         resetActionState();
     }
 
