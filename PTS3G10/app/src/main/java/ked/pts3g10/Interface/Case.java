@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.R;
 
-public class Case extends FrameLayout{
+public class Case extends FrameLayout {
 
     private ImageView grass;
     private ImageView cardThumbnail; //Pas inspiré pour ce nom, représente l'image de la carte sur la case

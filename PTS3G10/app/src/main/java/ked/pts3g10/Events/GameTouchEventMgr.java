@@ -49,7 +49,6 @@ public class GameTouchEventMgr {
                 Log.i("deckId",""+d.getDeckId());
                 intent.putExtra("deckId",d.getDeckId());
                 context.startActivity(intent);
-
             }
         });
     }
