@@ -20,12 +20,10 @@ public class Case extends FrameLayout {
     private ImageView grass;
     private ImageView cardThumbnail; //Pas inspiré pour ce nom, représente l'image de la carte sur la case
     private GameActivity context;
-    private boolean isOccupied;
 
     public Case(GameActivity context){
         super(context);
         this.context = context;
-        isOccupied=false;
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT,1);
         this.setLayoutParams(lp);
@@ -49,10 +47,15 @@ public class Case extends FrameLayout {
     }
 
     public boolean setCardThumbnail(int id){
-        if(!isOccupied){ // On ne veut pas supperposer les cartes !
+        if(isCardThumbnailEmpty()){ // On ne veut pas supperposer les cartes !
             cardThumbnail.setBackgroundResource(id);
             cardThumbnail.bringToFront();
-            isOccupied = true;
+            return true;
+        }else return false;
+    }
+
+    public boolean isCardThumbnailEmpty(){
+        if(cardThumbnail == null){
             return true;
         }else return false;
     }
