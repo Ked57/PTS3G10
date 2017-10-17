@@ -1,9 +1,11 @@
 package ked.pts3g10.Gameplay;
 
+import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
+import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Interface.Case;
-
+import ked.pts3g10.R;
 
 
 public class PlayerAction {
@@ -28,5 +30,16 @@ public class PlayerAction {
 
     public void attack(Case actual_case, Case attack_case) {
 
+    }
+
+    public void chooseInitialCase(Card card){
+        Board board = ActivityMgr.gameActivity.getBoard();
+
+        for(int i = 0; i < 5; ++i){
+            Case c = board.getCaseWithLinearLayoutNumber(i,4);
+            if(c.isCardThumbnailEmpty()){
+                c.setBackgroundResource(R.color.colorGreen);
+            }else c.setBackgroundResource(R.color.colorRed);
+        }
     }
 }

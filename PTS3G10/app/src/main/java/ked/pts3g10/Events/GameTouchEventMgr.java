@@ -1,25 +1,14 @@
 package ked.pts3g10.Events;
 
 import android.content.Intent;
-import android.os.Parcelable;
 import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.reflect.TypeToken;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 import ked.pts3g10.DeckActivity;
 import ked.pts3g10.GameActivity;
-import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.R;
 

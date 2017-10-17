@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.DeckActivity;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.R;
@@ -109,9 +111,11 @@ public class Board {
         if(playersTurn){
             endRoundButton.setBackgroundColor(Color.rgb(76,49,35));
             endRoundButton.setClickable(true);
+            if(ActivityMgr.deckActivity != null) ActivityMgr.deckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice));
         }else {
             endRoundButton.setBackgroundColor(Color.GRAY);
             endRoundButton.setClickable(false);
+            if(ActivityMgr.deckActivity != null) ActivityMgr.deckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice_wrong));
         }
 
         //Declare the timer
@@ -142,6 +146,10 @@ public class Board {
 
         }, 0, 1000);
 
+    }
+
+    public boolean isPlayersTurn() {
+        return playersTurn;
     }
 
     public void onEndRoundButtonClick(){

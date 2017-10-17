@@ -55,7 +55,7 @@ public class Case extends FrameLayout {
     }
 
     public boolean isCardThumbnailEmpty(){
-        if(cardThumbnail == null){
+        if(cardThumbnail.getBackground() == null){
             return true;
         }else return false;
     }

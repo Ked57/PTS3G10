@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,6 +23,7 @@ public class DeckActivity extends AppCompatActivity {
     private TextView deckCrystalCost, deckCardName, deckCardDescription, deckAttackPoints, deckHealthPoints, deckRangePoints, deckMovementPoints;
     private int currIndex;
     private ImageView deckBackgroundImage;
+    private Button deckChoiceButton;
 
     private CardDB cardDb;
 
@@ -47,6 +49,11 @@ public class DeckActivity extends AppCompatActivity {
         deckMovementPoints = (TextView) findViewById(R.id.deckMovementPoints);
         deckAttackPoints = (TextView) findViewById(R.id.deckAttackPoints);
         deckBackgroundImage = (ImageView) findViewById(R.id.deckBackgroundImage);
+
+        deckChoiceButton = (Button) findViewById(R.id.deckChoiceButton);
+        if(ActivityMgr.gameActivity.getBoard().isPlayersTurn())
+            setChoiceButtonText(getResources().getString(R.string.deck_choice));
+        else setChoiceButtonText(getResources().getString(R.string.deck_choice_wrong));
 
         currIndex = 0;
         displayCardForIndex(currIndex);
@@ -77,6 +84,9 @@ public class DeckActivity extends AppCompatActivity {
         deckBackgroundImage.setBackgroundResource(bgResource);
     }
 
+    public int getCurrIndex() {
+        return currIndex;
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
@@ -97,5 +107,9 @@ public class DeckActivity extends AppCompatActivity {
             displayCardForIndex(currIndex);
         }//TODO: else : afficher un hint
 
+    }
+
+    public void setChoiceButtonText(String text){
+        deckChoiceButton.setText(text);
     }
 }

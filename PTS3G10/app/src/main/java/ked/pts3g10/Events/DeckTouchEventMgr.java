@@ -3,20 +3,43 @@ package ked.pts3g10.Events;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
+import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.DeckActivity;
+import ked.pts3g10.Gameplay.Player;
+import ked.pts3g10.R;
 
 
 public class DeckTouchEventMgr implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
 
     private DeckActivity context;
     private GestureDetector gestureDetector;
+    private Button deckChoiceButton;
 
-    public DeckTouchEventMgr(DeckActivity context){
+    public DeckTouchEventMgr(final DeckActivity context){
         this.context = context;
         Log.i("deck","deck");
         gestureDetector = new GestureDetector(context,this);
         gestureDetector.setOnDoubleTapListener(this);
+
+        deckChoiceButton = (Button) context.findViewById(R.id.deckChoiceButton);
+        deckChoiceButton.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View v) {
+                Player player = ActivityMgr.gameActivity.getBoard().getPlayer();
+                if(ActivityMgr.gameActivity.getBoard().isPlayersTurn()) {
+                    player.getPlayerAction().chooseInitialCase(player.getDeck().getCardList().get(context.getCurrIndex()));
+                    context.finish();
+                }else {
+                    Toast t = Toast.makeText(context,context.getResources().getString(R.string.deck_choice_wrong), Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            }
+        });
     }
 
     public void setOnTouchEvent(MotionEvent event){
