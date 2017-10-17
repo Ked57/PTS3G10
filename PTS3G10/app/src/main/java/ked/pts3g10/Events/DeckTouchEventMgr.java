@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.DeckActivity;
+import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.Player;
 import ked.pts3g10.R;
 

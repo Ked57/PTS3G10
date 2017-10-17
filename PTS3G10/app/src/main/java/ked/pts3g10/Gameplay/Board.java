@@ -118,6 +118,7 @@ public class Board {
             if(ActivityMgr.deckActivity != null) ActivityMgr.deckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice_wrong));
         }
 
+        clearBoardActions(); // Pour enlever les éventuelles actions en cours
         //Declare the timer
         Timer t = new Timer();
         //Set the schedule function and rate
@@ -146,6 +147,12 @@ public class Board {
 
         }, 0, 1000);
 
+    }
+
+    public void clearBoardActions(){
+        for(Case c : cases){
+            c.setCaseNonActionable();
+        }
     }
 
     public boolean isPlayersTurn() {
