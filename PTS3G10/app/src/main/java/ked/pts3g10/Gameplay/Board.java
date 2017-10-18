@@ -3,7 +3,6 @@ package ked.pts3g10.Gameplay;
 
 import android.graphics.Color;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,10 +12,11 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ked.pts3g10.ActivityMgr;
-import ked.pts3g10.DeckActivity;
 import ked.pts3g10.GameActivity;
+import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.R;
+import ked.pts3g10.Util.Pos;
 
 public class Board {
 
@@ -48,11 +48,11 @@ public class Board {
         V3 = (LinearLayout) context.findViewById(R.id.V3);
         V4 = (LinearLayout) context.findViewById(R.id.V4);
         V5 = (LinearLayout) context.findViewById(R.id.V5);
-        initLayout(V1);
-        initLayout(V2);
-        initLayout(V3);
-        initLayout(V4);
-        initLayout(V5);
+        initLayout(V1,0);
+        initLayout(V2,1);
+        initLayout(V3,2);
+        initLayout(V4,3);
+        initLayout(V5,4);
 
         //On met les chateaux
         getCaseWithLinearLayoutNumber(2,0).setCardThumbnail(R.drawable.castle);
@@ -72,11 +72,15 @@ public class Board {
         newRound();
     }
 
+    public ArrayList<Case> getCases() {
+        return cases;
+    }
+
     public Player getPlayer(){ return player;}
 
-    public void initLayout(LinearLayout V){
+    public void initLayout(LinearLayout V, int number){
         for(int i = 0; i < 5; ++i){
-            Case c = new Case(context);
+            Case c = new Case(context,new Pos(number,i));
             V.addView(c);
             cases.add(c);
         }
@@ -99,6 +103,7 @@ public class Board {
     public void newRound(){
         ++roundNumber;
 
+        resetCardsHaveMovedThisRound();
         seconds = DEFAULT_SECONDS;
         endRound = false;
         playersTurn = !playersTurn;
@@ -161,6 +166,12 @@ public class Board {
     public void clearBoardActions(){
         for(Case c : cases){
             c.setCaseNonActionable();
+        }
+    }
+
+    public void resetCardsHaveMovedThisRound(){
+        for(Case c : cases){
+            if(c.getCard() != null && c.getCard().hasMovedThisRound()) c.getCard().setHasMovedThisRound(false);
         }
     }
 

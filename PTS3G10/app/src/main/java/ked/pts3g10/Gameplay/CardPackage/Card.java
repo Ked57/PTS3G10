@@ -11,6 +11,7 @@ public abstract class Card {
     protected int rangePoints;
     protected ImageView background;// L'image qui s'affiche quand on regarde la carte
     protected ImageView thumbnail;// L'image affichée sur le board
+    protected boolean hasMovedThisRound;
 
     public Card(String name,String description,int crystalCost, int ap, int rp, ImageView bg, ImageView thmbn){
         this.name = name;
@@ -20,6 +21,7 @@ public abstract class Card {
         rangePoints = rp;
         background = bg;
         thumbnail = thmbn;
+        hasMovedThisRound = false;
     }
 
     public String getName() {
@@ -57,5 +59,13 @@ public abstract class Card {
                 ", rangePoints=" + rangePoints +
                 ", background=" + background.getTag().toString() +
                 ", thumbnail=" + thumbnail.getTag().toString()+",";
+    }
+
+    public boolean hasMovedThisRound() {
+        return hasMovedThisRound;
+    }
+
+    public void setHasMovedThisRound(boolean hasMovedThisRound) {
+        this.hasMovedThisRound = hasMovedThisRound;
     }
 }

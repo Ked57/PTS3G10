@@ -12,25 +12,30 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
+import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.R;
+import ked.pts3g10.Util.Pos;
 
 public class Case extends FrameLayout {
 
     private ImageView grass;
     private ImageView cardThumbnail; //Pas inspiré pour ce nom, représente l'image de la carte sur la case
-    private Card card;
+    private BoardCard card;
     private GameActivity context;
     private boolean isActionable;
+    private Pos pos;
 
-    public Case(GameActivity context){
+    public Case(GameActivity context,Pos pos){
         super(context);
         this.context = context;
         isActionable = false;
+        this.pos = pos;
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT,1);
         this.setLayoutParams(lp);
@@ -63,8 +68,9 @@ public class Case extends FrameLayout {
         });
     }
 
-    public void setCard(Card card){
+    public void setCard(BoardCard card){
         this.card = card;
+        Log.e("card",""+ (card != null));
         setCardThumbnail((int) card.getThumbnail().getTag());
     }
 
@@ -77,6 +83,9 @@ public class Case extends FrameLayout {
         if(isCardThumbnailEmpty()){ // On ne veut pas supperposer les cartes !
             cardThumbnail.setBackgroundResource(id);
             cardThumbnail.bringToFront();
+            return true;
+        }else if(id == 0) {
+            cardThumbnail.setBackgroundResource(id);
             return true;
         }else return false;
     }
@@ -96,14 +105,43 @@ public class Case extends FrameLayout {
         setBackgroundResource(0);
     }
 
-    public void onClickAction(){
+    public int getXDistanceWith(Case c){
+        int dist = c.pos.getPosX()-pos.getPosX();
+        if(dist < 0)
+            dist = -dist;
+        return dist;
+    }
 
-        PlayerAction pa = ActivityMgr.gameActivity.getBoard().getPlayer().getPlayerAction();
-        if(isActionable && isCardThumbnailEmpty() && pa.getActionState() == 1){ // Choosing state
-            Log.i("card",pa.getChooseInitialCaseCard().getThumbnail().getTag()+"");
-            pa.placeBoardCard(pa.getChooseInitialCaseCard(),this);
-        }else if(isActionable && isCardThumbnailEmpty() && pa.getActionState() == 2){
+    public int getYDistanceWith(Case c){
+        int dist = c.pos.getPosY()-pos.getPosY();
+        if(dist < 0)
+            dist = -dist;
+        return dist;
+    }
+
+    public BoardCard getCard() { return card; }
+
+    public void onClickAction(){
+        Toast t;
+        if(ActivityMgr.gameActivity.getBoard().isPlayersTurn()) {
+            PlayerAction pa = ActivityMgr.gameActivity.getBoard().getPlayer().getPlayerAction();
+            if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 1) { // Choosing state
+                pa.placeBoardCard(pa.getCaseCard(), this);
+            } else if (!isCardThumbnailEmpty() && card != null && pa.getActionState() != 2) {
+                if(!card.hasMovedThisRound())
+                    pa.chooseCaseToGoTo(this);//On affiche les cases où on peut aller
+                else {
+                    t = Toast.makeText(context,context.getResources().getString(R.string.game_already_moved),Toast.LENGTH_SHORT);
+                    t.show();
+                }
+            } else if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 2) {
             /* TODO: Move or attack */
+                pa.moveCard(pa.getCaseCard(), this);
+            }
+        }else{
+            t = Toast.makeText(context,context.getResources().getString(R.string.deck_choice_wrong),Toast.LENGTH_SHORT);
+            t.show();
+
         }
     }
 }

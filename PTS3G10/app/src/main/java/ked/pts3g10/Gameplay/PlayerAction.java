@@ -12,25 +12,33 @@ public class PlayerAction {
 
     private Player player;
     private int actionState;
-    private Card chooseInitialCaseCard;
+    private BoardCard caseCard;
+    private Case movingFrom;
 
     public PlayerAction(Player player) {
 
         this.player = player;
         actionState = 0; // 0 rien; 1 choosing initial case; 2 moving
-        chooseInitialCaseCard = null;
+        caseCard = null;
+        movingFrom = null;
     }
 
-    public void placeBoardCard(Card card, Case new_case) {
+    public void placeBoardCard(BoardCard card, Case new_case) {
         new_case.setCard(card);
         player.setCrystals(player.getCrystals()-card.getCrystalCost());
         player.getDeck().getCardList().remove(card);
         ActivityMgr.gameActivity.getBoard().updateTexts();
         resetActionState();
+        card.setHasMovedThisRound(true);
     }
 
-    public void moveCard(Case actual_case, Case new_case) {
-
+    public void moveCard(BoardCard card,Case new_case) {
+        new_case.setCard(card);
+        movingFrom.resetCard();
+        caseCard = null;
+        ActivityMgr.gameActivity.getBoard().clearBoardActions();
+        resetActionState();
+        card.setHasMovedThisRound(true);
     }
 
     public void useSpellCard(Spell spell, Case new_case) {
@@ -41,16 +49,30 @@ public class PlayerAction {
 
     }
 
+    public void chooseCaseToGoTo(Case base){
+        Board board = ActivityMgr.gameActivity.getBoard();
+        actionState = 2;
+        movingFrom = base;
+        caseCard = movingFrom.getCard();
+        for(Case c : board.getCases()){
+            if(base.getXDistanceWith(c) <= base.getCard().getMovementPoints() && base.getYDistanceWith(c) <= base.getCard().getMovementPoints()){
+                if(c.isCardThumbnailEmpty())
+                    c.setCaseActionable(R.color.colorGreen);
+                else c.setCaseNonActionable();
+            }
+        }
+    }
+
     public void resetActionState(){
         actionState = 0;
         ActivityMgr.gameActivity.getBoard().clearBoardActions();
     }
     public int getActionState() {return actionState;}
 
-    public void chooseInitialCase(Card card){
+    public void chooseInitialCase(BoardCard card){
         Board board = ActivityMgr.gameActivity.getBoard();
         actionState = 1;
-        chooseInitialCaseCard = card;
+        caseCard = card;
 
         for(int i = 0; i < 5; ++i){
             Case c = board.getCaseWithLinearLayoutNumber(i,4);
@@ -60,7 +82,7 @@ public class PlayerAction {
         }
     }
 
-    public Card getChooseInitialCaseCard() {
-        return chooseInitialCaseCard;
+    public BoardCard getCaseCard() {
+        return caseCard;
     }
 }
