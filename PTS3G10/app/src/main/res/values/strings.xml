@@ -5,4 +5,6 @@
     <string name="deck_choice">Jouer cette carte</string>
     <string name="deck_choice_wrong">Vous devez attendre votre tour</string>
     <string name="deck_choice_crystals">Vous n\'avez pas assez de cristaux</string>
+    <string name="menu_options">Options</string>
+    <string name="menu_new_round">DEV: tour suivant</string>
 </resources>
