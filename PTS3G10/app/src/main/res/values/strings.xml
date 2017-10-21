@@ -8,10 +8,10 @@
     <string name="menu_options">Options</string>
     <string name="menu_new_round">DEV: tour suivant</string>
     <string name="game_already_moved">Vous avez déjà déplacé cette carte durant ce round, veuillez attendre le suivant</string>
-    <string name="nom">Nom :</string>
-    <string name="prenom">Prénom :</string>
+    <string name="email">Email :</string>
+    <string name="passwordconf">Confirm Password:</string>
     <string name="pseudo">Pseudo :</string>
-    <string name="password">Mot de passe :</string>
+    <string name="password">Password :</string>
     <string name="creeCompte">Créer un compte</string>
     <string name="connection">Connection</string>
     <string name="inscription">Inscription</string>
