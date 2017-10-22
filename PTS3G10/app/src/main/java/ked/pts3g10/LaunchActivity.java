@@ -3,21 +3,11 @@ package ked.pts3g10;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.net.Socket;
-
 import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.Gameplay.CardPackage.Army;
-import ked.pts3g10.Gameplay.CardPackage.Card;
-import ked.pts3g10.Util.CreditActivity;
-
-import static android.R.attr.port;
 
 public class LaunchActivity extends AppCompatActivity {
 

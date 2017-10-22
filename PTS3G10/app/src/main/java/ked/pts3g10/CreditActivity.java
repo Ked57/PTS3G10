@@ -1,4 +1,4 @@
-package ked.pts3g10.Util;
+package ked.pts3g10;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
