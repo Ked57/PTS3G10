@@ -15,6 +15,7 @@ import java.net.Socket;
 import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.Gameplay.CardPackage.Army;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Util.CreditActivity;
 
 import static android.R.attr.port;
 
@@ -56,6 +57,15 @@ public class LaunchActivity extends AppCompatActivity {
                                startActivity(intent);
                            }
          });
+
+        //Boutton pour afficher la page crédits
+        findViewById(R.id.credits).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LaunchActivity.this, CreditActivity.class);
+                startActivity(intent);
+            }
+        });
 
         ActivityMgr.launchActivity = this;
     }
