@@ -25,6 +25,7 @@
             android:name=".DeckActivity"
             android:theme="@style/DeckActivity" />
         <activity android:name=".ConnectionActivity" />
+        <activity android:name=".CreditActivity" />
         <activity android:name=".InscriptionActivity"></activity>
     </application>
 
