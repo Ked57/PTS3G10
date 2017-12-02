@@ -6,6 +6,7 @@ L'intérêt ici est d'extend FrameLayout et de construire notre interface procé
 
  */
 
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -128,8 +129,12 @@ public class Case extends FrameLayout {
             if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 1) { // Choosing state
                 pa.placeBoardCard(pa.getCaseCard(), this);
             } else if (!isCardThumbnailEmpty() && card != null && pa.getActionState() != 2) {
-                if(!card.hasMovedThisRound())
+                if(!card.hasMovedThisRound() && !card.isAdversary())
                     pa.chooseCaseToGoTo(this);//On affiche les cases où on peut aller
+                else if(card.isAdversary()){
+                    t = Toast.makeText(context,context.getString(R.string.game_not_your_card),Toast.LENGTH_SHORT);
+                    t.show();
+                }
                 else {
                     t = Toast.makeText(context,context.getResources().getString(R.string.game_already_moved),Toast.LENGTH_SHORT);
                     t.show();

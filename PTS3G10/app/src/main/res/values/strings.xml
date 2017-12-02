@@ -10,6 +10,7 @@
     <string name="menu_new_round">DEV: tour suivant</string>
     <string name="menu_populate">DEV : peupler</string>
     <string name="game_already_moved">Vous avez déjà déplacé cette carte durant ce round, veuillez attendre le suivant</string>
+    <string name="game_not_your_card">Cette carte ne vous appartient pas</string>
 
     <!--Menu de connection et inscription-->
     <string name="email">Email :</string>

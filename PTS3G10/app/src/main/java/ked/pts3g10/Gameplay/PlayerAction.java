@@ -1,5 +1,8 @@
 package ked.pts3g10.Gameplay;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
@@ -51,16 +54,16 @@ public class PlayerAction {
 
     public void chooseCaseToGoTo(Case base){
         Board board = ActivityMgr.gameActivity.getBoard();
-        actionState = 2;
-        movingFrom = base;
-        caseCard = movingFrom.getCard();
-        for(Case c : board.getCases()){
-            if(base.getXDistanceWith(c) <= base.getCard().getMovementPoints() && base.getYDistanceWith(c) <= base.getCard().getMovementPoints()){
-                if(c.isCardThumbnailEmpty())
-                    c.setCaseActionable(R.color.colorGreen);
-                else c.setCaseNonActionable();
+            actionState = 2;
+            movingFrom = base;
+            caseCard = movingFrom.getCard();
+            for (Case c : board.getCases()) {
+                if (base.getXDistanceWith(c) <= base.getCard().getMovementPoints() && base.getYDistanceWith(c) <= base.getCard().getMovementPoints()) {
+                    if (c.isCardThumbnailEmpty())
+                        c.setCaseActionable(R.color.colorGreen);
+                    else c.setCaseNonActionable();
+                }
             }
-        }
     }
 
     public void resetActionState(){
