@@ -126,7 +126,7 @@ public class CardDB {
                 int hp = cursor.getInt(cursor.getColumnIndex(CardDBModel.CardDbEntry.CARD_HP));
                 int mp = cursor.getInt(cursor.getColumnIndex(CardDBModel.CardDbEntry.CARD_MP));
 
-                c = new Army(name,description,crystalCost,ap,rp,hp,mp,bg,thmbn);
+                c = new Army(name,description,crystalCost,ap,rp,hp,mp,bg,thmbn,false);
                 cards.add(c);
 
             }else if(cardType == 2){
@@ -135,17 +135,27 @@ public class CardDB {
                 int abilityId = cursor.getInt(cursor.getColumnIndex(CardDBModel.CardDbEntry.CARD_ABILITY_ID));
 
                 c = new Hero(name, description, crystalCost, ap, rp, hp, mp, bg, thmbn,
-                        new SpecialAbility(abilityId,"Ability placeholder","placeholder description"));
+                        new SpecialAbility(abilityId,"Ability placeholder","placeholder description"),false);
                 cards.add(c);
 
             }else if(cardType == 3){
                 int abilityId = cursor.getInt(cursor.getColumnIndex(CardDBModel.CardDbEntry.CARD_ABILITY_ID));
                 c = new Spell(name, description, crystalCost, ap, rp, bg, thmbn,
-                        new SpecialAbility(abilityId,"Ability placeholder","placeholder description"));
+                        new SpecialAbility(abilityId,"Ability placeholder","placeholder description"),false);
                 cards.add(c);
             }
         }
         cursor.close();
         return cards;
+    }
+
+    public Card getCardFromIndex(int index, boolean adversary){
+        Card c = select().get(index);
+
+        if(c instanceof Army){
+            return new Army(c.getName(),c.getDescription(),c.getCrystalCost(),c.getAttactPoints(),c.getRangePoints(),((Army) c).getHealthPoints(),((Army) c).getMovementPoints(),c.getBackground(),c.getThumbnail(),adversary);
+        }else if(c instanceof Hero){
+            return new Hero(c.getName(),c.getDescription(),c.getCrystalCost(),c.getAttactPoints(),c.getRangePoints(),((Hero) c).getHealthPoints(),((Hero) c).getMovementPoints(),c.getBackground(),c.getThumbnail(),((Hero) c).getAbility(),adversary);
+        }else return new Spell(c.getName(),c.getDescription(),c.getCrystalCost(),c.getAttactPoints(),c.getRangePoints(),c.getBackground(),c.getThumbnail(),((Spell) c).getAbility(),adversary);
     }
 }

@@ -14,17 +14,19 @@ public class Player {
     private String nickName;
     private GameActivity context;
     private PlayerAction playerAction;
+    private boolean adversary;
 
-    public Player(GameActivity context,String nick){
+    public Player(GameActivity context,String nick, boolean adversary){
         nickName = nick;
         crystals = 1;
         healthPoints = 30; //A définir
         this.context = context;
+        this.adversary = adversary;
         ArrayList<Card> cards = new ArrayList<Card>();
         CardDB cardDB = new CardDB(context);
         for(int i = 0; i < 4; ++i){//Pour peupler en attendant de récupérer les decks du serveur
-            cards.add(cardDB.select().get(0));
-            cards.add(cardDB.select().get(1));
+            cards.add(cardDB.getCardFromIndex(0,adversary));
+            cards.add(cardDB.getCardFromIndex(1,adversary));
         }
         deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
         playerAction = new PlayerAction(this);

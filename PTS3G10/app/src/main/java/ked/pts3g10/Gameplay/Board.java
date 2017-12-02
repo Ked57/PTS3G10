@@ -13,6 +13,7 @@ import java.util.TimerTask;
 
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
+import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.R;
@@ -56,7 +57,7 @@ public class Board {
         initLayout(V5,4);
 
         //On met les chateaux
-        getCaseWithLinearLayoutNumber(2,0).setCardThumbnail(R.drawable.castle);
+        getCaseWithLinearLayoutNumber(2,0).setCardThumbnail(R.drawable.castlered);
         getCaseWithLinearLayoutNumber(2,4).setCardThumbnail(R.drawable.castle);
 
         /*Init des text view */
@@ -181,6 +182,11 @@ public class Board {
 
     public boolean isPlayersTurn() {
         return playersTurn;
+    }
+    //Destinée aux tests, met quelques cartes adverses sur le board
+    public void populate(){
+        adversary.getPlayerAction().placeBoardCard((BoardCard) adversary.getDeck().getCardList().get(0),cases.get(7));
+        adversary.getPlayerAction().placeBoardCard((BoardCard) adversary.getDeck().getCardList().get(1),cases.get(12));
     }
 
     public void onEndRoundButtonClick(){

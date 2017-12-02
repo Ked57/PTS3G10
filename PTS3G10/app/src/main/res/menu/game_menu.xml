@@ -4,4 +4,6 @@
         android:title="@string/menu_options" />
     <item android:id="@+id/newRound"
         android:title="@string/menu_new_round" />
+    <item android:id="@+id/populate"
+        android:title="@string/menu_populate"/>
 </menu>

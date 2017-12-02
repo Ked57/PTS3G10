@@ -8,6 +8,7 @@
     <string name="deck_choice_crystals">Vous n\'avez pas assez de cristaux</string>
     <string name="menu_options">Options</string>
     <string name="menu_new_round">DEV: tour suivant</string>
+    <string name="menu_populate">DEV : peupler</string>
     <string name="game_already_moved">Vous avez déjà déplacé cette carte durant ce round, veuillez attendre le suivant</string>
 
     <!--Menu de connection et inscription-->

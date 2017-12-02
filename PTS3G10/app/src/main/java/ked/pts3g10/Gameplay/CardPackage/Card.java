@@ -1,7 +1,10 @@
 package ked.pts3g10.Gameplay.CardPackage;
 
 
+import android.util.Log;
 import android.widget.ImageView;
+
+import ked.pts3g10.R;
 
 public abstract class Card {
     protected String name;
@@ -12,16 +15,30 @@ public abstract class Card {
     protected ImageView background;// L'image qui s'affiche quand on regarde la carte
     protected ImageView thumbnail;// L'image affichée sur le board
     protected boolean hasMovedThisRound;
+    protected boolean adversary;
 
-    public Card(String name,String description,int crystalCost, int ap, int rp, ImageView bg, ImageView thmbn){
+    public Card(String name,String description,int crystalCost, int ap, int rp, ImageView bg, ImageView thmbn, boolean adversary){
         this.name = name;
         this.description = description;
         this.crystalCost = crystalCost;
         attactPoints = ap;
         rangePoints = rp;
         background = bg;
-        thumbnail = thmbn;
         hasMovedThisRound = false;
+        this.adversary = adversary;
+        thumbnail = thmbn;
+        if(adversary){
+           switch(name){
+               case "Archers":
+                   thmbn.setBackgroundResource(R.drawable.bowred);
+                   thmbn.setTag(R.drawable.bowred);
+                   break;
+               case "Légion":
+                   thmbn.setBackgroundResource(R.drawable.swordred);
+                   thmbn.setTag(R.drawable.swordred);
+           }
+        }
+
     }
 
     public String getName() {
@@ -67,5 +84,9 @@ public abstract class Card {
 
     public void setHasMovedThisRound(boolean hasMovedThisRound) {
         this.hasMovedThisRound = hasMovedThisRound;
+    }
+
+    public boolean isAdversary() {
+        return adversary;
     }
 }

@@ -49,7 +49,7 @@ public class Deck{
             ImageView thmbn = new ImageView(context);
             thmbn.setBackgroundResource(R.drawable.sword);
             thmbn.setTag(R.drawable.sword);
-            cardList.add(new Army("Placeholder "+i ,"Description du placeholder "+i,2, 3, 1, 2, 1, bg,thmbn));
+            cardList.add(new Army("Placeholder "+i ,"Description du placeholder "+i,2, 3, 1, 2, 1, bg,thmbn,false));
         }
     }
 
@@ -62,7 +62,7 @@ public class Deck{
             ImageView thmbn = new ImageView(context);
             thmbn.setBackgroundResource(R.drawable.sword);
             thmbn.setTag(R.drawable.sword);
-            cardList.add(new Army("Placeholder "+i ,"Description du placeholder "+i,2, 3, 1, 2, 1, bg,thmbn));
+            cardList.add(new Army("Placeholder "+i ,"Description du placeholder "+i,2, 3, 1, 2, 1, bg,thmbn,false));
         }
     }
 

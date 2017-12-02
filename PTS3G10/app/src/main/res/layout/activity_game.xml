@@ -2,6 +2,7 @@
 <android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
@@ -53,10 +54,10 @@
                 android:id="@+id/ADVCardsLeftText"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_gravity="start"
                 android:layout_weight="1"
                 android:text="9"
                 android:textAlignment="viewStart"
-                android:layout_gravity="start"
                 android:textSize="24sp" />
         </FrameLayout>
 

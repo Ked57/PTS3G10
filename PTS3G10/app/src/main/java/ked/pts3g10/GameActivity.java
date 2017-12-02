@@ -24,7 +24,7 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
 
-        board = new Board(this, new Player(this,"Ked"), new Player(this,"Shyndard")); //Valeurs d'exemple
+        board = new Board(this, new Player(this,"Ked",false), new Player(this,"Shyndard",true)); //Valeurs d'exemple
         temgr = new GameTouchEventMgr(this);
 
         ActivityMgr.gameActivity = this;
@@ -42,6 +42,9 @@ public class GameActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.newRound:
                 board.newRound();
+                return true;
+            case R.id.populate:
+                board.populate();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -28,7 +28,7 @@ public class LaunchActivity extends AppCompatActivity {
                 ImageView thmbn = new ImageView(this);
                 thmbn.setBackgroundResource(R.drawable.bow);
                 thmbn.setTag(R.drawable.bow);
-                cardDb.insert(new Army("Archers", "Une armée d'archers",2,2,2,2,1, bg, thmbn));
+                cardDb.insert(new Army("Archers", "Une armée d'archers",2,2,2,2,1, bg, thmbn,false));
 
                 ImageView bg2 = new ImageView(this);
                 bg2.setBackgroundResource(R.drawable.sword);
@@ -36,7 +36,7 @@ public class LaunchActivity extends AppCompatActivity {
                 ImageView thmbn2 = new ImageView(this);
                 thmbn2.setBackgroundResource(R.drawable.sword);
                 thmbn2.setTag(R.drawable.sword);
-                cardDb.insert(new Army("Légion","Une armée de légionnaires",1,2,1,2,1,bg2,thmbn2));
+                cardDb.insert(new Army("Légion","Une armée de légionnaires",1,2,1,2,1,bg2,thmbn2,false));
         }
 
 
