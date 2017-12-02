@@ -30,6 +30,7 @@ public class Board {
     private boolean endRound;
     private boolean playersTurn; // true -> le joueur, false -> l'adversaire
     private int roundNumber;
+    private Timer t;
 
 
     private LinearLayout V1,V2,V3,V4,V5;//V pour verical, le nombre pour le numéro de colonne
@@ -69,6 +70,7 @@ public class Board {
         endRound = false;
         playersTurn = false; // Valeur acheminée du serveur, implémenté plus tard
 
+        t = new Timer();
         newRound();
     }
 
@@ -102,6 +104,10 @@ public class Board {
 
     public void newRound(){
         ++roundNumber;
+        t.cancel();
+        t.purge();
+
+        t = new Timer();
 
         resetCardsHaveMovedThisRound();
         seconds = DEFAULT_SECONDS;
@@ -133,8 +139,7 @@ public class Board {
         }
 
         clearBoardActions(); // Pour enlever les éventuelles actions en cours
-        //Declare the timer
-        Timer t = new Timer();
+
         //Set the schedule function and rate
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -151,7 +156,6 @@ public class Board {
                         if(seconds == 0 || endRound)
                         {
                             newRound();
-                            cancel();
                         }
 
                     }
