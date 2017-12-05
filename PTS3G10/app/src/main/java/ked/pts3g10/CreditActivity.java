@@ -16,13 +16,11 @@ public class CreditActivity extends AppCompatActivity {
 
     private ImageView logoIut;
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        logoIut = (ImageView)findViewById(R.id.CreditIut);
-        logoIut.setColorFilter(R.color.colorBlue);
         setContentView(R.layout.activity_credits);
+
 
     }
 }
