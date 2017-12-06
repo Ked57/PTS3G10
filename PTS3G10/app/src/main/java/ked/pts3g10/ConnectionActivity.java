@@ -11,7 +11,7 @@ import android.widget.Toast;
 public class ConnectionActivity extends AppCompatActivity {
 
     private EditText pseudo,password;
-    private Button connection, inscription;
+    private Button connection, inscription, dev;
     private String stringPseudo,stringPassword;
     private Boolean connecter=true;//<<<<<<<<<<<<<<<-----------------------Variable pour la connection sur vrais pour le test
     private ConnectionActivity context;
@@ -26,6 +26,7 @@ public class ConnectionActivity extends AppCompatActivity {
         password =(EditText)findViewById(R.id.password);
         connection = (Button) findViewById(R.id.buttonconnection);
         inscription = (Button) findViewById(R.id.buttoninscription);
+        dev = (Button) findViewById(R.id.dev);
         context=this;
 
         //Ouvre l'activite du jeux et envoie les informations de connection a la bdd
@@ -63,6 +64,16 @@ public class ConnectionActivity extends AppCompatActivity {
                 //Ouvre la fenetre d'inscription
                 Intent inscription = new Intent(context,InscriptionActivity.class);
                 startActivity(inscription);
+                //On ne ferme pas cet activity pour eviter de la rapeller après l'inscription
+            }
+        });
+
+        dev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Ouvre la fenetre d'inscription
+                Intent launch = new Intent(context,LaunchActivity.class);
+                startActivity(launch);
                 //On ne ferme pas cet activity pour eviter de la rapeller après l'inscription
             }
         });
