@@ -69,6 +69,11 @@ public class Case extends FrameLayout {
         });
     }
 
+    public Pos getPos(){return pos;}
+
+    public boolean isPlayersCastle(){ return pos.getPosX() == 2 && pos.getPosY()== 4;}
+    public boolean isAdversaryCastle(){ return pos.getPosX() == 2 && pos.getPosY() == 0;}
+
     public void setCard(BoardCard card){
         this.card = card;
         Log.e("card",""+ (card != null));

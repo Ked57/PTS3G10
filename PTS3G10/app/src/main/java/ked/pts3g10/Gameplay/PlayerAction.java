@@ -61,6 +61,14 @@ public class PlayerAction {
                 if (base.getXDistanceWith(c) <= base.getCard().getMovementPoints() && base.getYDistanceWith(c) <= base.getCard().getMovementPoints()) {
                     if (c.isCardThumbnailEmpty())
                         c.setCaseActionable(R.color.colorGreen);
+                    else if(c.isPlayersCastle()){
+                        c.setCaseNonActionable();
+                    }else if(c.isAdversaryCastle()){
+                        c.setCaseActionable(R.color.colorBlue);
+                    }
+                    else if(c.getCard().isAdversary()){
+                        c.setCaseActionable(R.color.colorBlue);
+                    }
                     else c.setCaseNonActionable();
                 }
             }
