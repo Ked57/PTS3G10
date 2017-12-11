@@ -12,6 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
@@ -56,9 +57,7 @@ public class Board {
         initLayout(V4,3);
         initLayout(V5,4);
 
-        //On met les chateaux
-        getCaseWithLinearLayoutNumber(2,0).setCardThumbnail(R.drawable.castlered);
-        getCaseWithLinearLayoutNumber(2,4).setCardThumbnail(R.drawable.castle);
+        initCastles();
 
         /*Init des text view */
         updateTexts();
@@ -73,6 +72,14 @@ public class Board {
 
         t = new Timer();
         newRound();
+    }
+
+    public void initCastles(){
+        CardDB cardDB = new CardDB(context);
+        Card castleFriend = cardDB.getCardFromIndex(0, false);
+        Card castleEni = cardDB.getCardFromIndex(0, true);
+        getCaseWithLinearLayoutNumber(2,0).setCard(context,(BoardCard)castleEni);
+        getCaseWithLinearLayoutNumber(2,4).setCard(context,(BoardCard)castleFriend);
     }
 
     public ArrayList<Case> getCases() {
@@ -185,8 +192,8 @@ public class Board {
     }
     //Destinée aux tests, met quelques cartes adverses sur le board
     public void populate(){
-        adversary.getPlayerAction().placeBoardCard((BoardCard) adversary.getDeck().getCardList().get(0),cases.get(7));
-        adversary.getPlayerAction().placeBoardCard((BoardCard) adversary.getDeck().getCardList().get(1),cases.get(12));
+        adversary.getPlayerAction().placeBoardCard(context,(BoardCard) adversary.getDeck().getCardList().get(0),cases.get(7));
+        adversary.getPlayerAction().placeBoardCard(context,(BoardCard) adversary.getDeck().getCardList().get(1),cases.get(12));
     }
 
     public void onEndRoundButtonClick(){

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
@@ -26,8 +27,8 @@ public class PlayerAction {
         movingFrom = null;
     }
 
-    public void placeBoardCard(BoardCard card, Case new_case) {
-        new_case.setCard(card);
+    public void placeBoardCard(GameActivity context, BoardCard card, Case new_case) {
+        new_case.setCard(context, card);
         player.setCrystals(player.getCrystals()-card.getCrystalCost());
         player.getDeck().getCardList().remove(card);
         ActivityMgr.gameActivity.getBoard().updateTexts();
@@ -35,8 +36,8 @@ public class PlayerAction {
         card.setHasMovedThisRound(true);
     }
 
-    public void moveCard(BoardCard card,Case new_case) {
-        new_case.setCard(card);
+    public void moveCard(GameActivity context, BoardCard card, Case new_case) {
+        new_case.setCard(context,card);
         movingFrom.resetCard();
         caseCard = null;
         ActivityMgr.gameActivity.getBoard().clearBoardActions();
@@ -59,11 +60,15 @@ public class PlayerAction {
 
         if(eniHp <= 0){
             attack_case.resetCard();
-        }else attack_case.getCard().setHealthPoints(eniHp);
+        }else {
+            attack_case.getCard().setHealthPoints(eniHp);
+            attack_case.updateHp(eniHp);
+        }
 
         resetActionState();
         caseCard.setHasMovedThisRound(true);
     }
+
 
     public void chooseCaseToGoTo(Case base){
         Board board = ActivityMgr.gameActivity.getBoard();

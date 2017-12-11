@@ -78,11 +78,11 @@ public class Case extends FrameLayout {
     public boolean isPlayersCastle(){ return pos.getPosX() == 2 && pos.getPosY()== 4;}
     public boolean isAdversaryCastle(){ return pos.getPosX() == 2 && pos.getPosY() == 0;}
 
-    public void setCard(BoardCard card){
+    public void setCard(GameActivity context, BoardCard card){
         this.card = card;
         Log.e("card",""+ (card != null));
         setCardThumbnail((int) card.getThumbnail().getTag());
-        setHealthPointsView(card.getHealthPoints());
+        setHealthPointsView(context,card.getHealthPoints());
     }
 
     public void resetCard(){
@@ -92,8 +92,8 @@ public class Case extends FrameLayout {
         healthPointsView = null;
     }
 
-    public void setHealthPointsView(int hp){
-        healthPointsView = new TextView(ActivityMgr.gameActivity);
+    public void setHealthPointsView(GameActivity context, int hp){
+        healthPointsView = new TextView(context);
         this.addView(healthPointsView);
         healthPointsView.setText(""+hp);
     }
@@ -141,12 +141,18 @@ public class Case extends FrameLayout {
 
     public BoardCard getCard() { return card; }
 
+    public void updateHp(int hp){
+        if(!isCardThumbnailEmpty()){
+            healthPointsView.setText(""+hp);
+        }
+    }
+
     public void onClickAction(){
         Toast t;
         if(ActivityMgr.gameActivity.getBoard().isPlayersTurn()) {
             PlayerAction pa = ActivityMgr.gameActivity.getBoard().getPlayer().getPlayerAction();
             if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 1) { // Choosing state
-                pa.placeBoardCard(pa.getCaseCard(), this);
+                pa.placeBoardCard(context,pa.getCaseCard(), this);
             } else if (!isCardThumbnailEmpty() && card != null && pa.getActionState() != 2) {
                 if(!card.hasMovedThisRound() && !card.isAdversary())
                     pa.chooseCaseToGoTo(this);//On affiche les cases où on peut aller
@@ -160,7 +166,7 @@ public class Case extends FrameLayout {
                 }
             } else if (isActionable && pa.getActionState() == 2) {
                 if(isCardThumbnailEmpty())
-                    pa.moveCard(pa.getCaseCard(), this);
+                    pa.moveCard(context, pa.getCaseCard(), this);
                 else pa.attack(this);
             }
         }else{

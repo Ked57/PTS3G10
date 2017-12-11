@@ -25,8 +25,8 @@ public class Player {
         ArrayList<Card> cards = new ArrayList<Card>();
         CardDB cardDB = new CardDB(context);
         for(int i = 0; i < 4; ++i){//Pour peupler en attendant de récupérer les decks du serveur
-            cards.add(cardDB.getCardFromIndex(0,adversary));
             cards.add(cardDB.getCardFromIndex(1,adversary));
+            cards.add(cardDB.getCardFromIndex(2,adversary));
         }
         deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
         playerAction = new PlayerAction(this);
