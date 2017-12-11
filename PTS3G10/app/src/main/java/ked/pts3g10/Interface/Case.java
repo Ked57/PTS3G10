@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
@@ -125,6 +126,7 @@ public class Case extends FrameLayout {
         return dist;
     }
 
+
     public BoardCard getCard() { return card; }
 
     public void onClickAction(){
@@ -144,9 +146,10 @@ public class Case extends FrameLayout {
                     t = Toast.makeText(context,context.getResources().getString(R.string.game_already_moved),Toast.LENGTH_SHORT);
                     t.show();
                 }
-            } else if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 2) {
-            /* TODO: Move or attack */
-                pa.moveCard(pa.getCaseCard(), this);
+            } else if (isActionable && pa.getActionState() == 2) {
+                if(isCardThumbnailEmpty())
+                    pa.moveCard(pa.getCaseCard(), this);
+                else pa.attack(this);
             }
         }else{
             t = Toast.makeText(context,context.getResources().getString(R.string.deck_choice_wrong),Toast.LENGTH_SHORT);

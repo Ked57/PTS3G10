@@ -18,6 +18,8 @@ public abstract class BoardCard extends Card {
         return healthPoints;
     }
 
+    public void setHealthPoints(int healthPoints) { this.healthPoints = healthPoints;}
+
     public int getMovementPoints() {
         return movementPoints;
     }

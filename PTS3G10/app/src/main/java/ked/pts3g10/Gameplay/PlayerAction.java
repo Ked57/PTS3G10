@@ -48,8 +48,21 @@ public class PlayerAction {
 
     }
 
-    public void attack(Case actual_case, Case attack_case) {
+    public void attack(Case attack_case) {
+        int ap = getCaseCard().getAttactPoints();
+        int eniHp = attack_case.getCard().getHealthPoints();
 
+        // Notifier le serveur
+        // Lancer l'animation
+
+        eniHp -= ap;
+
+        if(eniHp <= 0){
+            attack_case.resetCard();
+        }else attack_case.getCard().setHealthPoints(eniHp);
+
+        resetActionState();
+        caseCard.setHasMovedThisRound(true);
     }
 
     public void chooseCaseToGoTo(Case base){
