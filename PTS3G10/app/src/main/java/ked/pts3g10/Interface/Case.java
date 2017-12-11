@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
@@ -28,6 +30,7 @@ public class Case extends FrameLayout {
 
     private ImageView grass;
     private ImageView cardThumbnail; //Pas inspiré pour ce nom, représente l'image de la carte sur la case
+    private TextView healthPointsView;
     private BoardCard card;
     private GameActivity context;
     private boolean isActionable;
@@ -79,11 +82,20 @@ public class Case extends FrameLayout {
         this.card = card;
         Log.e("card",""+ (card != null));
         setCardThumbnail((int) card.getThumbnail().getTag());
+        setHealthPointsView(card.getHealthPoints());
     }
 
     public void resetCard(){
         this.card = null;
         setCardThumbnail(0);
+        this.removeView(healthPointsView);
+        healthPointsView = null;
+    }
+
+    public void setHealthPointsView(int hp){
+        healthPointsView = new TextView(ActivityMgr.gameActivity);
+        this.addView(healthPointsView);
+        healthPointsView.setText(""+hp);
     }
 
     public boolean setCardThumbnail(int id){
