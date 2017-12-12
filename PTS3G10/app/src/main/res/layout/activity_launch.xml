@@ -34,6 +34,13 @@
             android:text="@string/credits"
             tools:layout_editor_absoluteX="136dp"
             tools:layout_editor_absoluteY="196dp" />
+        <Button
+            android:id="@+id/constituerDeck"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="constituer deck"
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="196dp" />
 
 
 
