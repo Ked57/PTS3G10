@@ -13,20 +13,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InscriptionActivity">
-
-        </activity>
+        <activity android:name=".InscriptionActivity"></activity>
         <activity android:name=".GameActivity" />
         <activity
             android:name=".DeckActivity"
             android:theme="@style/DeckActivity" />
-        <activity android:name=".ConnectionActivity" ><intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+        <activity android:name=".ConnectionActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".CreditActivity" />
-        <activity android:name=".LaunchActivity"></activity>
-        <activity android:name=".ConstructionDeckActivity"></activity>
+        <activity android:name=".LaunchActivity" />
+        <activity android:name=".ConstructionDeckActivity" />
+        <activity android:name=".ChargementActivity"></activity>
     </application>
 
 </manifest>

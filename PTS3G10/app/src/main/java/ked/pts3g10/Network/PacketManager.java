@@ -5,6 +5,7 @@ import android.util.Log;
 import java.net.DatagramPacket;
 
 import ked.pts3g10.Network.packet.PacketErrorAuth;
+import ked.pts3g10.Network.packet.PacketPrepareGame;
 import ked.pts3g10.Network.packet.PacketSuccessAuth;
 
 
@@ -35,6 +36,9 @@ public class PacketManager {
 			case ERRORAUTH:
 				packetI = new PacketErrorAuth();
 				break;
+            case PREPAREGAME:
+                packetI = new PacketPrepareGame();
+                break;
 			default: 
 				break;
 		}

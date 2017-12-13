@@ -7,6 +7,8 @@ L'intérêt ici est d'extend FrameLayout et de construire notre interface procé
  */
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -97,11 +99,13 @@ public class Case extends FrameLayout {
         healthPointsView = new TextView(context);
         this.addView(healthPointsView);
         healthPointsView.setText(""+hp);
-        healthPointsView.setTextSize(TypedValue.COMPLEX_UNIT_SP,15);
+        healthPointsView.setTextColor(Color.RED);
+        healthPointsView.setTypeface(null,Typeface.BOLD);
+        healthPointsView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
     }
 
     public boolean setCardThumbnail(int id){
-        if(isCardThumbnailEmpty()){ // On ne veut pas supperposer les cartes !
+        if(isCardThumbnailEmpty()){ // On ne veut pas superposer les cartes !
             cardThumbnail.setBackgroundResource(id);
             cardThumbnail.bringToFront();
             return true;

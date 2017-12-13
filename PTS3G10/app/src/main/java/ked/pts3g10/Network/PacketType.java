@@ -5,7 +5,8 @@ public enum PacketType {
 	AUTH(0, 3),
 	ERRORAUTH(1, 1),
 	SUCCESSAUTH(2, 2), 
-	WAITINGGAME(3, 2);
+	WAITINGGAME(3, 2),
+	PREPAREGAME(4, 1);
 	
 	private int id;
 	private int paramLength;

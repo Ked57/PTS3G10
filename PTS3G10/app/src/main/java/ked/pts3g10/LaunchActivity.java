@@ -51,7 +51,7 @@ public class LaunchActivity extends AppCompatActivity {
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                               Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
+                               Intent intent = new Intent(LaunchActivity.this, ChargementActivity.class);
                                startActivity(intent);
                            }
          });
