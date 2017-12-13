@@ -69,6 +69,10 @@ public abstract class Card {
         return thumbnail;
     }
 
+    public void setThumbnail(int resId) { thumbnail.setImageResource(resId);}
+
+    public void setBackground(int resId) { background.setImageResource(resId);}
+
     @Override
     public String toString() {
         return "name='" + name + '\'' +
