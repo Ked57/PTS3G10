@@ -41,4 +41,7 @@
 
     </string>
 
+    <!--Menu création d'un deck-->
+    <string name="cartesDispo">Cartes disponibles</string>
+
 </resources>

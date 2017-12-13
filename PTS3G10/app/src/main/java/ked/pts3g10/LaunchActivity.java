@@ -65,6 +65,14 @@ public class LaunchActivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.constituerDeck).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LaunchActivity.this, ConstructionDeckActivity.class);
+                startActivity(intent);
+            }
+        });
+
         ActivityMgr.launchActivity = this;
     }
 

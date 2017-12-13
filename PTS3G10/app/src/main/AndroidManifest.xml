@@ -26,6 +26,7 @@
         </intent-filter></activity>
         <activity android:name=".CreditActivity" />
         <activity android:name=".LaunchActivity"></activity>
+        <activity android:name=".ConstructionDeckActivity"></activity>
     </application>
 
 </manifest>
