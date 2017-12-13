@@ -4,6 +4,7 @@ public class ActivityMgr {
     public static DeckActivity deckActivity;
     public static LaunchActivity launchActivity;
     public static GameActivity gameActivity;
+    public static ConnectionActivity connectionActivity;
 
     private ActivityMgr(){}
 

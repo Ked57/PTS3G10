@@ -24,6 +24,8 @@
     <string name="toastConfirmationPassword">Mot de passe incorrect</string>
     <string name="toastCreationDuCompte">Compte Crée</string>
     <string name="toastChampVide">Tout les champs sont a remplir</string>
+    <string name="toastCaractereInvalide">Votre pseudo ou mot de passe contient des caractères invalides</string>
+    <string name="toastConnectionFailed">La connexion a échouée, veuillez recommencer</string>
 
     <!--Menu crédits-->
     <string name="credits">credits</string>

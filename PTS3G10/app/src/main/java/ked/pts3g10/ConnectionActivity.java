@@ -7,7 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import ked.pts3g10.Network.Communication;
 import ked.pts3g10.Network.packet.PacketAuth;
@@ -17,9 +21,12 @@ public class ConnectionActivity extends AppCompatActivity {
     private EditText pseudo,password;
     private Button connection, inscription, dev;
     private String stringPseudo,stringPassword;
-    private Boolean connecter=true;//<<<<<<<<<<<<<<<-----------------------Variable pour la connection sur vrais pour le test
     private ConnectionActivity context;
     public static Communication com;
+    public static boolean connected;
+    public static int token;
+
+    public Timer t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,13 +41,11 @@ public class ConnectionActivity extends AppCompatActivity {
         dev = (Button) findViewById(R.id.dev);
         context=this;
 
+        token = 0;
+        connected = false;
+
         com = new Communication();
         com.start();
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            Log.e("Network",e.getMessage()); }
-        new PacketAuth().call("shyndard", "mot2passe");
 
         //Ouvre l'activite du jeux et envoie les informations de connection a la bdd
         connection.setOnClickListener(new View.OnClickListener() {
@@ -52,20 +57,34 @@ public class ConnectionActivity extends AppCompatActivity {
                 if(stringPassword.isEmpty()|stringPseudo.isEmpty()){
                     Toast toast =Toast.makeText(context,R.string.toastChampVide,Toast.LENGTH_LONG);
                     toast.show();
-                }else{
+                }else if(stringPseudo.contains(":") || stringPassword.contains(":")){
+                    Toast t = Toast.makeText(context,R.string.toastCaractereInvalide,Toast.LENGTH_SHORT);
+                    t.show();
+                }
+                else{
                     // envoyer les info vers la bdd
-                    //
-                    //
-                    //Ajout de la condition que doit être identifier
-                    if(connecter){
-                        Intent launch = new Intent(context,LaunchActivity.class);
-                        //Envoie de variable a l'autre fenetre ?
-                        //
-                        //
-                        startActivity(launch);
-                        //Empeche le retour en arrière car on ferme l'activité après connection
-                        context.finish();
-                    }
+                    new PacketAuth().call(stringPseudo,stringPassword);
+                    //Ouvre la popup
+
+                    //Check toutes les 500ms si réponse
+                    t = new Timer();
+                    t.scheduleAtFixedRate(new TimerTask() {
+                        @Override
+                        public void run() {
+                            context.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    if(connected && token > 0){
+                                        toLauncher();
+                                    }else if(token == -1){
+                                        connectionFailed();
+                                    }
+                                }
+
+                            });
+                        }
+
+                    }, 0, 500);
                 }
             }
         });
@@ -102,5 +121,39 @@ public class ConnectionActivity extends AppCompatActivity {
         return ":";
     }
 
+    public static void connectionCallBack(int tokenReceived){
+        if(tokenReceived < 0){
+            //Connexion a échouée
+            token = -1;
+        }else{
+            //Connexion réussie
+            connected = true;
+            token = tokenReceived;
+        }
+    }
+
+    public void toLauncher(){
+        t.purge();
+        t.cancel();
+        t = null;
+        //Ajout de la condition que doit être identifié
+        Intent launch = new Intent(context,LaunchActivity.class);
+        //Envoie de variable a l'autre fenetre ?
+
+
+        startActivity(launch);
+        //Empeche le retour en arrière car on ferme l'activité après connection
+        context.finish();
+    }
+
+    public void connectionFailed(){
+        t.purge();
+        t.cancel();
+        t = null;
+        
+        Toast t = Toast.makeText(context,R.string.toastConnectionFailed ,Toast.LENGTH_SHORT);
+        t.show();
+        token = 0;
+    }
 
 }
