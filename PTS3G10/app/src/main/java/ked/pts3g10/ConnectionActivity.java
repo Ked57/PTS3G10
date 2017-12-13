@@ -3,10 +3,14 @@ package ked.pts3g10;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import ked.pts3g10.Network.Communication;
+import ked.pts3g10.Network.packet.PacketAuth;
 
 public class ConnectionActivity extends AppCompatActivity {
 
@@ -15,6 +19,7 @@ public class ConnectionActivity extends AppCompatActivity {
     private String stringPseudo,stringPassword;
     private Boolean connecter=true;//<<<<<<<<<<<<<<<-----------------------Variable pour la connection sur vrais pour le test
     private ConnectionActivity context;
+    public static Communication com;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,14 @@ public class ConnectionActivity extends AppCompatActivity {
         inscription = (Button) findViewById(R.id.buttoninscription);
         dev = (Button) findViewById(R.id.dev);
         context=this;
+
+        com = new Communication();
+        com.start();
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            Log.e("Network",e.getMessage()); }
+        new PacketAuth().call("shyndard", "mot2passe");
 
         //Ouvre l'activite du jeux et envoie les informations de connection a la bdd
         connection.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +93,14 @@ public class ConnectionActivity extends AppCompatActivity {
 
     }
 
+
+    public static Communication getCom() {
+        return com;
+    }
+
+    public static String getSeparator() {
+        return ":";
+    }
 
 
 }
