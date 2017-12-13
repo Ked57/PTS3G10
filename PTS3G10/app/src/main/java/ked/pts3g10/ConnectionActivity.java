@@ -150,7 +150,7 @@ public class ConnectionActivity extends AppCompatActivity {
         t.purge();
         t.cancel();
         t = null;
-        
+
         Toast t = Toast.makeText(context,R.string.toastConnectionFailed ,Toast.LENGTH_SHORT);
         t.show();
         token = 0;

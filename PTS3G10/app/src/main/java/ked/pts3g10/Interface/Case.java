@@ -8,6 +8,7 @@ L'intérêt ici est d'extend FrameLayout et de construire notre interface procé
 
 import android.content.Context;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -96,6 +97,7 @@ public class Case extends FrameLayout {
         healthPointsView = new TextView(context);
         this.addView(healthPointsView);
         healthPointsView.setText(""+hp);
+        healthPointsView.setTextSize(TypedValue.COMPLEX_UNIT_SP,15);
     }
 
     public boolean setCardThumbnail(int id){
