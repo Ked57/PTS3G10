@@ -1,4 +1,10 @@
 <resources>
+
+    <!--Manifest-->
+    <string name="construction_deck">Construction Deck</string>
+    <string name="menu">Menu</string>
+
+
     <!--Jeux-->
     <string name="app_name">PTS3G10</string>
     <string name="play_button">Jouer</string>
@@ -48,6 +54,6 @@
     </string>
 
     <!--Menu création d'un deck-->
-    <string name="cartesDispo">Cartes disponibles</string>
+    <string name="selectionner">Sélectionner</string>
 
 </resources>
