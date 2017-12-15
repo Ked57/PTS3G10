@@ -10,5 +10,7 @@ public class PacketPrepareGame implements ActionInterface {
 	@Override
 	public void onCall(String message, String[] args, PacketType action, DatagramPacket packet) {
 		//Event quand serveur a trouv� un partenaire
+		//args[1] : string pseudo adversaire
+        //args[2] : boolean commence ou pas
 	}
 }
