@@ -40,7 +40,7 @@ public class Board {
 
     private Button endRoundButton;
 
-    public Board(GameActivity context, Player player, Player adversary){
+    public Board(GameActivity context, Player player, Player adversary, boolean playersTurn){
         this.context = context;
         this.player = player;
         this.adversary = adversary;
@@ -68,7 +68,7 @@ public class Board {
         roundNumber = 0;
         seconds = DEFAULT_SECONDS;
         endRound = false;
-        playersTurn = false; // Valeur acheminée du serveur, implémenté plus tard
+        this.playersTurn = !playersTurn; // Valeur acheminée du serveur, implémenté plus tard
 
         t = new Timer();
         newRound();
@@ -174,6 +174,8 @@ public class Board {
         }, 0, 1000);
 
     }
+
+    public Player getAdversary(){return adversary;}
 
     public void clearBoardActions(){
         for(Case c : cases){

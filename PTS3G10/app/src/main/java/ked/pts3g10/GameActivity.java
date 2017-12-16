@@ -1,5 +1,6 @@
 package ked.pts3g10;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,9 +23,14 @@ public class GameActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        Intent intent = getIntent();
+        String adversaryName = intent.getStringExtra("adversaryName");
+        String starting = intent.getStringExtra("starting");
+        boolean b;
+        if(starting.equals("true")) b = true;
+        else b = false;
 
-
-        board = new Board(this, new Player(this,"Ked",false), new Player(this,"Shyndard",true)); //Valeurs d'exemple
+        board = new Board(this, new Player(this,"Ked",false), new Player(this,adversaryName,true),b); //Valeurs d'exemple
         temgr = new GameTouchEventMgr(this);
 
         ActivityMgr.gameActivity = this;
