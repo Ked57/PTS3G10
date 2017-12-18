@@ -56,4 +56,12 @@
     <!--Menu création d'un deck-->
     <string name="selectionner">Sélectionner</string>
 
+
+    <!--Alert nb cartes insuffisant-->
+    <string name="alertNbCartes">
+        Vous n\'avez pas sélectionner un nombre de cartes suffisant pour créer un deck.
+        Souhaitez vous remplir le deck de manière aléatoire?
+    </string>
+
+
 </resources>
