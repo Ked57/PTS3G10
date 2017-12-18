@@ -6,12 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.Gameplay.CardPackage.Army;
 
 public class LaunchActivity extends AppCompatActivity {
 
     private CardDB cardDb;
+    private static String adversaryName = "";
+    private static boolean starting = true;
+    private Timer t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,22 @@ public class LaunchActivity extends AppCompatActivity {
         });
 
         ActivityMgr.launchActivity = this;
+
+        //Check toutes les 500ms si réponse
+        t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                    }
+
+                });
+            }
+
+        }, 0, 500);
     }
 
     @Override
@@ -82,4 +104,15 @@ public class LaunchActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    public static void newGame(String adversaryName, boolean starting){
+        ActivityMgr.launchActivity.adversaryName = adversaryName;
+        ActivityMgr.launchActivity.starting = starting;
+    }
+
+    public void startGame(String adversaryName, boolean starting){
+        Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
+        intent.putExtra("adversaryName",adversaryName);
+        intent.putExtra("starting",""+starting);
+        startActivity(intent);
+    }
 }

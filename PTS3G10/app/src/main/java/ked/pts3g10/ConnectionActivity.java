@@ -140,7 +140,6 @@ public class ConnectionActivity extends AppCompatActivity {
         Intent launch = new Intent(context,LaunchActivity.class);
         //Envoie de variable a l'autre fenetre ?
 
-
         startActivity(launch);
         //Empeche le retour en arrière car on ferme l'activité après connection
         context.finish();

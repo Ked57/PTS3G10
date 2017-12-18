@@ -45,6 +45,15 @@ public class PlayerAction {
         card.setHasMovedThisRound(true);
     }
 
+    public void moveCard(GameActivity context, BoardCard card,Case movingFrom, Case new_case) {
+        new_case.setCard(context,card);
+        movingFrom.resetCard();
+        caseCard = null;
+        ActivityMgr.gameActivity.getBoard().clearBoardActions();
+        resetActionState();
+        card.setHasMovedThisRound(true);
+    }
+
     public void useSpellCard(Spell spell, Case new_case) {
 
     }
