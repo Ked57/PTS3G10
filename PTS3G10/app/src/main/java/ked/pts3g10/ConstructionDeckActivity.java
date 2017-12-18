@@ -21,13 +21,16 @@ import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.Player;
 
 public class ConstructionDeckActivity extends AppCompatActivity {
-    private TextView indiceCarte;
+    private TextView indiceCarte,nbCarteDeck;
     private Button selectionner;
     private ImageButton left_arrow, right_arrow, terminer;
     private ImageView carteVue;
     private int indice=0;
     private List<Drawable> carteList = new ArrayList<>();
     private Drawable carte;
+    private ConstructionDeckActivity context;
+    private int nbCartes=0,nbCarteDeckMax=10;
+    private List<Drawable> deck = new ArrayList<>();
 
 
 
@@ -41,6 +44,8 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         right_arrow = (ImageButton) findViewById(R.id.right_arrow);
         selectionner = (Button) findViewById(R.id.selectionner);
         terminer = (ImageButton) findViewById(R.id.terminer);
+        nbCarteDeck= (TextView) findViewById(R.id.NbCarteDeck);
+        context=this;
 
 
         //Initialisation de l'ensemble des cartes dans la liste
@@ -66,8 +71,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
                     indiceCarte.setText(affichageIndice);
                     //On récupére l'image présent a l'indice et l'affiche
                     carte=carteList.get(indice);
-                    //API Lev 16 /!\
-                    //carteVue.setBackground(carte);
+                    carteVue.setBackground(carte);
                 }
             }
         });
@@ -86,19 +90,24 @@ public class ConstructionDeckActivity extends AppCompatActivity {
                     indiceCarte.setText(affichageIndice);
                     //On récupére l'image présent a l'indice et l'affiche
                     carte=carteList.get(indice);
-                    //API Lev 16 /!\
-                    //carteVue.setBackground(carte);
+                    carteVue.setBackground(carte);
                 }
             }
         });
-
-
 
 
         //Action bouton selectionner
         selectionner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(nbCartes==nbCarteDeckMax){
+                    //Afficher une alerte
+                }else{
+                    carte=carteList.get(indice);
+                    deck.add(carte);
+                    nbCartes++;
+                    nbCarteDeck.setText(""+nbCartes);
+                }
 
             }
         });
@@ -109,7 +118,10 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         terminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                //Envoie du deck au serveur
+                //
+                //
+                context.finish();
             }
         });
 

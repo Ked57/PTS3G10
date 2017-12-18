@@ -56,5 +56,6 @@
 
     <!--Menu création d'un deck-->
     <string name="selectionner">Sélectionner</string>
+    <string name="CarteDeck">Nb Carte Deck :</string>
 
 </resources>

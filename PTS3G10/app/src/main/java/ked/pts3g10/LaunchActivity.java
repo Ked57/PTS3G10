@@ -92,6 +92,7 @@ public class LaunchActivity extends AppCompatActivity {
             }
         });
 
+        //Button pour affiche la page de constitution du deck
         findViewById(R.id.constituerDeck).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
