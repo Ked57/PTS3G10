@@ -1,10 +1,10 @@
 package ked.pts3g10.Network.packet;
 
-import java.net.DatagramPacket;
 
 import ked.pts3g10.ActivityMgr;
-import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.PacketType;
+import ked.pts3g10.Util.CoordinateConverter;
+import ked.pts3g10.Util.Pos;
 
 /**
  * Packet envoyé quand le joueur bouge une carte
@@ -21,7 +21,10 @@ public class PacketSendMovement  {
         //args[4] : int LinearLayoutNumber -> X nouveau
         //args[5] : int CaseNumber -> Y nouveau
 
-        ActivityMgr.connectionActivity.getCom().send(type.getId() + ":" + token+ ":" +base_x+ ":" +base_y+ ":" +new_x+ ":" +new_y);
+        Pos base = CoordinateConverter.convert(new Pos(base_x,base_y));
+        Pos new_case = CoordinateConverter.convert(new Pos(new_x,new_y));
+
+        ActivityMgr.connectionActivity.getCom().send(type.getId() + ":" + token+ ":" +base.getPosX()+ ":" +base.getPosY()+ ":" +new_case.getPosX()+ ":" +new_case.getPosY());
 
     }
 }

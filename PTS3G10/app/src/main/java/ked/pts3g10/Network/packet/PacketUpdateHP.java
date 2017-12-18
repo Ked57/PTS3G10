@@ -5,6 +5,8 @@ import java.net.DatagramPacket;
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.PacketType;
+import ked.pts3g10.Util.CoordinateConverter;
+import ked.pts3g10.Util.Pos;
 
 /**
  * Packet envoyé au serveur quand une carte perd des hp
@@ -20,6 +22,8 @@ public class PacketUpdateHP {
         //args[3] : int LinearLayoutNumber -> X carte
         //args[4] : int CaseNumber -> Y carte
 
-        ActivityMgr.connectionActivity.getCom().send(type.getId() + ":" + token+ ":" +new_hp+ ":" +x+ ":" +y);
+        Pos p = CoordinateConverter.convert(new Pos(x,y));
+
+        ActivityMgr.connectionActivity.getCom().send(type.getId() + ":" + token+ ":" +new_hp+ ":" +p.getPosX()+ ":" +p.getPosY());
     }
 }
