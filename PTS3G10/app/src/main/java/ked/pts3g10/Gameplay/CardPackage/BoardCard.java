@@ -29,4 +29,8 @@ public abstract class BoardCard extends Card {
         return super.toString()+ "healthPoints=" + healthPoints +
                 ", movementPoints=" + movementPoints;
     }
+
+    public BoardCard clone(boolean adversary){
+        return null;
+    }
 }

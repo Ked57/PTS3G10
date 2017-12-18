@@ -6,17 +6,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.Gameplay.CardPackage.Army;
+import ked.pts3g10.Gameplay.CardPackage.Card;
+
 
 public class LaunchActivity extends AppCompatActivity {
 
-    private CardDB cardDb;
+
     private static String adversaryName = "";
     private static boolean starting = true;
+    public static ArrayList<Card> cards = new ArrayList<>();
     private Timer t;
 
     @Override
@@ -24,8 +27,8 @@ public class LaunchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launch);
 
-        cardDb = new CardDB(this);
-        if(cardDb.select().isEmpty()){
+
+
             /* TODO: récupérer les cartes via le serveur (Json) */
 
                 ImageView bg = new ImageView(this);
@@ -34,7 +37,15 @@ public class LaunchActivity extends AppCompatActivity {
                 ImageView thmbn = new ImageView(this);
                 thmbn.setBackgroundResource(R.drawable.castle);
                 thmbn.setTag(R.drawable.castle);
-                cardDb.insert(new Army("Chateau", "Votre base principale",0,0,0,30,0, bg, thmbn,false));
+                cards.add(new Army("Chateau", "Votre base principale",0,0,0,30,0, bg, thmbn,false));
+
+                ImageView bg4 = new ImageView(this);
+                bg4.setBackgroundResource(R.drawable.castle);
+                bg4.setTag(R.drawable.castle);//A ne pas oublier
+                ImageView thmbn4 = new ImageView(this);
+                thmbn4.setBackgroundResource(R.drawable.castle);
+                thmbn4.setTag(R.drawable.castle);
+                cards.add(new Army("Chateau", "Votre base principale",0,0,0,30,0, bg4, thmbn4,true));
 
                 ImageView bg3 = new ImageView(this);
                 bg3.setBackgroundResource(R.drawable.bow);
@@ -42,7 +53,7 @@ public class LaunchActivity extends AppCompatActivity {
                 ImageView thmbn3 = new ImageView(this);
                 thmbn3.setBackgroundResource(R.drawable.bow);
                 thmbn3.setTag(R.drawable.bow);
-                cardDb.insert(new Army("Archers", "Une armée d'archers",2,2,2,2,1, bg3, thmbn3,false));
+                cards.add(new Army("Archers", "Une armée d'archers",2,2,2,2,1, bg3, thmbn3,false));
 
                 ImageView bg2 = new ImageView(this);
                 bg2.setBackgroundResource(R.drawable.sword);
@@ -50,8 +61,8 @@ public class LaunchActivity extends AppCompatActivity {
                 ImageView thmbn2 = new ImageView(this);
                 thmbn2.setBackgroundResource(R.drawable.sword);
                 thmbn2.setTag(R.drawable.sword);
-                cardDb.insert(new Army("Légion","Une armée de légionnaires",1,2,1,2,1,bg2,thmbn2,false));
-        }
+                cards.add(new Army("Légion","Une armée de légionnaires",1,2,1,2,1,bg2,thmbn2,false));
+
 
 
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
@@ -110,7 +121,6 @@ public class LaunchActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        cardDb.disconnect();
         super.onDestroy();
     }
 

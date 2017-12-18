@@ -3,7 +3,7 @@ package ked.pts3g10.Gameplay;
 
 import java.util.ArrayList;
 
-import ked.pts3g10.DB.CardDB;
+import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 
@@ -23,11 +23,8 @@ public class Player {
         this.context = context;
         this.adversary = adversary;
         ArrayList<Card> cards = new ArrayList<Card>();
-        CardDB cardDB = new CardDB(context);
-        for(int i = 0; i < 4; ++i){//Pour peupler en attendant de récupérer les decks du serveur
-            cards.add(cardDB.getCardFromIndex(1,adversary));
-            cards.add(cardDB.getCardFromIndex(2,adversary));
-        }
+        cards.add(ActivityMgr.launchActivity.cards.get(2).clone(adversary));
+        cards.add(ActivityMgr.launchActivity.cards.get(3).clone(adversary));
         deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
         playerAction = new PlayerAction(this);
     }

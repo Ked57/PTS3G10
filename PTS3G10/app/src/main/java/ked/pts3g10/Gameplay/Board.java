@@ -12,7 +12,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ked.pts3g10.ActivityMgr;
-import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
@@ -75,9 +74,8 @@ public class Board {
     }
 
     public void initCastles(){
-        CardDB cardDB = new CardDB(context);
-        Card castleFriend = cardDB.getCardFromIndex(0, false);
-        Card castleEni = cardDB.getCardFromIndex(0, true);
+        Card castleFriend = ActivityMgr.launchActivity.cards.get(0);
+        Card castleEni = ActivityMgr.launchActivity.cards.get(0);
         getCaseWithLinearLayoutNumber(2,0).setCard(context,(BoardCard)castleEni);
         getCaseWithLinearLayoutNumber(2,4).setCard(context,(BoardCard)castleFriend);
     }

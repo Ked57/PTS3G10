@@ -93,4 +93,8 @@ public abstract class Card {
     public boolean isAdversary() {
         return adversary;
     }
+
+    public Card clone(boolean adversary){
+        return null;
+    }
 }

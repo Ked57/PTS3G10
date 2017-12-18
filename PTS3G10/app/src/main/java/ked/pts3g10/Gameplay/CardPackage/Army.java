@@ -14,4 +14,8 @@ public class Army extends BoardCard {
     public String toString() {
         return "Army{"+super.toString()+"}";
     }
+
+    public Army clone(boolean adversary){
+        return new Army(name,description,crystalCost,attactPoints,rangePoints, healthPoints, movementPoints, background, thumbnail, adversary);
+    }
 }

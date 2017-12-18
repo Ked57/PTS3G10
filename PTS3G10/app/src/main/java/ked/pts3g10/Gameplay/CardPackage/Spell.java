@@ -22,4 +22,8 @@ public class Spell extends Card {
     public String toString() {
         return "Army{"+super.toString()+","+ability.toString()+"}";
     }
+
+    public Spell clone(boolean adversary){
+        return new Spell(name,description,crystalCost,attactPoints,rangePoints, background, thumbnail, ability, adversary);
+    }
 }
