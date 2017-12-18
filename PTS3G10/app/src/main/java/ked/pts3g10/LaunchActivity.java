@@ -62,6 +62,16 @@ public class LaunchActivity extends AppCompatActivity {
                            }
          });
 
+        findViewById(R.id.devButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
+                intent.putExtra("adversaryName","Dev");
+                intent.putExtra("starting","true");
+                startActivity(intent);
+            }
+        });
+
         //Boutton pour afficher la page crédits
         findViewById(R.id.credits).setOnClickListener(new View.OnClickListener() {
             @Override
