@@ -30,7 +30,7 @@ import ked.pts3g10.Gameplay.CardPackage.Spell;
 
 public class XMLParser {
 
-    public static ArrayList<Card> cards = new ArrayList<>();
+    public int version = 0;
 
     /**
      * Cette classe représente une "entry" dans le fichier XML
@@ -77,10 +77,10 @@ public class XMLParser {
             for(Entry e : readData(parser)){
                 switch(e.type){
                     case "army":
-                        ImageView bg = new ImageView(ActivityMgr.gameActivity);
+                        ImageView bg = new ImageView(ActivityMgr.launchActivity);
                         bg.setBackgroundResource(e.bg);
                         bg.setTag(e.bg);
-                        ImageView thmbn = new ImageView(ActivityMgr.gameActivity);
+                        ImageView thmbn = new ImageView(ActivityMgr.launchActivity);
                         thmbn.setBackgroundResource(e.thmbn);
                         thmbn.setTag(e.thmbn);
                         boolean adversary = e.adversary.equals("true");
@@ -118,9 +118,13 @@ public class XMLParser {
             }
             String name = parser.getName();
 
+            if(name.equals("version")){
+                version = Integer.parseInt(readTag(parser,"version"));
+            }
+
             // si cette balise est un <entry>, extraire le contenu de cette balise avec readEntry()
             // et ajouter le nouvel object Entry dans la liste entries
-            if (name.equals("entry")) {
+            else if (name.equals("entry")) {
                 entries.add(readEntry(parser));
                 // sinon, sauter la balise
             } else {
@@ -196,10 +200,10 @@ public class XMLParser {
                     mp = Integer.parseInt(readTag(parser, "mp"));
                     break;
                 case "bg":
-                    bg = Integer.parseInt(readTag(parser, "bg"));
+                    bg = Integer.decode(readTag(parser, "bg"));
                     break;
                 case "thmbn":
-                    thmbn = Integer.parseInt(readTag(parser, "thmbn"));
+                    thmbn = Integer.decode(readTag(parser, "thmbn"));
                     break;
 
                 default:
@@ -263,7 +267,7 @@ public class XMLParser {
      * @param cards
      * @throws IOException
      */
-    public void write(Context context, ArrayList<Card> cards) throws IOException {
+    public void write(Context context, ArrayList<Card> cards, int version) throws IOException {
 
         FileOutputStream fileos = new FileOutputStream(context.getFilesDir()+"/save.xml");//Environment.getExternalStorageDirectory().getAbsolutePath()+"/Android/data/ked.atc-simulator/files/save.xml");
         XmlSerializer xmlSerializer = Xml.newSerializer();
@@ -272,13 +276,13 @@ public class XMLParser {
         xmlSerializer.startDocument("UTF-8", true);
         xmlSerializer.startTag(null, "data");
         xmlSerializer.startTag(null, "version");
-        xmlSerializer.text("0.1"); // TODO: Récup la version et la réécrire ici
+        xmlSerializer.text(""+version); // TODO: Récup la version et la réécrire ici
         xmlSerializer.endTag(null,"version");
         for(Card c : cards) {
             xmlSerializer.startTag(null, "entry");
-            xmlSerializer.startTag(null, "nom");
+            xmlSerializer.startTag(null, "name");
             xmlSerializer.text(c.getName());
-            xmlSerializer.endTag(null, "nom");
+            xmlSerializer.endTag(null, "name");
 
             xmlSerializer.startTag(null, "description");
             xmlSerializer.text(c.getDescription());
@@ -295,6 +299,10 @@ public class XMLParser {
             xmlSerializer.startTag(null, "type");
             if(c instanceof Army)
                 xmlSerializer.text("army");
+            else if(c instanceof Hero)
+                xmlSerializer.text("hero");
+            else if(c instanceof Spell)
+                xmlSerializer.text("spell");
             else xmlSerializer.text("default");
             xmlSerializer.endTag(null, "type");
 
@@ -330,7 +338,7 @@ public class XMLParser {
 
             xmlSerializer.startTag(null, "bg");
             xmlSerializer.text(""+c.getBackground().getTag());
-            xmlSerializer.endTag(null, "ap");
+            xmlSerializer.endTag(null, "bg");
 
             xmlSerializer.startTag(null, "thmbn");
             xmlSerializer.text(""+c.getThumbnail().getTag());
@@ -346,4 +354,6 @@ public class XMLParser {
         fileos.write(dataWrite.getBytes());
         fileos.close();
     }
+
+    public int getVersion(){ return version;}
 }
