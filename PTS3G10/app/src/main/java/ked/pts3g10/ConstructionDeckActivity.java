@@ -26,11 +26,11 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     private ImageButton left_arrow, right_arrow, terminer;
     private ImageView carteVue;
     private int indice=0;
-    private List<Drawable> carteList = new ArrayList<>();
-    private Drawable carte;
+    private List<Integer> carteList = new ArrayList<>();
+    private int carte;
     private ConstructionDeckActivity context;
     private int nbCartes=0,nbCarteDeckMax=10;
-    private List<Drawable> deck = new ArrayList<>();
+    private List<Integer> deck = new ArrayList<>();
 
 
 
@@ -49,11 +49,13 @@ public class ConstructionDeckActivity extends AppCompatActivity {
 
 
         //Initialisation de l'ensemble des cartes dans la liste
-        //carteList.add()
+        carteList.add(R.drawable.card);
+        carteList.add(R.drawable.card);
+        carteList.add(R.drawable.card);
 
 
         //Initialisation affichage de l'indice de la carte actuelle
-        String affichageIndice = indice+"/"+carteList.size();
+        String affichageIndice = indice+"/"+(carteList.size()-1);
         indiceCarte.setText(affichageIndice);
 
 
@@ -67,11 +69,11 @@ public class ConstructionDeckActivity extends AppCompatActivity {
                 }else{
                     indice--;
                     //Actualisation de l'affichage en fonction de l'indice
-                    String affichageIndice = indice+"/"+carteList.size();
+                    String affichageIndice = indice+"/"+(carteList.size()-1);
                     indiceCarte.setText(affichageIndice);
                     //On récupére l'image présent a l'indice et l'affiche
                     carte=carteList.get(indice);
-                    carteVue.setBackground(carte);
+                    carteVue.setBackgroundResource(carte);
                 }
             }
         });
@@ -81,16 +83,16 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         right_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(indice==carteList.size()){
+                if(indice==carteList.size()-1){
                     //Fin de la liste côté droit
                 }else{
                     indice++;
                     //Actualisation de l'affichage en fonction de l'indice
-                    String affichageIndice = indice+"/"+carteList.size();
+                    String affichageIndice = indice+"/"+(carteList.size()-1);
                     indiceCarte.setText(affichageIndice);
                     //On récupére l'image présent a l'indice et l'affiche
                     carte=carteList.get(indice);
-                    carteVue.setBackground(carte);
+                    carteVue.setBackgroundResource(carte);
                 }
             }
         });
