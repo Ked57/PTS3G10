@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,14 +50,16 @@ public class ConstructionDeckActivity extends AppCompatActivity {
 
 
         //Initialisation de l'ensemble des cartes dans la liste
-        carteList.add(R.drawable.card);
-        carteList.add(R.drawable.card);
-        carteList.add(R.drawable.card);
+        carteList.add(R.drawable.z_carte_legion);
+        //carteList.add(R.drawable.carte_archer);
 
 
         //Initialisation affichage de l'indice de la carte actuelle
-        String affichageIndice = indice+"/"+(carteList.size()-1);
+        String affichageIndice = (indice+1)+"/"+(carteList.size());
         indiceCarte.setText(affichageIndice);
+
+        //Initialisation affichage du nb de carte selectionner
+        nbCarteDeck.setText(""+nbCartes);
 
 
 
@@ -69,7 +72,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
                 }else{
                     indice--;
                     //Actualisation de l'affichage en fonction de l'indice
-                    String affichageIndice = indice+"/"+(carteList.size()-1);
+                    String affichageIndice = (indice+1)+"/"+(carteList.size());
                     indiceCarte.setText(affichageIndice);
                     //On récupére l'image présent a l'indice et l'affiche
                     carte=carteList.get(indice);
@@ -83,12 +86,13 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         right_arrow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(indice==carteList.size()-1){
+                Log.e("indice",""+indice);
+                if(indice+1==carteList.size()){
                     //Fin de la liste côté droit
                 }else{
                     indice++;
                     //Actualisation de l'affichage en fonction de l'indice
-                    String affichageIndice = indice+"/"+(carteList.size()-1);
+                    String affichageIndice = (indice+1)+"/"+(carteList.size()-1);
                     indiceCarte.setText(affichageIndice);
                     //On récupére l'image présent a l'indice et l'affiche
                     carte=carteList.get(indice);
