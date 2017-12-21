@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.Events.DeckTouchEventMgr;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
@@ -25,13 +24,10 @@ public class DeckActivity extends AppCompatActivity {
     private ImageView deckBackgroundImage;
     private Button deckChoiceButton;
 
-    private CardDB cardDb;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck);
-        cardDb = new CardDB(this);
 
         dtemgr = new DeckTouchEventMgr(this);
         Intent i = getIntent();
@@ -64,7 +60,6 @@ public class DeckActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        cardDb.disconnect();
         super.onDestroy();
     }
 

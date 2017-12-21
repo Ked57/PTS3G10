@@ -8,7 +8,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import ked.pts3g10.DB.CardDB;
 import ked.pts3g10.Events.GameTouchEventMgr;
 import ked.pts3g10.Gameplay.Board;
 import ked.pts3g10.Gameplay.Deck;

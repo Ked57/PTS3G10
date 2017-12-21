@@ -22,4 +22,8 @@ public class Hero extends BoardCard {
     public String toString() {
         return "Hero{"+super.toString()+","+ability.toString()+"}";
     }
+
+    public Hero clone(boolean adversary){
+        return new Hero(name,description,crystalCost,attactPoints,rangePoints, healthPoints, movementPoints, background, thumbnail,ability, adversary);
+    }
 }
