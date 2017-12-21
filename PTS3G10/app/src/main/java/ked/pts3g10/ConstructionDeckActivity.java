@@ -1,9 +1,11 @@
 package ked.pts3g10;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -124,10 +126,34 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         terminer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(nbCartes< nbCarteDeckMax){
+                    AlertDialog.Builder aBuilder = new AlertDialog.Builder(ConstructionDeckActivity.this);
+                    aBuilder.setMessage(R.string.alertNbCartes).setCancelable(false).setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                            remplissageRandom();
+
+                        }
+                    }).setNegativeButton("NON", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            finish();
+                        }
+                    });
+                    AlertDialog alert = aBuilder.create();
+
+
+                    alert.show();
+                }
+                else{
+                   context.finish();
+                }
+
                 //Envoie du deck au serveur
                 //
                 //
-                context.finish();
+
             }
         });
 
@@ -142,6 +168,11 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     public void afficher( Player player){
 
 
+
+    }
+
+    public void remplissageRandom(){
+        //a implementer
 
     }
 
