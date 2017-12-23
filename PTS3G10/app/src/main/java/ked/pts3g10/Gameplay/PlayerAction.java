@@ -101,6 +101,22 @@ public class PlayerAction {
                         c.setCaseNonActionable();
                     }
                 }
+                if(base.getCard().getRangePoints() > base.getCard().getMovementPoints()
+                        && !c.isCardThumbnailEmpty()
+                        && base.getXDistanceWith(c) <= base.getCard().getRangePoints()
+                        && base.getYDistanceWith(c) <= base.getCard().getRangePoints()) {
+                    if(c.isPlayersCastle()){
+                        c.setCaseNonActionable();
+                    }else if(c.isAdversaryCastle()){
+                        c.setCaseActionable(R.color.colorBlue);
+                    }
+                    else if(c.getCard().isAdversary()){
+                        c.setCaseActionable(R.color.colorBlue);
+                    }
+                    else {
+                        c.setCaseNonActionable();
+                    }
+                }
             }
     }
 
