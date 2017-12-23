@@ -5,6 +5,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.Toast;
 
 
 import ked.pts3g10.DeckActivity;
@@ -33,11 +34,16 @@ public class GameTouchEventMgr {
         playerCardsFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context,DeckActivity.class);
                 Deck d = context.getBoard().getPlayer().getDeck();
-                Log.i("deckId",""+d.getDeckId());
-                intent.putExtra("deckId",d.getDeckId());
-                context.startActivity(intent);
+                if(d.getCardList().size() > 0) {
+                    Intent intent = new Intent(context, DeckActivity.class);
+                    Log.i("deckId", "" + d.getDeckId());
+                    intent.putExtra("deckId", d.getDeckId());
+                    context.startActivity(intent);
+                }else{
+                    Toast t = Toast.makeText(context,R.string.game_deck_empty,Toast.LENGTH_SHORT);
+                    t.show();
+                }
             }
         });
     }
