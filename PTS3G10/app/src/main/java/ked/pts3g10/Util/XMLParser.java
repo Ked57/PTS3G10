@@ -88,6 +88,7 @@ public class XMLParser {
                         int thmbnId = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
                         thmbn.setBackgroundResource(thmbnId);
                         thmbn.setTag(thmbnId);
+                        Log.i("Parser","MP:"+e.mp);
                         cards.add(new Army(e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,bg,thmbn,adversary));
                         break;
                     //TODO: Spell and Hero cards
@@ -202,6 +203,7 @@ public class XMLParser {
                     break;
                 case "mp":
                     mp = Integer.parseInt(readTag(parser, "mp"));
+                    Log.i("Parser","Parsed mp : "+mp);
                     break;
                 case "bg":
                     bg = Integer.decode(readTag(parser, "bg"));
@@ -216,7 +218,7 @@ public class XMLParser {
             }
         }
         // retourner une nouvelle Entry avec le nom et message extrait du XML
-        return new Entry(name, description, type, crystalCost,ap,rp,hp,abilityId,mp,bg,thmbn,adversary);
+        return new Entry(name, description, type, crystalCost,ap,rp,hp,mp,abilityId,bg,thmbn,adversary);
     }
 
 

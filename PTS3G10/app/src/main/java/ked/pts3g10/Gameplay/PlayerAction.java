@@ -1,6 +1,7 @@
 package ked.pts3g10.Gameplay;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
@@ -86,9 +87,9 @@ public class PlayerAction {
             caseCard = movingFrom.getCard();
             for (Case c : board.getCases()) {
                 if (base.getXDistanceWith(c) <= base.getCard().getMovementPoints() && base.getYDistanceWith(c) <= base.getCard().getMovementPoints()) {
-                    if (c.isCardThumbnailEmpty())
+                    if (c.isCardThumbnailEmpty()) {
                         c.setCaseActionable(R.color.colorGreen);
-                    else if(c.isPlayersCastle()){
+                    }else if(c.isPlayersCastle()){
                         c.setCaseNonActionable();
                     }else if(c.isAdversaryCastle()){
                         c.setCaseActionable(R.color.colorBlue);
@@ -96,7 +97,9 @@ public class PlayerAction {
                     else if(c.getCard().isAdversary()){
                         c.setCaseActionable(R.color.colorBlue);
                     }
-                    else c.setCaseNonActionable();
+                    else {
+                        c.setCaseNonActionable();
+                    }
                 }
             }
     }
