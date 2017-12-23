@@ -24,7 +24,7 @@ public class Player {
         this.adversary = adversary;
         ArrayList<Card> cards = new ArrayList<Card>();
         cards.add(ActivityMgr.launchActivity.cards.get(2).clone(adversary));
-        cards.add(ActivityMgr.launchActivity.cards.get(3).clone(adversary));
+        cards.add(ActivityMgr.launchActivity.cards.get(4).clone(adversary));
         deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
         playerAction = new PlayerAction(this);
     }

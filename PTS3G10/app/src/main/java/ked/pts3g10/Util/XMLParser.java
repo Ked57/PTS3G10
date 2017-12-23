@@ -77,13 +77,17 @@ public class XMLParser {
             for(Entry e : readData(parser)){
                 switch(e.type){
                     case "army":
-                        ImageView bg = new ImageView(ActivityMgr.launchActivity);
-                        bg.setBackgroundResource(e.bg);
-                        bg.setTag(e.bg);
-                        ImageView thmbn = new ImageView(ActivityMgr.launchActivity);
-                        thmbn.setBackgroundResource(e.thmbn);
-                        thmbn.setTag(e.thmbn);
                         boolean adversary = e.adversary.equals("true");
+
+                        ImageView bg = new ImageView(ActivityMgr.launchActivity);
+                        int bgId = ImagesEnum.getDrawableIdWithImageId(e.bg);
+                        bg.setBackgroundResource(bgId);
+                        bg.setTag(bgId);
+
+                        ImageView thmbn = new ImageView(ActivityMgr.launchActivity);
+                        int thmbnId = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
+                        thmbn.setBackgroundResource(thmbnId);
+                        thmbn.setTag(thmbnId);
                         cards.add(new Army(e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,bg,thmbn,adversary));
                         break;
                     //TODO: Spell and Hero cards

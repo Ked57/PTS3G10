@@ -99,7 +99,6 @@ public class Case extends FrameLayout {
         healthPointsView = new TextView(context);
         this.addView(healthPointsView);
         healthPointsView.setText(""+hp);
-        healthPointsView.setTextColor(Color.RED);
         healthPointsView.setTypeface(null,Typeface.BOLD);
         healthPointsView.setTextSize(TypedValue.COMPLEX_UNIT_SP,20);
     }
