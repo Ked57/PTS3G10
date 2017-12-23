@@ -75,7 +75,7 @@ public class Board {
 
     public void initCastles(){
         Card castleFriend = ActivityMgr.launchActivity.cards.get(0);
-        Card castleEni = ActivityMgr.launchActivity.cards.get(0);
+        Card castleEni = ActivityMgr.launchActivity.cards.get(1);
         getCaseWithLinearLayoutNumber(2,0).setCard(context,(BoardCard)castleEni);
         getCaseWithLinearLayoutNumber(2,4).setCard(context,(BoardCard)castleFriend);
     }
@@ -193,7 +193,7 @@ public class Board {
     //Destinée aux tests, met quelques cartes adverses sur le board
     public void populate(){
         adversary.getPlayerAction().placeBoardCard(context,(BoardCard) adversary.getDeck().getCardList().get(0),cases.get(7));
-        adversary.getPlayerAction().placeBoardCard(context,(BoardCard) adversary.getDeck().getCardList().get(1),cases.get(12));
+        adversary.getPlayerAction().placeBoardCard(context,(BoardCard) adversary.getDeck().getCardList().get(0),cases.get(12));
     }
 
     public void onEndRoundButtonClick(){
