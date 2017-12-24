@@ -13,7 +13,7 @@ import ked.pts3g10.Network.PacketType;
 public class PacketReceiveEndGame {
 
     public void call(int reason) {
-        // args[1] : int id raison déconnexion
+        // args[1] : String raison déconnexion
         //ActivityMgr.gameActivity.endGame();
     }
 }

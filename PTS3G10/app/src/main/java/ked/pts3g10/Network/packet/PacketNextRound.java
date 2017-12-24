@@ -14,7 +14,7 @@ public class PacketNextRound implements ActionInterface {
     public void onCall(String message, String[] args, PacketType action, DatagramPacket packet) {
         //Passage ou tour suivant
         //A utiliser seulement en cas de fin prématurée du round
-
+        
         ActivityMgr.gameActivity.getBoard().newRound();
     }
 }
