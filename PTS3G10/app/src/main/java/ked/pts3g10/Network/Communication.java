@@ -21,7 +21,7 @@ public class Communication extends Thread {
 		port = 20000;
 		receivePacket = new DatagramPacket(buffer, buffer.length);
 		serverPort = 25565;
-		try { serverIp = InetAddress.getByName("5.196.126.150");//127.0.0.1
+		try { serverIp = InetAddress.getByName("149.91.80.135");//127.0.0.1
 		} catch (Exception e) {
 			Log.e("Network",Log.getStackTraceString(e));}
 	}
