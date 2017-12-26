@@ -142,4 +142,6 @@ public class PlayerAction {
     public BoardCard getCaseCard() {
         return caseCard;
     }
+
+    public Case getMovingFrom() {return movingFrom;}
 }

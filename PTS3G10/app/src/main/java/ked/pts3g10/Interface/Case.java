@@ -6,13 +6,10 @@ L'intérêt ici est d'extend FrameLayout et de construire notre interface procé
 
  */
 
-import android.content.Context;
-import android.graphics.Color;
+
 import android.graphics.Typeface;
 import android.util.Log;
 import android.util.TypedValue;
-import android.view.ContextMenu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -21,12 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
-import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
 import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.R;
@@ -161,7 +155,10 @@ public class Case extends FrameLayout {
         Toast t;
         if(ActivityMgr.gameActivity.getBoard().isPlayersTurn()) {
             PlayerAction pa = ActivityMgr.gameActivity.getBoard().getPlayer().getPlayerAction();
-            if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 1) { // Choosing state
+            if(pa.getActionState() == 2 && pa.getMovingFrom().equals(this)){
+                pa.resetActionState();
+            }
+            else if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 1) { // Choosing state
                 pa.placeBoardCard(context,pa.getCaseCard(), this);
             } else if (!isCardThumbnailEmpty() && card != null && pa.getActionState() != 2) {
                 if(!card.hasMovedThisRound() && !card.isAdversary())

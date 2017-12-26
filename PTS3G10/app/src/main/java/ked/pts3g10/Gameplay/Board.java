@@ -2,6 +2,7 @@ package ked.pts3g10.Gameplay;
 
 
 import android.graphics.Color;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
