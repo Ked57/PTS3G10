@@ -36,6 +36,7 @@ public class GameTouchEventMgr {
             public void onClick(View v) {
                 Deck d = context.getBoard().getPlayer().getDeck();
                 if(d.getCardList().size() > 0) {
+                    context.getBoard().getPlayer().getPlayerAction().resetActionState();
                     Intent intent = new Intent(context, DeckActivity.class);
                     Log.i("deckId", "" + d.getDeckId());
                     intent.putExtra("deckId", d.getDeckId());
