@@ -7,7 +7,6 @@ public abstract class Ability {
     protected int id;
     protected String name;
     protected String description;
-    protected Case target;//A voir comment on implémente ça
 
     public Ability(int id, String name, String description){
         this.id = id;
@@ -25,9 +24,5 @@ public abstract class Ability {
 
     public String getDescription() {
         return description;
-    }
-
-    public Case getTarget() {
-        return target;
     }
 }

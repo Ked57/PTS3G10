@@ -3,15 +3,18 @@ package ked.pts3g10;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import ked.pts3g10.Events.GameTouchEventMgr;
 import ked.pts3g10.Gameplay.Board;
 import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.Gameplay.Player;
+import ked.pts3g10.Interface.Case;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -33,6 +36,16 @@ public class GameActivity extends AppCompatActivity {
         temgr = new GameTouchEventMgr(this);
 
         ActivityMgr.gameActivity = this;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        if(((Case)v).isHero()) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.case_menu, menu);
+        }
     }
 
     @Override

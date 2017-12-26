@@ -90,6 +90,7 @@ public class Board {
             Case c = new Case(context,new Pos(number,i));
             V.addView(c);
             cases.add(c);
+            context.registerForContextMenu(c);
         }
     }
 

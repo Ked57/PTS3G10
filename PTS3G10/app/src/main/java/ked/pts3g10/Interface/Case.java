@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
@@ -25,6 +27,7 @@ import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Gameplay.CardPackage.Hero;
 import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
@@ -77,6 +80,8 @@ public class Case extends FrameLayout {
     }
 
     public Pos getPos(){return pos;}
+
+    public boolean isHero(){ return card instanceof Hero;}
 
     public boolean isPlayersCastle(){ return pos.getPosX() == 2 && pos.getPosY()== 4;}
     public boolean isAdversaryCastle(){ return pos.getPosX() == 2 && pos.getPosY() == 0;}
