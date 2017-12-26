@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
+import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
@@ -162,9 +163,9 @@ public class PlayerAction {
         actionState = 1;
         caseCard = card;
         for(Case c : board.getCases()){
-            if(c.isCardThumbnailEmpty()){
+            if (c.isCardThumbnailEmpty()) {
                 c.setCaseActionable(R.color.colorGreen);
-            }else c.setCaseActionable(R.color.colorBlue);
+            } else c.setCaseActionable(R.color.colorBlue);
         }
     }
 

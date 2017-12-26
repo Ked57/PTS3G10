@@ -18,6 +18,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ked.pts3g10.Gameplay.AbilityPackage.Ability;
+import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
+import ked.pts3g10.Gameplay.AbilityPackage.HealAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAndDamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
@@ -177,6 +179,8 @@ public class LaunchActivity extends AppCompatActivity {
     public void initAbilities(){
         //Codé en dur pour l'instant, à voir plus tard
         abilities.add(new HealAndDamageAbility(1,"Sort de zone","Un sort de zone qui heal vos cartes et fait des dégats à celles de votre adversaire"));
+        abilities.add(new DamageAbility(2,"Sort d'attaque","Un sort d'attaque qui fait des dégats aux cartes de votre adversaire"));
+        abilities.add(new HealAbility(3,"Sort de soins","Un sort de soins qui soigne vos cartes"));
     }
 
     public Ability getAbilityById(int id){
