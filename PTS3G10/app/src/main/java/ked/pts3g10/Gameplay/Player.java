@@ -26,9 +26,11 @@ public class Player {
         if(adversary) {
             cards.add(ActivityMgr.launchActivity.cards.get(3).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(5).clone(adversary));
+            cards.add(ActivityMgr.launchActivity.cards.get(7).clone(adversary));
         }else{
             cards.add(ActivityMgr.launchActivity.cards.get(2).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(4).clone(adversary));
+            cards.add(ActivityMgr.launchActivity.cards.get(6).clone(adversary));
         }
         deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
         playerAction = new PlayerAction(this);

@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.Gameplay.AbilityPackage.Ability;
 import ked.pts3g10.Gameplay.CardPackage.Army;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
@@ -88,10 +89,25 @@ public class XMLParser {
                         int thmbnId = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
                         thmbn.setBackgroundResource(thmbnId);
                         thmbn.setTag(thmbnId);
-                        Log.i("Parser","MP:"+e.mp);
                         cards.add(new Army(e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,bg,thmbn,adversary));
                         break;
-                    //TODO: Spell and Hero cards
+                    case "spell":
+                        boolean adversary2 = e.adversary.equals("true");
+
+                        ImageView bg2 = new ImageView(ActivityMgr.launchActivity);
+                        int bgId2 = ImagesEnum.getDrawableIdWithImageId(e.bg);
+                        bg2.setBackgroundResource(bgId2);
+                        bg2.setTag(bgId2);
+
+                        ImageView thmbn2 = new ImageView(ActivityMgr.launchActivity);
+                        int thmbnId2 = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
+                        thmbn2.setBackgroundResource(thmbnId2);
+                        thmbn2.setTag(thmbnId2);
+                        Ability ability = ActivityMgr.launchActivity.getAbilityById(e.abilityId);
+                        if(ability.equals(ActivityMgr.launchActivity.emptyAbility)) break;
+                        cards.add(new Spell(e.name,e.description,e.crystalCost,e.ap,e.rp,bg2,thmbn2,ability,adversary2));
+                        break;
+                    //TODO: Hero cards
                 }
             }
             return cards;

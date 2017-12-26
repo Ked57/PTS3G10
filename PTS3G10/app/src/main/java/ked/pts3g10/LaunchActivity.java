@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -15,11 +14,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ked.pts3g10.Gameplay.CardPackage.Army;
+import ked.pts3g10.Gameplay.AbilityPackage.Ability;
+import ked.pts3g10.Gameplay.AbilityPackage.HealAndDamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
 import ked.pts3g10.Util.XMLParser;
@@ -27,6 +26,7 @@ import ked.pts3g10.Util.XMLParser;
 
 public class LaunchActivity extends AppCompatActivity {
 
+   public final HealAndDamageAbility emptyAbility = new HealAndDamageAbility(0,null,null);
 
     private static String adversaryName = "";
     private static boolean starting = true;
@@ -34,6 +34,7 @@ public class LaunchActivity extends AppCompatActivity {
     private Timer t;
     private XMLParser xmlParser;
     private int version;
+    public static ArrayList<Ability> abilities = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,8 @@ public class LaunchActivity extends AppCompatActivity {
         xmlParser = new XMLParser();
         version = 0;
 
+        initAbilities();
+        ActivityMgr.launchActivity = this;
         getDistantCards();
 
 
@@ -84,7 +87,6 @@ public class LaunchActivity extends AppCompatActivity {
             }
         });
 
-        ActivityMgr.launchActivity = this;
 
         //Check toutes les 500ms si réponse
         t = new Timer();
@@ -170,5 +172,20 @@ public class LaunchActivity extends AppCompatActivity {
         } catch (IOException e) {
             Log.e("Parser", Log.getStackTraceString(e));
         }
+    }
+
+    public void initAbilities(){
+        //Codé en dur pour l'instant, à voir plus tard
+        abilities.add(new HealAndDamageAbility(1,"Sort de zone","Un sort de zone qui heal vos cartes et fait des dégats à celles de votre adversaire"));
+    }
+
+    public Ability getAbilityById(int id){
+        if(abilities.size()<= 0) return emptyAbility;
+        for (Ability a : abilities){
+            if(a.getId() == id){
+                return a;
+            }
+        }
+        return emptyAbility;
     }
 }

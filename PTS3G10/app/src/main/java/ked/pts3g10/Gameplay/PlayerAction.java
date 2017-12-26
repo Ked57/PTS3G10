@@ -17,7 +17,8 @@ public class PlayerAction {
 
     private Player player;
     private int actionState;
-    private BoardCard caseCard;
+    private Card caseCard;
+    private Spell spellCard;
     private Case movingFrom;
 
     public PlayerAction(Player player) {
@@ -55,8 +56,16 @@ public class PlayerAction {
         card.setHasMovedThisRound(true);
     }
 
-    public void useSpellCard(Spell spell, Case new_case) {
-
+    public void useSpellCard(Case new_case) {
+        Log.i("Spell","Using spell");
+        if(caseCard instanceof Spell){
+            ((Spell)caseCard).getAbility().use(ActivityMgr.gameActivity.getBoard(),new_case, caseCard.getRangePoints());
+            player.setCrystals(player.getCrystals()-caseCard.getCrystalCost());
+            player.getDeck().getCardList().remove(caseCard);
+            caseCard = null;
+            resetActionState();
+            ActivityMgr.gameActivity.getBoard().updateTexts();
+        }
     }
 
     public void attack(Case attack_case) {
@@ -75,6 +84,15 @@ public class PlayerAction {
             attack_case.updateHp(eniHp);
         }
 
+        resetActionState();
+        caseCard.setHasMovedThisRound(true);
+    }
+
+    public void heal(Case heal_case){
+        int ap = getCaseCard().getAttactPoints();
+        int hp = heal_case.getCard().getHealthPoints();
+
+        heal_case.updateHp(hp+ap);
         resetActionState();
         caseCard.setHasMovedThisRound(true);
     }
@@ -139,7 +157,18 @@ public class PlayerAction {
         }
     }
 
-    public BoardCard getCaseCard() {
+    public void chooseSpellAimPoint(Spell card){
+        Board board = ActivityMgr.gameActivity.getBoard();
+        actionState = 1;
+        caseCard = card;
+        for(Case c : board.getCases()){
+            if(c.isCardThumbnailEmpty()){
+                c.setCaseActionable(R.color.colorGreen);
+            }else c.setCaseActionable(R.color.colorBlue);
+        }
+    }
+
+    public Card getCaseCard() {
         return caseCard;
     }
 

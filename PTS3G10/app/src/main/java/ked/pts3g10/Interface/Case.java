@@ -22,6 +22,7 @@ import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
+import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
@@ -158,8 +159,11 @@ public class Case extends FrameLayout {
             if(pa.getActionState() == 2 && pa.getMovingFrom().equals(this)){
                 pa.resetActionState();
             }
-            else if (isActionable && isCardThumbnailEmpty() && pa.getActionState() == 1) { // Choosing state
-                pa.placeBoardCard(context,pa.getCaseCard(), this);
+            else if (isActionable && pa.getActionState() == 1) { // Choosing state
+                if(isCardThumbnailEmpty() && pa.getCaseCard() instanceof BoardCard)
+                    pa.placeBoardCard(context,(BoardCard)pa.getCaseCard(), this);
+                else if(pa.getCaseCard() instanceof Spell)
+                    pa.useSpellCard(this);
             } else if (!isCardThumbnailEmpty() && card != null && pa.getActionState() != 2) {
                 if(!card.hasMovedThisRound() && !card.isAdversary())
                     pa.chooseCaseToGoTo(this);//On affiche les cases où on peut aller
@@ -173,7 +177,7 @@ public class Case extends FrameLayout {
                 }
             } else if (isActionable && pa.getActionState() == 2) {
                 if(isCardThumbnailEmpty())
-                    pa.moveCard(context, pa.getCaseCard(), this);
+                    pa.moveCard(context, (BoardCard)pa.getCaseCard(), this);
                 else pa.attack(this);
             }
         }else{

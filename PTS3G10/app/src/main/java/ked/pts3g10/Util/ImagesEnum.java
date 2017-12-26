@@ -14,10 +14,12 @@ public enum ImagesEnum {
     CASTLE(0, R.drawable.castle),
     SWORD(1, R.drawable.sword),
     BOW(2, R.drawable.bow),
+    STAFF(3, R.drawable.staff),
     //RED
     CASTLERED(1000, R.drawable.castlered),
     SWORDRED(1001, R.drawable.swordred),
-    BOWRED(1002, R.drawable.bowred);
+    BOWRED(1002, R.drawable.bowred),
+    STAFFRED(1003, R.drawable.staffred);
 
     private int imageId;
     private int drawableId;

@@ -11,6 +11,7 @@ import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.DeckActivity;
 import ked.pts3g10.Gameplay.Board;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
+import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Gameplay.Player;
 import ked.pts3g10.R;
 
@@ -35,7 +36,9 @@ public class DeckTouchEventMgr implements GestureDetector.OnGestureListener, Ges
                 Player player = ActivityMgr.gameActivity.getBoard().getPlayer();
                 Board board = ActivityMgr.gameActivity.getBoard();
                 if(board.isPlayersTurn() && player.getCrystals() >= player.getDeck().getCardList().get(context.getCurrIndex()).getCrystalCost()) {
-                    player.getPlayerAction().chooseInitialCase((BoardCard) player.getDeck().getCardList().get(context.getCurrIndex()));
+                    if(player.getDeck().getCardList().get(context.getCurrIndex()) instanceof BoardCard) {
+                        player.getPlayerAction().chooseInitialCase((BoardCard) player.getDeck().getCardList().get(context.getCurrIndex()));
+                    }else player.getPlayerAction().chooseSpellAimPoint((Spell)player.getDeck().getCardList().get(context.getCurrIndex()));
                     context.finish();
                 }
                 else if(board.isPlayersTurn() && player.getCrystals() < player.getDeck().getCardList().get(context.getCurrIndex()).getCrystalCost()){
