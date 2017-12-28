@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import ked.pts3g10.R;
 
-public class ChargementActivity extends AppCompatActivity {
+public class WaitingForGameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

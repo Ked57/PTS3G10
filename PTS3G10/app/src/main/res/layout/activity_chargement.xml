@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="ked.pts3g10.ChargementActivity">
+    tools:context="ked.pts3g10.WaitingForGameActivity">
 
     <TextView
         android:id="@+id/textChargement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/chargement" />
+        android:text="@string/waiting_for_game" />
 </LinearLayout>

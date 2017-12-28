@@ -39,7 +39,7 @@
 
 
     <!-- Chargement -->
-    <string name="chargement">Chargement en cours...</string>
+    <string name="waiting_for_game">Recherche de partie en cours ...</string>
 
     <!--Menu crédits-->
     <string name="credits">credits</string>

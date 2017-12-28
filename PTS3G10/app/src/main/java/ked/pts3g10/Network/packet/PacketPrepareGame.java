@@ -1,12 +1,8 @@
 package ked.pts3g10.Network.packet;
 
-import android.content.Intent;
-
 import java.net.DatagramPacket;
 
 import ked.pts3g10.ActivityMgr;
-import ked.pts3g10.ChargementActivity;
-import ked.pts3g10.LaunchActivity;
 import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.PacketType;
 
