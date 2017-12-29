@@ -1,12 +1,13 @@
 package ked.pts3g10.Network;
 
+import android.os.AsyncTask;
 import android.util.Log;
 
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 
-public class Communication extends Thread {
+public class Communication extends AsyncTask {
 
 	private Integer serverPort;
 	private InetAddress serverIp;
@@ -25,25 +26,27 @@ public class Communication extends Thread {
 		} catch (Exception e) {
 			Log.e("Network",Log.getStackTraceString(e));}
 	}
-	
-	public DatagramSocket getSrvSocket() {
-		return clientSocket;
-	}
 
-	@Override
-	public void run() {
-		try {
-			clientSocket = new DatagramSocket(port);
-			Log.i("Network","Init listening on port " + port);
-			send("-1");
-			while (true) {
-				clientSocket.receive(receivePacket);
-				new PacketManager(receivePacket);
-				receivePacket.setLength(buffer.length);
-			}
-		} catch (Exception ex) {
-			Log.e("Network",Log.getStackTraceString(ex));
-		}
+    @Override
+    protected Object doInBackground(Object[] objects) {
+        try {
+            clientSocket = new DatagramSocket(port);
+            Log.i("Network","Init listening on port " + port);
+            send("-1");
+            while (true) {
+                clientSocket.receive(receivePacket);
+                new PacketManager(receivePacket);
+                receivePacket.setLength(buffer.length);
+            }
+        } catch (Exception ex) {
+            Log.e("Network",Log.getStackTraceString(ex));
+        }
+        Log.i("Network","gone out of the while");
+        return null;
+    }
+
+    public DatagramSocket getSrvSocket() {
+		return clientSocket;
 	}
 
 	public synchronized void send(String message) {

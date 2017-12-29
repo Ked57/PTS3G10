@@ -1,6 +1,7 @@
 package ked.pts3g10;
 
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -44,8 +45,15 @@ public class ConnectionActivity extends AppCompatActivity {
         token = 0;
         connected = false;
 
+        StrictMode.ThreadPolicy old = StrictMode.getThreadPolicy();
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder(old)
+                .permitNetwork()
+                .build());
+
         com = new Communication();
-        com.start();
+        com.execute();
+
+
 
         //Ouvre l'activite du jeux et envoie les informations de connection a la bdd
         connection.setOnClickListener(new View.OnClickListener() {

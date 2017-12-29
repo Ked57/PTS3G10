@@ -22,6 +22,7 @@ import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAndDamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Network.packet.PacketJoinGameWaitingList;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
 import ked.pts3g10.Util.XMLParser;
 
@@ -54,8 +55,9 @@ public class LaunchActivity extends AppCompatActivity {
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                               Intent intent = new Intent(LaunchActivity.this, WaitingForGameActivity.class);
-                               startActivity(intent);
+                 new PacketJoinGameWaitingList().call();
+                 Intent intent = new Intent(LaunchActivity.this, WaitingForGameActivity.class);
+                 startActivity(intent);
                            }
          });
 
@@ -112,12 +114,6 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-    }
-
-
-    public static void newGame(String adversaryName, boolean starting){
-        ActivityMgr.launchActivity.adversaryName = adversaryName;
-        ActivityMgr.launchActivity.starting = starting;
     }
 
     public void startGame(){

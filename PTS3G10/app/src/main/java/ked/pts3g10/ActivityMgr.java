@@ -5,6 +5,7 @@ public class ActivityMgr {
     public static LaunchActivity launchActivity;
     public static GameActivity gameActivity;
     public static ConnectionActivity connectionActivity;
+    public static WaitingForGameActivity waitingForGameActivity;
 
     private ActivityMgr(){}
 

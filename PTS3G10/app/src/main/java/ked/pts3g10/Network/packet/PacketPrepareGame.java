@@ -14,11 +14,6 @@ public class PacketPrepareGame implements ActionInterface {
 		//args[1] : string pseudo adversaire
         //args[2] : boolean commence ou pas
 
-        boolean starting;
-        if(args[2].equals("true"))
-            starting = true;
-        else starting = false;
-
-        ActivityMgr.launchActivity.newGame(args[1], starting);
+        ActivityMgr.waitingForGameActivity.startGame(args[1], args[2]);
 	}
 }
