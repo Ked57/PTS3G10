@@ -5,7 +5,6 @@ import java.net.DatagramPacket;
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.Gameplay.Board;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
-import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.Player;
 import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.PacketType;
