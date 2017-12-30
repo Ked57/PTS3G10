@@ -35,6 +35,8 @@ public class Board {
     private int roundNumber;
     private Timer t;
 
+    private int serverRound;
+
 
     private LinearLayout V1,V2,V3,V4,V5;//V pour verical, le nombre pour le numéro de colonne
     private ArrayList<Case> cases;
@@ -62,6 +64,8 @@ public class Board {
 
         /*Init des text view */
         updateTexts();
+
+        serverRound = 0;
 
         endRoundButton = (Button) context.findViewById(R.id.EndButton);
 
@@ -112,7 +116,6 @@ public class Board {
     }
 
     public void newRound(){
-        ++roundNumber;
         t.cancel();
         t.purge();
 
@@ -122,7 +125,7 @@ public class Board {
         seconds = DEFAULT_SECONDS;
         endRound = false;
         playersTurn = !playersTurn;
-
+        Log.i("Network","New round number is "+roundNumber);
         if(roundNumber <= 2)
         {
             player.setCrystals(R.id.PlayerCrystalsText,1);
@@ -160,13 +163,12 @@ public class Board {
 
                         TextView tv = (TextView) context.findViewById(R.id.Timer);
                         tv.setText(String.valueOf(seconds));
-                        seconds -= 1;
-
-                        if(seconds == 0 || endRound)
-                        {
+                        if(seconds > 0)
+                            seconds -= 1;
+                        if(endRound){
+                            roundNumber = serverRound;
                             newRound();
                         }
-
                     }
 
                 });
@@ -199,12 +201,12 @@ public class Board {
         adversary.getPlayerAction().placeBoardCard(context,(BoardCard) adversary.getDeck().getCardList().get(0),cases.get(12));
     }
 
-    public void setEndRound(boolean endRound){
+    public void setEndRound(boolean endRound, int roundNumber){
+        this.serverRound = roundNumber;
         this.endRound=endRound;
     }
 
     public void onEndRoundButtonClick(){
         new PacketEndRound().call(ConnectionActivity.token);
-        endRound = true;
     }
 }
