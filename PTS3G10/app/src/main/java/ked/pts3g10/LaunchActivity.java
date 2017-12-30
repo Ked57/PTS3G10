@@ -42,6 +42,9 @@ public class LaunchActivity extends AppCompatActivity {
     private int version;
     public static ArrayList<Ability> abilities = new ArrayList<>();
 
+    public static boolean displayEndGame;
+    public static String endGameMessage;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,9 @@ public class LaunchActivity extends AppCompatActivity {
 
         xmlParser = new XMLParser();
         version = 0;
+
+        displayEndGame = false;
+        endGameMessage = "";
 
         initAbilities();
         ActivityMgr.launchActivity = this;
@@ -113,6 +119,11 @@ public class LaunchActivity extends AppCompatActivity {
                         if(!adversaryName.equals("") && cards.size() > 0) {
                             startGame();
                         }
+                        if(displayEndGame){
+                            Toast t = Toast.makeText(LaunchActivity.this, endGameMessage, Toast.LENGTH_SHORT);
+                            t.show();
+                            displayEndGame = false;
+                        }
                     }
 
                 });
@@ -138,7 +149,6 @@ public class LaunchActivity extends AppCompatActivity {
         intent.putExtra("adversaryName",adversaryName);
         intent.putExtra("starting",starting);
         startActivity(intent);
-        //ActivityMgr.waitingForGameActivity.finish();
     }
 
     public void getDistantCards(){
@@ -206,5 +216,10 @@ public class LaunchActivity extends AppCompatActivity {
             }
         }
         return emptyAbility;
+    }
+
+    public void displayEndGameMessage(String message){
+        displayEndGame = true;
+        endGameMessage = message;
     }
 }

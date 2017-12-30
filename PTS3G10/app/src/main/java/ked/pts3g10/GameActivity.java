@@ -91,9 +91,7 @@ public class GameActivity extends AppCompatActivity {
     public Board getBoard(){ return board;}
 
     public void endGame(String message){
-        //Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
-        //t.show();
-
+        ActivityMgr.launchActivity.displayEndGameMessage(message);
         finish();
     }
 }
