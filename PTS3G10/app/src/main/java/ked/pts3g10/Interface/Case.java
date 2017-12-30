@@ -19,11 +19,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Gameplay.PlayerAction;
+import ked.pts3g10.Network.packet.PacketPlayCard;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
 
@@ -160,8 +162,10 @@ public class Case extends FrameLayout {
                 pa.resetActionState();
             }
             else if (isActionable && pa.getActionState() == 1) { // Choosing state
-                if(isCardThumbnailEmpty() && pa.getCaseCard() instanceof BoardCard)
-                    pa.placeBoardCard(context,(BoardCard)pa.getCaseCard(), this);
+                if(isCardThumbnailEmpty() && pa.getCaseCard() instanceof BoardCard) {
+                    new PacketPlayCard().call(ConnectionActivity.token,ActivityMgr.gameActivity.getBoard().getPlayer().getDeck().getCardList().indexOf(pa.getCaseCard()),pos.getPosX(),pos.getPosY());
+                    pa.placeBoardCard(context, (BoardCard) pa.getCaseCard(), this);
+                }
                 else if(pa.getCaseCard() instanceof Spell)
                     pa.useSpellCard(this);
             } else if (!isCardThumbnailEmpty() && card != null && pa.getActionState() != 2) {

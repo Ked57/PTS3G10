@@ -49,6 +49,9 @@ public class PacketManager {
             case RECEIVEENDGAME:
                 packetI = new PacketReceiveEndGame();
                 break;
+            case RECEIVEPLAYCARD:
+                packetI = new PacketReceiveEndGame();
+                break;
 			default: 
 				break;
 		}
