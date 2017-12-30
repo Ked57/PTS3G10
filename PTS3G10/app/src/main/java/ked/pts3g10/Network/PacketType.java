@@ -17,7 +17,7 @@ public enum PacketType {
 	SENDANIMATION(12, 4),
 	SENDMOVEMENT(13, 6),
 	UPDATEHP(14, 5),
-	PLAYCARD(15,4),
+	PLAYCARD(15,5),
 	RECEIVEPLAYCARD(16,3);
 	
 	private int id;
