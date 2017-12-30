@@ -9,6 +9,7 @@ import ked.pts3g10.Network.packet.PacketNextRound;
 import ked.pts3g10.Network.packet.PacketPrepareGame;
 import ked.pts3g10.Network.packet.PacketReceiveEndGame;
 import ked.pts3g10.Network.packet.PacketReceiveMovement;
+import ked.pts3g10.Network.packet.PacketReceivePlayCard;
 import ked.pts3g10.Network.packet.PacketSuccessAuth;
 
 
@@ -50,7 +51,7 @@ public class PacketManager {
                 packetI = new PacketReceiveEndGame();
                 break;
             case RECEIVEPLAYCARD:
-                packetI = new PacketReceiveEndGame();
+                packetI = new PacketReceivePlayCard();
                 break;
 			default: 
 				break;

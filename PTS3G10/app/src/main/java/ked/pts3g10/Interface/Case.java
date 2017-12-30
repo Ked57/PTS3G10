@@ -163,7 +163,7 @@ public class Case extends FrameLayout {
             }
             else if (isActionable && pa.getActionState() == 1) { // Choosing state
                 if(isCardThumbnailEmpty() && pa.getCaseCard() instanceof BoardCard) {
-                    new PacketPlayCard().call(ConnectionActivity.token,ActivityMgr.gameActivity.getBoard().getPlayer().getDeck().getCardList().indexOf(pa.getCaseCard()),pos.getPosX(),pos.getPosY());
+                    new PacketPlayCard().call(ConnectionActivity.token,ActivityMgr.gameActivity.getBoard().getPlayer().getDeck().getCardList().indexOf(pa.getCaseCard()),pos);
                     pa.placeBoardCard(context, (BoardCard) pa.getCaseCard(), this);
                 }
                 else if(pa.getCaseCard() instanceof Spell)

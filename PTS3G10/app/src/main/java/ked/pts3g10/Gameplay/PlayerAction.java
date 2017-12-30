@@ -19,8 +19,11 @@ public class PlayerAction {
     private Player player;
     private int actionState;
     private Card caseCard;
-    private Spell spellCard;
     private Case movingFrom;
+
+    private BoardCard toBePlaced;
+    private Case caseToPlaceIt;
+    private boolean placeBoardCardNext;
 
     public PlayerAction(Player player) {
 
@@ -28,6 +31,27 @@ public class PlayerAction {
         actionState = 0; // 0 rien; 1 choosing initial case; 2 moving
         caseCard = null;
         movingFrom = null;
+        toBePlaced = null;
+        caseToPlaceIt = null;
+        placeBoardCardNext = false;
+    }
+
+    public void setCaseToPlaceIt(Case caseToPlaceIt){
+        this.caseToPlaceIt = caseToPlaceIt;
+    }
+
+    public void setToBePlaced(BoardCard toBePlaced){
+        this.toBePlaced = toBePlaced;
+    }
+
+    public void setPlaceBoardCardNext(boolean placeBoardCardNext){
+        this.placeBoardCardNext = placeBoardCardNext;
+    }
+
+    public boolean isPlaceBoardCardNext(){return placeBoardCardNext;}
+
+    public void placeBoardCardNext(GameActivity context){
+        placeBoardCard(context,toBePlaced, caseToPlaceIt);
     }
 
     public void placeBoardCard(GameActivity context, BoardCard card, Case new_case) {

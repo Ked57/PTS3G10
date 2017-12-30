@@ -169,6 +169,11 @@ public class Board {
                             roundNumber = serverRound;
                             newRound();
                         }
+
+                        if(adversary.getPlayerAction().isPlaceBoardCardNext()){
+                            adversary.getPlayerAction().placeBoardCardNext(context);
+                            adversary.getPlayerAction().setPlaceBoardCardNext(false);
+                        }
                     }
 
                 });
