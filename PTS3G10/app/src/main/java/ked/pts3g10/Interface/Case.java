@@ -85,8 +85,12 @@ public class Case extends FrameLayout {
 
     public void setCard(GameActivity context, BoardCard card){
         this.card = card;
-        Log.e("card",""+ (card != null));
-        setCardThumbnail((int) card.getThumbnail().getTag());
+        Log.i("card","SetCard("+pos.getPosY()+";"+pos.getPosY()+") card is null "+ (card == null));
+        Log.i("card","SetCard("+pos.getPosY()+";"+pos.getPosY()+") thumbnail tag = "+ card.getThumbnail().getTag());
+        Log.i("card","SetCard("+pos.getPosY()+";"+pos.getPosY()+") thumbnail empty = "+ isCardThumbnailEmpty());
+        if(setCardThumbnail(Integer.parseInt(card.getThumbnail().getTag().toString())))
+            Log.i("card","setCardThumbnailSuccessful");
+        else Log.i("card","setCartThumbnail not sucessful");
         setHealthPointsView(context,card.getHealthPoints());
     }
 

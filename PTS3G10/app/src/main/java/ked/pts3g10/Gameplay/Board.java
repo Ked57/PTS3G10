@@ -172,7 +172,9 @@ public class Board {
 
                         if(adversary.getPlayerAction().isPlaceBoardCardNext()){
                             adversary.getPlayerAction().placeBoardCardNext(context);
-                            adversary.getPlayerAction().setPlaceBoardCardNext(false);
+                        }
+                        if(adversary.getPlayerAction().isMoveBoardCardNext()){
+                            adversary.getPlayerAction().moveBoardCardNext(context);
                         }
                     }
 

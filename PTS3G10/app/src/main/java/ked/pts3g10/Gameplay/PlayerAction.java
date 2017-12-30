@@ -5,13 +5,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Interface.Case;
+import ked.pts3g10.Network.packet.PacketSendMovement;
 import ked.pts3g10.R;
+import ked.pts3g10.Util.Pos;
 
 
 public class PlayerAction {
@@ -25,15 +28,40 @@ public class PlayerAction {
     private Case caseToPlaceIt;
     private boolean placeBoardCardNext;
 
+    private Case caseItComesFrom;
+    private Case caseItsGoingTo;
+    private boolean moveBoardCardNext;
+
     public PlayerAction(Player player) {
 
         this.player = player;
         actionState = 0; // 0 rien; 1 choosing initial case; 2 moving
         caseCard = null;
         movingFrom = null;
+
         toBePlaced = null;
         caseToPlaceIt = null;
         placeBoardCardNext = false;
+
+        caseItComesFrom = null;
+        caseItsGoingTo = null;
+        moveBoardCardNext = false;
+    }
+
+    public boolean isMoveBoardCardNext() {
+        return moveBoardCardNext;
+    }
+
+    public void setCaseItComesFrom(Case caseItComesFrom) {
+        this.caseItComesFrom = caseItComesFrom;
+    }
+
+    public void setCaseItsGoingTo(Case caseItsGoingTo) {
+        this.caseItsGoingTo = caseItsGoingTo;
+    }
+
+    public void setMoveBoardCardNext(boolean moveBoardCardNext) {
+        this.moveBoardCardNext = moveBoardCardNext;
     }
 
     public void setCaseToPlaceIt(Case caseToPlaceIt){
@@ -52,6 +80,12 @@ public class PlayerAction {
 
     public void placeBoardCardNext(GameActivity context){
         placeBoardCard(context,toBePlaced, caseToPlaceIt);
+        placeBoardCardNext = false;
+    }
+
+    public void moveBoardCardNext(GameActivity context){
+        moveCard(context,caseItComesFrom,caseItsGoingTo);
+        moveBoardCardNext = false;
     }
 
     public void placeBoardCard(GameActivity context, BoardCard card, Case new_case) {
@@ -62,8 +96,11 @@ public class PlayerAction {
         resetActionState();
         card.setHasMovedThisRound(true);
     }
-
+    //Appelé quand c'est le joueur qui bouge une carte
     public void moveCard(GameActivity context, BoardCard card, Case new_case) {
+        Pos basePos = movingFrom.getPos();
+        Pos newPos = new_case.getPos();
+        new PacketSendMovement().call(ConnectionActivity.token,basePos.getPosX(),basePos.getPosY(),newPos.getPosX(),newPos.getPosY());
         new_case.setCard(context,card);
         movingFrom.resetCard();
         caseCard = null;
@@ -71,8 +108,9 @@ public class PlayerAction {
         resetActionState();
         card.setHasMovedThisRound(true);
     }
-
-    public void moveCard(GameActivity context, BoardCard card,Case movingFrom, Case new_case) {
+    //Appelé quand c'est l'adversaire
+    public void moveCard(GameActivity context,Case movingFrom, Case new_case) {
+        BoardCard card = movingFrom.getCard();
         new_case.setCard(context,card);
         movingFrom.resetCard();
         caseCard = null;

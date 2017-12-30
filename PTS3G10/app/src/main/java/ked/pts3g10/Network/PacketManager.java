@@ -53,6 +53,9 @@ public class PacketManager {
             case RECEIVEPLAYCARD:
                 packetI = new PacketReceivePlayCard();
                 break;
+            case RECEIVEMOVEMENT:
+                packetI = new PacketReceiveMovement();
+                break;
 			default: 
 				break;
 		}

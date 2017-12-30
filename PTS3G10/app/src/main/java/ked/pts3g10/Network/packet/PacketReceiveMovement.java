@@ -15,6 +15,7 @@ import ked.pts3g10.Util.Pos;
  */
 
 public class PacketReceiveMovement implements ActionInterface {
+
     @Override
     public void onCall(String message, String[] args, PacketType action, DatagramPacket packet) {
         //args[1] : int LinearLayoutNumber -> X actuel
@@ -25,11 +26,13 @@ public class PacketReceiveMovement implements ActionInterface {
         Board board = ActivityMgr.gameActivity.getBoard();
         PlayerAction adversaryAction = board.getAdversary().getPlayerAction();
         Pos basePos = new Pos(Integer.parseInt(args[1]),Integer.parseInt(args[2]));
-        Pos newPos = new Pos(Integer.parseInt(args[1]),Integer.parseInt(args[2]));
+        Pos newPos = new Pos(Integer.parseInt(args[3]),Integer.parseInt(args[4]));
 
         Case base = board.getCaseWithLinearLayoutNumber(basePos.getPosX(),basePos.getPosY());
         Case new_case = board.getCaseWithLinearLayoutNumber(newPos.getPosX(),newPos.getPosY());
 
-        adversaryAction.moveCard(ActivityMgr.gameActivity,base.getCard(),base,new_case);
+        adversaryAction.setCaseItComesFrom(base);
+        adversaryAction.setCaseItsGoingTo(new_case);
+        adversaryAction.setMoveBoardCardNext(true);
     }
 }
