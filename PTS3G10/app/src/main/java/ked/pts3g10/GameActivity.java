@@ -35,7 +35,7 @@ public class GameActivity extends AppCompatActivity {
         if(starting.equals("true")) b = true;
         else b = false;
 
-        board = new Board(this, new Player(this,"Ked",false), new Player(this,adversaryName,true),b); //Valeurs d'exemple
+        board = new Board(this, new Player(this,ConnectionActivity.stringPseudo,false), new Player(this,adversaryName,true),b); //Valeurs d'exemple
         temgr = new GameTouchEventMgr(this);
 
         ActivityMgr.gameActivity = this;

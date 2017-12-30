@@ -22,7 +22,8 @@ public class ConnectionActivity extends AppCompatActivity {
 
     private EditText pseudo,password;
     private Button connection, inscription, dev;
-    private String stringPseudo,stringPassword;
+    private String stringPassword;
+    public static String stringPseudo;
     private ConnectionActivity context;
     public static Communication com;
     public static boolean connected;
