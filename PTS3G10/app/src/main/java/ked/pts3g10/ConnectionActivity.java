@@ -1,6 +1,7 @@
 package ked.pts3g10;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,7 +52,7 @@ public class ConnectionActivity extends AppCompatActivity {
                 .build());
 
         com = new Communication();
-        com.execute();
+        com.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 
 

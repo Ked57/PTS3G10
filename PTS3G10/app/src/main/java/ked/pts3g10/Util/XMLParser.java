@@ -104,7 +104,10 @@ public class XMLParser {
                         thmbn2.setBackgroundResource(thmbnId2);
                         thmbn2.setTag(thmbnId2);
                         Ability ability = ActivityMgr.launchActivity.getAbilityById(e.abilityId);
-                        if(ability.equals(ActivityMgr.launchActivity.emptyAbility)) break;
+                        if(ability.equals(ActivityMgr.launchActivity.emptyAbility)){
+                            Log.e("Parser","Ability is null");
+                            break;
+                        }
                         cards.add(new Spell(e.name,e.description,e.crystalCost,e.ap,e.rp,bg2,thmbn2,ability,adversary2));
                         break;
                     //TODO: Hero cards

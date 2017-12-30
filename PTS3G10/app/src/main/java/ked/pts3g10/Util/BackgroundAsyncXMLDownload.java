@@ -19,7 +19,7 @@ import ked.pts3g10.LaunchActivity;
  * Pour éxécuter le téléchargement du XML en tâche de fond
  */
 
-public class BackgroundAsyncXMLDownload extends AsyncTask<String, Void, String> {
+public class BackgroundAsyncXMLDownload extends AsyncTask {
 
     private XMLParser xmlParser;
     private ArrayList<Card> cards;
@@ -31,14 +31,17 @@ public class BackgroundAsyncXMLDownload extends AsyncTask<String, Void, String> 
         version = 0;
         xmlParser = parser;
         this.context = context;
+        Log.i("Parser","Created backgroundasync");
     }
 
     @Override
-    protected String doInBackground(String ...params) {
+    protected Object doInBackground(Object[] objects) {
         URL url = null;
         String returnedResult = "";
+        Log.i("Parser","in do in background");
         try {
-            url = new URL(params[0]);
+            url = new URL("http://vps238052.ovh.net/cards.xml");
+            Log.i("Parser","url is :"+url.getPath());
         } catch (MalformedURLException e) {
             Log.e("Parser", Log.getStackTraceString(e));
         }
@@ -62,10 +65,12 @@ public class BackgroundAsyncXMLDownload extends AsyncTask<String, Void, String> 
         return returnedResult;
     }
     @Override
-    protected void onPostExecute(String s) {
+    protected void onPostExecute(Object o) {
+        String s = (String)o;
         super.onPostExecute(s);
         if(s.equals("ok")){
             context.initCards(version,cards);
         }else Log.i("Parser","Error parsing distant file");
     }
+
 }

@@ -1,10 +1,12 @@
 package ked.pts3g10;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
@@ -51,13 +53,17 @@ public class LaunchActivity extends AppCompatActivity {
         ActivityMgr.launchActivity = this;
         getDistantCards();
 
-
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 new PacketJoinGameWaitingList().call();
-                 Intent intent = new Intent(LaunchActivity.this, WaitingForGameActivity.class);
-                 startActivity(intent);
+                 if(cards.size() > 0) {
+                     new PacketJoinGameWaitingList().call();
+                     Intent intent = new Intent(LaunchActivity.this, WaitingForGameActivity.class);
+                     startActivity(intent);
+                 }else {
+                     Toast t = Toast.makeText(LaunchActivity.this,R.string.toastLoadingCards,Toast.LENGTH_SHORT);
+                     t.show();
+                 }
                            }
          });
 
@@ -69,6 +75,9 @@ public class LaunchActivity extends AppCompatActivity {
                     intent.putExtra("adversaryName", "Dev");
                     intent.putExtra("starting", "true");
                     startActivity(intent);
+                }else {
+                    Toast t = Toast.makeText(LaunchActivity.this,R.string.toastLoadingCards,Toast.LENGTH_SHORT);
+                    t.show();
                 }
             }
         });
@@ -122,10 +131,17 @@ public class LaunchActivity extends AppCompatActivity {
         intent.putExtra("starting",""+starting);
         startActivity(intent);
     }
+    public void startGame(String adversaryName,String starting){
+        Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
+        intent.putExtra("adversaryName",adversaryName);
+        intent.putExtra("starting",starting);
+        startActivity(intent);
+    }
 
     public void getDistantCards(){
+        Log.i("Parser","Retrieving cards from server ...");
         BackgroundAsyncXMLDownload backgroundAsyncXMLDownload = new BackgroundAsyncXMLDownload(new XMLParser(),this);
-        backgroundAsyncXMLDownload.execute("http://vps238052.ovh.net/cards.xml");
+        backgroundAsyncXMLDownload.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
     public void initCards(int distantVersion, ArrayList<Card> distantCards){

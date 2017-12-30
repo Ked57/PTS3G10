@@ -1,5 +1,7 @@
 package ked.pts3g10.Network.packet;
 
+import android.util.Log;
+
 import java.net.DatagramPacket;
 
 import ked.pts3g10.ActivityMgr;
@@ -13,7 +15,7 @@ public class PacketPrepareGame implements ActionInterface {
 		//Event quand serveur a trouv� un partenaire
 		//args[1] : string pseudo adversaire
         //args[2] : boolean commence ou pas
-
-        ActivityMgr.waitingForGameActivity.startGame(args[1], args[2]);
+		Log.i("Network","Received prepare game packet: "+args[1]+" ; "+args[2]);
+		ActivityMgr.launchActivity.startGame(args[1],args[2]);
 	}
 }

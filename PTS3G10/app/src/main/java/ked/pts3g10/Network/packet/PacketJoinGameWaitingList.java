@@ -5,7 +5,7 @@ import ked.pts3g10.Network.PacketType;
 
 public class PacketJoinGameWaitingList {
 
-	static PacketType type = PacketType.AUTH;
+	static PacketType type = PacketType.WAITINGGAME;
 
 	public void call() {
 		int token = ActivityMgr.connectionActivity.token;

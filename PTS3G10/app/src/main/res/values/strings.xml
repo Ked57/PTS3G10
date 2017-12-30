@@ -36,6 +36,7 @@
     <string name="toastChampVide">Tous les champs sont à remplir</string>
     <string name="toastCaractereInvalide">Votre pseudo ou mot de passe contient des caractères invalides</string>
     <string name="toastConnectionFailed">La connexion a échouée, mauvais pseudo ou mot de passe, veuillez recommencer</string>
+    <string name="toastLoadingCards">Attendez la fin du chargement des cartes ...</string>
 
 
     <!-- Chargement -->

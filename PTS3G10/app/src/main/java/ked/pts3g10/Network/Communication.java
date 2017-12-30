@@ -6,6 +6,7 @@ import android.util.Log;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
+import java.util.Random;
 
 public class Communication extends AsyncTask {
 
@@ -18,8 +19,8 @@ public class Communication extends AsyncTask {
 
 	public Communication() {
 		buffer = new byte[2048];
-		//port = 20000 + new Random().nextInt(10);
-		port = 20000;
+		port = 20000 + new Random().nextInt(100);
+		//port = 20000;
 		receivePacket = new DatagramPacket(buffer, buffer.length);
 		serverPort = 25565;
 		try { serverIp = InetAddress.getByName("149.91.80.135");//127.0.0.1
