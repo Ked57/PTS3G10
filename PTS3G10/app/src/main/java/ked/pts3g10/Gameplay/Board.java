@@ -16,6 +16,7 @@ import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Interface.Case;
+import ked.pts3g10.Network.packet.PacketEndRound;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
 
@@ -198,6 +199,7 @@ public class Board {
     }
 
     public void onEndRoundButtonClick(){
+        new PacketEndRound();
         endRound = true;
     }
 }
