@@ -9,12 +9,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import ked.pts3g10.Events.GameTouchEventMgr;
 import ked.pts3g10.Gameplay.Board;
 import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.Gameplay.Player;
 import ked.pts3g10.Interface.Case;
+import ked.pts3g10.Network.packet.PacketEndGame;
+import ked.pts3g10.Network.packet.PacketEndRound;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -36,6 +39,12 @@ public class GameActivity extends AppCompatActivity {
         temgr = new GameTouchEventMgr(this);
 
         ActivityMgr.gameActivity = this;
+    }
+
+    @Override
+    protected void onDestroy() {
+        new PacketEndGame().call();
+        super.onDestroy();
     }
 
     @Override
@@ -79,4 +88,10 @@ public class GameActivity extends AppCompatActivity {
     }
 
     public Board getBoard(){ return board;}
+
+    public void endGame(String message){
+        //Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        //t.show();
+        finish();
+    }
 }

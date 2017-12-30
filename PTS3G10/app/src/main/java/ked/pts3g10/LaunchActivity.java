@@ -24,6 +24,7 @@ import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAndDamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.packet.PacketJoinGameWaitingList;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
 import ked.pts3g10.Util.XMLParser;
@@ -130,12 +131,14 @@ public class LaunchActivity extends AppCompatActivity {
         intent.putExtra("adversaryName",adversaryName);
         intent.putExtra("starting",""+starting);
         startActivity(intent);
+        ActivityMgr.waitingForGameActivity.finish();
     }
     public void startGame(String adversaryName,String starting){
         Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
         intent.putExtra("adversaryName",adversaryName);
         intent.putExtra("starting",starting);
         startActivity(intent);
+        //ActivityMgr.waitingForGameActivity.finish();
     }
 
     public void getDistantCards(){

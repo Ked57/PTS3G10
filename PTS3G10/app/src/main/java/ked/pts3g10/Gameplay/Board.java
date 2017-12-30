@@ -65,12 +65,12 @@ public class Board {
         /*Init des text view */
         updateTexts();
 
-        serverRound = 0;
 
         endRoundButton = (Button) context.findViewById(R.id.EndButton);
 
 
         roundNumber = 0;
+        serverRound = 0;
         seconds = DEFAULT_SECONDS;
         endRound = false;
         this.playersTurn = !playersTurn; // Valeur acheminée du serveur, implémenté plus tard
