@@ -5,6 +5,7 @@ import android.util.Log;
 import java.net.DatagramPacket;
 
 import ked.pts3g10.Network.packet.PacketErrorAuth;
+import ked.pts3g10.Network.packet.PacketNextRound;
 import ked.pts3g10.Network.packet.PacketPrepareGame;
 import ked.pts3g10.Network.packet.PacketSuccessAuth;
 
@@ -29,6 +30,7 @@ public class PacketManager {
 			Log.e("Network",""+ex.getMessage());
 			return; }
 		ActionInterface packetI = null;
+		Log.i("Network","Received packet "+action.toString());
 		switch(action) {
 			case SUCCESSAUTH: 
 				packetI = new PacketSuccessAuth();
@@ -39,6 +41,9 @@ public class PacketManager {
             case PREPAREGAME:
                 packetI = new PacketPrepareGame();
                 break;
+			case NEXTROUND:
+				packetI = new PacketNextRound();
+				break;
 			default: 
 				break;
 		}

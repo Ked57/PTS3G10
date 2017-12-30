@@ -15,7 +15,7 @@ public class PacketPrepareGame implements ActionInterface {
 		//Event quand serveur a trouv� un partenaire
 		//args[1] : string pseudo adversaire
         //args[2] : boolean commence ou pas
-		Log.i("Network","Received prepare game packet: "+args[1]+" ; "+args[2]);
+
 		ActivityMgr.launchActivity.startGame(args[1],args[2]);
 	}
 }

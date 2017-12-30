@@ -12,6 +12,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
@@ -198,8 +199,12 @@ public class Board {
         adversary.getPlayerAction().placeBoardCard(context,(BoardCard) adversary.getDeck().getCardList().get(0),cases.get(12));
     }
 
+    public void setEndRound(boolean endRound){
+        this.endRound=endRound;
+    }
+
     public void onEndRoundButtonClick(){
-        new PacketEndRound();
+        new PacketEndRound().call(ConnectionActivity.token);
         endRound = true;
     }
 }
