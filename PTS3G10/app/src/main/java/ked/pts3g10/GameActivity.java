@@ -43,6 +43,7 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        ActivityMgr.waitingForGameActivity.notifyFinish();
         new PacketEndGame().call();
         super.onDestroy();
     }
@@ -92,6 +93,7 @@ public class GameActivity extends AppCompatActivity {
     public void endGame(String message){
         //Toast t = Toast.makeText(this, message, Toast.LENGTH_SHORT);
         //t.show();
+
         finish();
     }
 }
