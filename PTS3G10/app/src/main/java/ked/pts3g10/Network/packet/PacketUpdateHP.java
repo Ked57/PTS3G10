@@ -16,13 +16,13 @@ public class PacketUpdateHP {
 
     static PacketType type = PacketType.UPDATEHP;
 
-    public void call(int token, int new_hp, int x, int y) {
+    public void call(int token, int new_hp, Pos pos) {
         //args[1] : int token
         //args[2] : int new_hp
         //args[3] : int LinearLayoutNumber -> X carte
         //args[4] : int CaseNumber -> Y carte
 
-        Pos p = CoordinateConverter.convert(new Pos(x,y));
+        Pos p = CoordinateConverter.convert(pos);
 
         ActivityMgr.connectionActivity.getCom().send(type.getId() + ":" + token+ ":" +new_hp+ ":" +p.getPosX()+ ":" +p.getPosY());
     }

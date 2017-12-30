@@ -39,11 +39,20 @@ public class Case extends FrameLayout {
     private boolean isActionable;
     private Pos pos;
 
+    private boolean resetCard;
+    private boolean updateHp;
+    private int new_hp;
+
+
     public Case(GameActivity context,Pos pos){
         super(context);
         this.context = context;
         isActionable = false;
         this.pos = pos;
+
+        resetCard = false;
+        updateHp = false;
+        new_hp = 0;
 
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT,1);
         this.setLayoutParams(lp);
@@ -193,5 +202,40 @@ public class Case extends FrameLayout {
             t.show();
 
         }
+    }
+
+    public void notifyUpdateHp(){
+        if(updateHp) {
+            updateHp(new_hp);
+            updateHp = false;
+        }
+    }
+
+    public void notifyResetCard(){
+        if(resetCard){
+            resetCard();
+            resetCard = false;
+        }
+    }
+
+    public boolean isResetCard() {
+        return resetCard;
+    }
+
+    public void setResetCard(boolean resetCard) {
+        this.resetCard = resetCard;
+    }
+
+    public boolean isUpdateHp() {
+        return updateHp;
+    }
+
+    public void setUpdateHp(boolean updateHp) {
+        this.updateHp = updateHp;
+    }
+
+
+    public void setNew_hp(int new_hp) {
+        this.new_hp = new_hp;
     }
 }

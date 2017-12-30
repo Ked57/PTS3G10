@@ -13,6 +13,7 @@ import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.packet.PacketSendMovement;
+import ked.pts3g10.Network.packet.PacketUpdateHP;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
 
@@ -32,6 +33,11 @@ public class PlayerAction {
     private Case caseItsGoingTo;
     private boolean moveBoardCardNext;
 
+    private Case caseToUpdateHp;
+    private boolean updateHp;
+
+    private boolean resetCard;
+
     public PlayerAction(Player player) {
 
         this.player = player;
@@ -46,6 +52,11 @@ public class PlayerAction {
         caseItComesFrom = null;
         caseItsGoingTo = null;
         moveBoardCardNext = false;
+
+        caseToUpdateHp = null;
+        updateHp = false;
+
+        resetCard = false;
     }
 
     public boolean isMoveBoardCardNext() {
@@ -139,6 +150,8 @@ public class PlayerAction {
         // Lancer l'animation
 
         eniHp -= ap;
+
+        new PacketUpdateHP().call(ConnectionActivity.token,eniHp,attack_case.getPos());
 
         if(eniHp <= 0){
             attack_case.resetCard();
@@ -236,4 +249,28 @@ public class PlayerAction {
     }
 
     public Case getMovingFrom() {return movingFrom;}
+
+    public Case getCaseToUpdateHp() {
+        return caseToUpdateHp;
+    }
+
+    public void setCaseToUpdateHp(Case caseToUpdateHp) {
+        this.caseToUpdateHp = caseToUpdateHp;
+    }
+
+    public boolean isUpdateHp() {
+        return updateHp;
+    }
+
+    public void setUpdateHp(boolean updateHp) {
+        this.updateHp = updateHp;
+    }
+
+    public boolean isResetCard() {
+        return resetCard;
+    }
+
+    public void setResetCard(boolean resetCard) {
+        this.resetCard = resetCard;
+    }
 }

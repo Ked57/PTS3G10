@@ -25,12 +25,16 @@ public class Player {
         ArrayList<Card> cards = new ArrayList<Card>();
         if(adversary) {
             cards.add(ActivityMgr.launchActivity.cards.get(3).clone(adversary));
+            cards.add(ActivityMgr.launchActivity.cards.get(3).clone(adversary));
+            cards.add(ActivityMgr.launchActivity.cards.get(5).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(5).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(7).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(9).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(11).clone(adversary));
         }else{
             cards.add(ActivityMgr.launchActivity.cards.get(2).clone(adversary));
+            cards.add(ActivityMgr.launchActivity.cards.get(2).clone(adversary));
+            cards.add(ActivityMgr.launchActivity.cards.get(4).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(4).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(6).clone(adversary));
             cards.add(ActivityMgr.launchActivity.cards.get(8).clone(adversary));

@@ -176,6 +176,14 @@ public class Board {
                         if(adversary.getPlayerAction().isMoveBoardCardNext()){
                             adversary.getPlayerAction().moveBoardCardNext(context);
                         }
+                        if(adversary.getPlayerAction().isUpdateHp()){
+                            adversary.getPlayerAction().getCaseToUpdateHp().notifyUpdateHp();
+                            adversary.getPlayerAction().setUpdateHp(false);
+                        }
+                        if(adversary.getPlayerAction().isResetCard()){
+                            adversary.getPlayerAction().getCaseToUpdateHp().resetCard();
+                            adversary.getPlayerAction().setResetCard(false);
+                        }
                     }
 
                 });

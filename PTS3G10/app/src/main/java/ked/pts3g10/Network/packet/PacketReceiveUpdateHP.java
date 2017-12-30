@@ -4,6 +4,7 @@ import java.net.DatagramPacket;
 
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.Gameplay.Board;
+import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.PacketType;
@@ -21,15 +22,21 @@ public class PacketReceiveUpdateHP implements ActionInterface {
         //args[3] : int CaseNumber -> Y carte
 
         Board board = ActivityMgr.gameActivity.getBoard();
+        PlayerAction adversaryAction = board.getAdversary().getPlayerAction();
         int new_hp = Integer.parseInt(args[1]);
         Pos pos = new Pos(Integer.parseInt(args[2]),Integer.parseInt(args[3]));
         Case c = board.getCaseWithLinearLayoutNumber(pos.getPosX(),pos.getPosY());
 
         if(new_hp <= 0){
-            c.resetCard();
+            c.setResetCard(true);
+            adversaryAction.setResetCard(true);
         }else {
             c.getCard().setHealthPoints(new_hp);
-            c.updateHp(new_hp);
+            c.setNew_hp(new_hp);
+            c.setUpdateHp(true);
+            adversaryAction.setUpdateHp(true);
         }
+        adversaryAction.setCaseToUpdateHp(c);
+
     }
 }
