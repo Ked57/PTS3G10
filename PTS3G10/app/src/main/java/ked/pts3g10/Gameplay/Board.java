@@ -186,6 +186,13 @@ public class Board {
                         if(adversary.getPlayerAction().isResetCard()){
                             for(Case c : adversary.getPlayerAction().getCaseToResetCard()){
                                 c.notifyResetCard();
+                                if(c.isPlayersCastle()){
+                                    context.setNormalFinish(true);
+                                    context.endGame("Vous avez perdu !","Vous avez gagné !");
+                                }else if(c.isAdversaryCastle()){
+                                    context.setNormalFinish(true);
+                                    context.endGame("Vous avez gagné !","Vous avez perdu !");
+                                }
                             }
                             adversary.getPlayerAction().clearResetHp();
                             adversary.getPlayerAction().setResetCard(false);

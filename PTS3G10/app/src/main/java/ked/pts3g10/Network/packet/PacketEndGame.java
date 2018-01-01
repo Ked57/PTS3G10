@@ -14,9 +14,9 @@ public class PacketEndGame{
 
     static PacketType type = PacketType.ENDGAME;
 
-    public void call() {
+    public void call(String message) {
         // args[1] : token client
         // args[2] : message raison de déconnexion
-        ConnectionActivity.getCom().send(type.getId()+":"+ConnectionActivity.token+":"+"Parce que tu pue");
+        ConnectionActivity.getCom().send(type.getId()+":"+ConnectionActivity.token+":"+message);
     }
 }

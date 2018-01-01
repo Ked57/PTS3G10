@@ -15,6 +15,7 @@ public class PacketReceiveEndGame implements ActionInterface{
     @Override
     public void onCall(String message, String[] args, PacketType action, DatagramPacket packet) {
         // args[1] : String raison déconnexion
-        ActivityMgr.gameActivity.endGame(args[1]);
+        ActivityMgr.gameActivity.setNormalFinish(true);
+        ActivityMgr.gameActivity.endGame(args[1],args[1]);
     }
 }

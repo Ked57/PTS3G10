@@ -23,6 +23,8 @@ public class GameActivity extends AppCompatActivity {
 
     private Board board;
     private GameTouchEventMgr temgr;
+    private boolean normalFinish;
+    private String message, messageToSend;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +36,13 @@ public class GameActivity extends AppCompatActivity {
         boolean b;
         if(starting.equals("true")) b = true;
         else b = false;
+        normalFinish = false;
 
         board = new Board(this, new Player(this,ConnectionActivity.stringPseudo,false), new Player(this,adversaryName,true),b); //Valeurs d'exemple
         temgr = new GameTouchEventMgr(this);
+
+        message = "";
+        messageToSend = "";
 
         ActivityMgr.gameActivity = this;
     }
@@ -44,7 +50,12 @@ public class GameActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         ActivityMgr.waitingForGameActivity.notifyFinish();
-        new PacketEndGame().call();
+        if(!isNormalFinish()) {
+            message = "Une erreur inconnue est arrivée";
+            messageToSend = "Une erreur inconnue est arrivée";
+        }
+        new PacketEndGame().call(messageToSend);
+        ActivityMgr.launchActivity.displayEndGameMessage(message);
         super.onDestroy();
     }
 
@@ -69,8 +80,17 @@ public class GameActivity extends AppCompatActivity {
 
     public Board getBoard(){ return board;}
 
-    public void endGame(String message){
-        ActivityMgr.launchActivity.displayEndGameMessage(message);
+    public void endGame(String message, String messageToSend){
+        this.message = message;
+        this.messageToSend = messageToSend;
         finish();
+    }
+
+    public boolean isNormalFinish() {
+        return normalFinish;
+    }
+
+    public void setNormalFinish(boolean normalFinish) {
+        this.normalFinish = normalFinish;
     }
 }
