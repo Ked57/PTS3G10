@@ -1,6 +1,8 @@
 package ked.pts3g10;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -132,9 +134,12 @@ public class LaunchActivity extends AppCompatActivity {
                             displayEndGame = false;
                         }
                         if(timeout){
+                            ConnectionActivity.token = 0;
                             Intent intent = new Intent(LaunchActivity.this, ConnectionActivity.class);
                             intent.putExtra("timeout_message",timeoutMessage);
+                            Log.i("Timeout",timeoutMessage+" : "+timeout);
                             startActivity(intent);
+                            timeoutMessage = "";
                             timeout = false;
                             finish();
                         }
@@ -154,7 +159,9 @@ public class LaunchActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        new PacketSendImStillHere().call(ConnectionActivity.token);
+                        if(!timeout) {
+                            new PacketSendImStillHere().call(ConnectionActivity.token);
+                        }
                     }
 
                 });

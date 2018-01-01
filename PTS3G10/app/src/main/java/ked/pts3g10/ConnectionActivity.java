@@ -59,6 +59,11 @@ public class ConnectionActivity extends AppCompatActivity {
         com = new Communication();
         com.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
+        String str = getIntent().getStringExtra("timeout_message");
+        if(str != null){
+            Toast t = Toast.makeText(this,str,Toast.LENGTH_LONG);
+            t.show();
+        }
 
 
         //Ouvre l'activite du jeux et envoie les informations de connection a la bdd
@@ -170,7 +175,7 @@ public class ConnectionActivity extends AppCompatActivity {
 
         startActivity(launch);
         //Empeche le retour en arrière car on ferme l'activité après connection
-        context.finish();
+        finish();
     }
 
     public void connectionFailed(){
