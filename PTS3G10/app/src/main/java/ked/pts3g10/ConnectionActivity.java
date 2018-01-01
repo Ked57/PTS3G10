@@ -29,6 +29,8 @@ public class ConnectionActivity extends AppCompatActivity {
     public static boolean connected;
     public static int token;
 
+    private boolean emptyError, unvalidCharError;
+
     public Timer t;
 
     @Override
@@ -46,6 +48,9 @@ public class ConnectionActivity extends AppCompatActivity {
         token = 0;
         connected = false;
 
+        emptyError = false;
+        unvalidCharError = false;
+
         StrictMode.ThreadPolicy old = StrictMode.getThreadPolicy();
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder(old)
                 .permitNetwork()
@@ -60,15 +65,37 @@ public class ConnectionActivity extends AppCompatActivity {
         connection.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editTextNormal(pseudo);
+                editTextNormal(password);
+
+
                 stringPseudo=pseudo.getText().toString();
                 stringPassword=password.getText().toString();
                 //Verifie que les champs ne soit pas vide
-                if(stringPassword.isEmpty()|stringPseudo.isEmpty()){
-                    Toast toast =Toast.makeText(context,R.string.toastChampVide,Toast.LENGTH_LONG);
+                if(stringPassword.isEmpty()){
+                    emptyError = true;
+                    editTextError(password);
+                }
+                if(stringPseudo.isEmpty()) {
+                    emptyError = true;
+                    editTextError(pseudo);
+                }
+                if(stringPseudo.contains(":")){
+                    unvalidCharError = true;
+                    editTextError(pseudo);
+                }
+                if(stringPassword.contains(":")){
+                    unvalidCharError = true;
+                    editTextError(password);
+                }
+                if(emptyError){
+                    Toast toast = Toast.makeText(context,R.string.toastChampVide,Toast.LENGTH_LONG);
                     toast.show();
-                }else if(stringPseudo.contains(":") || stringPassword.contains(":")){
+                    emptyError = false;
+                }else if(unvalidCharError){
                     Toast t = Toast.makeText(context,R.string.toastCaractereInvalide,Toast.LENGTH_SHORT);
                     t.show();
+                    unvalidCharError = false;
                 }
                 else{
                     // envoyer les info vers la bdd
@@ -132,9 +159,11 @@ public class ConnectionActivity extends AppCompatActivity {
     }
 
     public void toLauncher(){
-        t.purge();
-        t.cancel();
-        t = null;
+        if(t != null) {
+            t.purge();
+            t.cancel();
+            t = null;
+        }
         //Ajout de la condition que doit être identifié
         Intent launch = new Intent(context,LaunchActivity.class);
         //Envoie de variable a l'autre fenetre ?
@@ -152,6 +181,15 @@ public class ConnectionActivity extends AppCompatActivity {
         Toast t = Toast.makeText(context,R.string.toastConnectionFailed ,Toast.LENGTH_SHORT);
         t.show();
         token = 0;
+        editTextError(pseudo);
+        editTextError(password);
+    }
+
+    public void editTextError(EditText e){
+        e.getBackground().setTint(getResources().getColor(R.color.colorRed));
+    }
+    public void editTextNormal(EditText e){
+        e.getBackground().setTint(getResources().getColor(R.color.colorPrimary));
     }
 
 }

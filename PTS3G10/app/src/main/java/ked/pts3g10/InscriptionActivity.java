@@ -23,6 +23,8 @@ public class InscriptionActivity extends AppCompatActivity {
     public static boolean registered;
     public static String registerMessage;
 
+    public boolean emptyError,unvalidChar;
+
     private Timer t;
 
     @Override
@@ -42,23 +44,68 @@ public class InscriptionActivity extends AppCompatActivity {
         registered = false;
         registerMessage = "";
 
+        emptyError = false;
+        unvalidChar = false;
+
         //affiche la fenetre d'inscription et envoie les donnée d'inscription a la bdd
         creeCompte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                editTextNormal(pseudoIns);
+                editTextNormal(passwordIns);
+                editTextNormal(passwordConf);
+                editTextNormal(email);
 
                 stringPseudo=pseudoIns.getText().toString();
                 stringPassword=passwordIns.getText().toString();
                 stringPasswordconf=passwordConf.getText().toString();
                 stringEmail=email.getText().toString();
                 //Verifie que les champs ne soit pas vide
-                if(stringPseudo.isEmpty()|stringPassword.isEmpty()|stringPasswordconf.isEmpty()|stringEmail.isEmpty()||stringEmail.isEmpty()){
+                if(stringPseudo.isEmpty()) {
+                    emptyError = true;
+                    editTextError(pseudoIns);
+                }
+                if(stringPassword.isEmpty()){
+                    emptyError = true;
+                    editTextError(passwordIns);
+                }
+                if(stringPasswordconf.isEmpty()){
+                    emptyError = true;
+                    editTextError(passwordConf);
+                }
+                if(stringEmail.isEmpty()){
+                    emptyError = true;
+                    editTextError(email);
+                }
+
+                if(stringPseudo.contains(":")){
+                    unvalidChar = true;
+                    editTextError(pseudoIns);
+                }
+                if(stringPassword.contains(":")) {
+                    unvalidChar = true;
+                    editTextError(passwordIns);
+                }
+                if(stringPasswordconf.contains(":")) {
+                    unvalidChar = true;
+                    editTextError(passwordConf);
+                }
+                if(stringEmail.contains(":")) {
+                    unvalidChar = true;
+                    editTextError(email);
+                }
+
+
+                if(emptyError){
                     Toast toast = Toast.makeText(context,R.string.toastChampVide,Toast.LENGTH_LONG);
                     toast.show();
-                }else if(stringPseudo.contains(":") || stringPassword.contains(":") || stringPasswordconf.contains(":") || stringEmail.contains(":")){
+                    emptyError = false;
+                }else if(unvalidChar){
                     Toast toast = Toast.makeText(context,R.string.toastCaractereInvalide,Toast.LENGTH_LONG);
                     toast.show();
+                    unvalidChar = false;
                 }else if(!stringEmail.contains("@")){
+                    editTextError(email);
                     Toast toast = Toast.makeText(context,R.string.toastEmailInvalide,Toast.LENGTH_LONG);
                     toast.show();
                 }else{
@@ -97,9 +144,8 @@ public class InscriptionActivity extends AppCompatActivity {
                     }else{
                         Toast toast = Toast.makeText(context,R.string.toastConfirmationPassword,Toast.LENGTH_LONG);
                         toast.show();
-                        if(Integer.valueOf(android.os.Build.VERSION.SDK)>21) {
-                            passwordConf.getBackground().setTint(getResources().getColor(R.color.colorRed));
-                        }
+                        editTextError(passwordIns);
+                        editTextError(passwordConf);
                     }
                 }
 
@@ -126,5 +172,12 @@ public class InscriptionActivity extends AppCompatActivity {
             t = null;
         }
         super.onDestroy();
+    }
+
+    public void editTextError(EditText e){
+        e.getBackground().setTint(getResources().getColor(R.color.colorRed));
+    }
+    public void editTextNormal(EditText e){
+        e.getBackground().setTint(getResources().getColor(R.color.colorPrimary));
     }
 }

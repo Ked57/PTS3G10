@@ -14,8 +14,6 @@
     <string name="deck_choice_wrong">Vous devez attendre votre tour</string>
     <string name="deck_choice_crystals">Vous n\'avez pas assez de cristaux</string>
     <string name="menu_options">Options</string>
-    <string name="menu_new_round">DEV: tour suivant</string>
-    <string name="menu_populate">DEV : peupler</string>
     <string name="game_already_moved">Vous avez déjà déplacé cette carte durant ce round, veuillez attendre le suivant</string>
     <string name="game_not_your_card">Cette carte ne vous appartient pas</string>
     <string name="game_deck_empty">Votre deck est vide !</string>
@@ -30,10 +28,10 @@
     <string name="password">Mot de passe :</string>
     <string name="creeCompte">Créer un compte</string>
     <string name="annuler">Annuler</string>
-    <string name="connection">Connection</string>
+    <string name="connection">Connexion</string>
     <string name="inscription">Inscription</string>
-    <string name="toastConfirmationPassword">Mot de passe incorrect</string>
-    <string name="toastCreationDuCompte">Compte Créé</string>
+    <string name="toastConfirmationPassword">Les deux mots de passe ne sont pas identiques</string>
+    <string name="toastCreationDuCompte">Compte créé</string>
     <string name="toastChampVide">Tous les champs sont à remplir</string>
     <string name="toastCaractereInvalide">Votre pseudo ou mot de passe contient des caractères invalides ( : n\'est pas autorisé)</string>
     <string name="toastEmailInvalide">Votre adresse mail est invalide</string>
