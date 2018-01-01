@@ -82,21 +82,6 @@ public class LaunchActivity extends AppCompatActivity {
                            }
          });
 
-        findViewById(R.id.devButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(cards.size() > 0) {
-                    Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
-                    intent.putExtra("adversaryName", "Dev");
-                    intent.putExtra("starting", "true");
-                    startActivity(intent);
-                }else {
-                    Toast t = Toast.makeText(LaunchActivity.this,R.string.toastLoadingCards,Toast.LENGTH_SHORT);
-                    t.show();
-                }
-            }
-        });
-
         //Boutton pour afficher la page crédits
         findViewById(R.id.credits).setOnClickListener(new View.OnClickListener() {
             @Override
