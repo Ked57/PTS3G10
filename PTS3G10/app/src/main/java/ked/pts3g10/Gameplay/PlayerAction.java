@@ -13,6 +13,7 @@ import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.packet.PacketSendMovement;
+import ked.pts3g10.Network.packet.PacketSendSpell;
 import ked.pts3g10.Network.packet.PacketUpdateHP;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
@@ -38,6 +39,9 @@ public class PlayerAction {
 
     private boolean resetCard;
 
+    private boolean useSpell;
+    private Case caseToUseSpellOn;
+
     public PlayerAction(Player player) {
 
         this.player = player;
@@ -57,6 +61,9 @@ public class PlayerAction {
         updateHp = false;
 
         resetCard = false;
+
+        useSpell = false;
+        caseToUseSpellOn = null;
     }
 
     public boolean isMoveBoardCardNext() {
@@ -133,6 +140,10 @@ public class PlayerAction {
     public void useSpellCard(Case new_case) {
         Log.i("Spell","Using spell");
         if(caseCard instanceof Spell){
+            if(!player.isAdversary()) {
+                new PacketSendSpell().call(ConnectionActivity.token, player.getDeck().getCardList().indexOf(caseCard), new_case.getPos());
+            }
+
             ((Spell)caseCard).getAbility().use(ActivityMgr.gameActivity.getBoard(),new_case, caseCard.getRangePoints());
             player.setCrystals(player.getCrystals()-caseCard.getCrystalCost());
             player.getDeck().getCardList().remove(caseCard);
@@ -266,11 +277,31 @@ public class PlayerAction {
         this.updateHp = updateHp;
     }
 
+    public void setCaseCard(Card c){
+        caseCard = c;
+    }
+
     public boolean isResetCard() {
         return resetCard;
     }
 
     public void setResetCard(boolean resetCard) {
         this.resetCard = resetCard;
+    }
+
+    public boolean isUseSpell() {
+        return useSpell;
+    }
+
+    public void setUseSpell(boolean useSpell) {
+        this.useSpell = useSpell;
+    }
+
+    public Case getCaseToUseSpellOn() {
+        return caseToUseSpellOn;
+    }
+
+    public void setCaseToUseSpellOn(Case caseToUseSpellOn) {
+        this.caseToUseSpellOn = caseToUseSpellOn;
     }
 }

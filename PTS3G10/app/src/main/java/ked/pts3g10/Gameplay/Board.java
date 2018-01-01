@@ -184,6 +184,11 @@ public class Board {
                             adversary.getPlayerAction().getCaseToUpdateHp().resetCard();
                             adversary.getPlayerAction().setResetCard(false);
                         }
+
+                        if(adversary.getPlayerAction().isUseSpell()){
+                            adversary.getPlayerAction().useSpellCard(adversary.getPlayerAction().getCaseToUseSpellOn());
+                            adversary.getPlayerAction().setUseSpell(false);
+                        }
                     }
 
                 });

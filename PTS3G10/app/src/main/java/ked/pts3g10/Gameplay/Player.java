@@ -90,4 +90,6 @@ public class Player {
     }
 
     public PlayerAction getPlayerAction() { return playerAction; }
+
+    public boolean isAdversary(){return adversary;}
 }
