@@ -7,6 +7,11 @@ import ked.pts3g10.Util.Pos;
 
 /**
  * Envoyé par le client au serveur quand une carte sort est utilisée
+ * args[0] type
+ * args[1] token
+ * args[2] cardIndex
+ * args[3] x
+ * args[4] y
  */
 
 public class PacketSendSpell {
