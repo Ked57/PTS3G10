@@ -30,13 +30,14 @@ public class PacketReceiveUpdateHP implements ActionInterface {
         if(new_hp <= 0){
             c.setResetCard(true);
             adversaryAction.setResetCard(true);
+            adversaryAction.addCaseToResetCard(c);
         }else {
             c.getCard().setHealthPoints(new_hp);
             c.setNew_hp(new_hp);
             c.setUpdateHp(true);
             adversaryAction.setUpdateHp(true);
+            adversaryAction.addCaseToUpdateHp(c);
         }
-        adversaryAction.setCaseToUpdateHp(c);
 
     }
 }

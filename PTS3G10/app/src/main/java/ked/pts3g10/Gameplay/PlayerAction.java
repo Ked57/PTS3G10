@@ -4,6 +4,8 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
@@ -34,10 +36,11 @@ public class PlayerAction {
     private Case caseItsGoingTo;
     private boolean moveBoardCardNext;
 
-    private Case caseToUpdateHp;
+    private ArrayList<Case> caseToUpdateHp;
     private boolean updateHp;
 
     private boolean resetCard;
+    private ArrayList<Case> caseToResetCard;
 
     private boolean useSpell;
     private Case caseToUseSpellOn;
@@ -57,7 +60,8 @@ public class PlayerAction {
         caseItsGoingTo = null;
         moveBoardCardNext = false;
 
-        caseToUpdateHp = null;
+        caseToUpdateHp = new ArrayList<>();
+        caseToResetCard = new ArrayList<>();
         updateHp = false;
 
         resetCard = false;
@@ -141,10 +145,10 @@ public class PlayerAction {
         Log.i("Spell","Using spell");
         if(caseCard instanceof Spell){
             if(!player.isAdversary()) {
-                new PacketSendSpell().call(ConnectionActivity.token, player.getDeck().getCardList().indexOf(caseCard), new_case.getPos());
+                //new PacketSendSpell().call(ConnectionActivity.token, player.getDeck().getCardList().indexOf(caseCard), new_case.getPos());
             }
 
-            ((Spell)caseCard).getAbility().use(ActivityMgr.gameActivity.getBoard(),new_case, caseCard.getRangePoints());
+            ((Spell)caseCard).getAbility().use(ActivityMgr.gameActivity.getBoard(),new_case, caseCard.getRangePoints(),player.isAdversary());
             player.setCrystals(player.getCrystals()-caseCard.getCrystalCost());
             player.getDeck().getCardList().remove(caseCard);
             caseCard = null;
@@ -179,8 +183,8 @@ public class PlayerAction {
         if(caseCard != null) {
             int ap = getCaseCard().getAttactPoints();
             int hp = heal_case.getCard().getHealthPoints();
-
             heal_case.updateHp(hp + ap);
+            new PacketUpdateHP().call(ConnectionActivity.token,hp+ap,heal_case.getPos());
             resetActionState();
             caseCard.setHasMovedThisRound(true);
         }
@@ -263,13 +267,26 @@ public class PlayerAction {
 
     public Case getMovingFrom() {return movingFrom;}
 
-    public Case getCaseToUpdateHp() {
-        return caseToUpdateHp;
+    public synchronized void clearUpdateHp(){
+        caseToUpdateHp.clear();
     }
 
-    public void setCaseToUpdateHp(Case caseToUpdateHp) {
-        this.caseToUpdateHp = caseToUpdateHp;
+    public synchronized void addCaseToUpdateHp(Case c) {
+        caseToUpdateHp.add(c);
     }
+
+    public synchronized ArrayList<Case> getCaseToUpdateHp(){return caseToUpdateHp;}
+
+    public synchronized void clearResetHp(){
+        caseToResetCard.clear();
+    }
+
+    public synchronized void addCaseToResetCard(Case c) {
+        caseToResetCard.add(c);
+    }
+
+
+    public synchronized ArrayList<Case> getCaseToResetCard(){return caseToResetCard;}
 
     public boolean isUpdateHp() {
         return updateHp;

@@ -177,11 +177,17 @@ public class Board {
                             adversary.getPlayerAction().moveBoardCardNext(context);
                         }
                         if(adversary.getPlayerAction().isUpdateHp()){
-                            adversary.getPlayerAction().getCaseToUpdateHp().notifyUpdateHp();
+                            for(Case c : adversary.getPlayerAction().getCaseToUpdateHp()){
+                                c.notifyUpdateHp();
+                            }
+                            adversary.getPlayerAction().clearUpdateHp();
                             adversary.getPlayerAction().setUpdateHp(false);
                         }
                         if(adversary.getPlayerAction().isResetCard()){
-                            adversary.getPlayerAction().getCaseToUpdateHp().resetCard();
+                            for(Case c : adversary.getPlayerAction().getCaseToResetCard()){
+                                c.notifyResetCard();
+                            }
+                            adversary.getPlayerAction().clearResetHp();
                             adversary.getPlayerAction().setResetCard(false);
                         }
 

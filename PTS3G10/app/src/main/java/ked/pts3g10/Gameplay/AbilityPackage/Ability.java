@@ -27,5 +27,5 @@ public abstract class Ability {
         return description;
     }
 
-    public void use(Board board, Case base, int radius){}
+    public void use(Board board, Case base, int radius, boolean adversary){}
 }
