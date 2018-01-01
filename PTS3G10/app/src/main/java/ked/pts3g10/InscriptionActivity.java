@@ -46,13 +46,20 @@ public class InscriptionActivity extends AppCompatActivity {
         creeCompte.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 stringPseudo=pseudoIns.getText().toString();
                 stringPassword=passwordIns.getText().toString();
                 stringPasswordconf=passwordConf.getText().toString();
                 stringEmail=email.getText().toString();
                 //Verifie que les champs ne soit pas vide
-                if(stringPseudo.isEmpty()|stringPassword.isEmpty()|stringPasswordconf.isEmpty()|stringEmail.isEmpty()){
+                if(stringPseudo.isEmpty()|stringPassword.isEmpty()|stringPasswordconf.isEmpty()|stringEmail.isEmpty()||stringEmail.isEmpty()){
                     Toast toast = Toast.makeText(context,R.string.toastChampVide,Toast.LENGTH_LONG);
+                    toast.show();
+                }else if(stringPseudo.contains(":") || stringPassword.contains(":") || stringPasswordconf.contains(":") || stringEmail.contains(":")){
+                    Toast toast = Toast.makeText(context,R.string.toastCaractereInvalide,Toast.LENGTH_LONG);
+                    toast.show();
+                }else if(!stringEmail.contains("@")){
+                    Toast toast = Toast.makeText(context,R.string.toastEmailInvalide,Toast.LENGTH_LONG);
                     toast.show();
                 }else{
                     //verifie si le "password" correspond bien a "confirmed password"
@@ -69,12 +76,16 @@ public class InscriptionActivity extends AppCompatActivity {
                                     public void run() {
                                       if (registered){
                                           Intent intent = new Intent(InscriptionActivity.this, LaunchActivity.class);
+                                          startActivity(intent);
                                           registered = false;
                                           finish();
                                       }else if(!registerMessage.equals("")){
                                           Toast toast = Toast.makeText(context,registerMessage,Toast.LENGTH_LONG);
                                           toast.show();
                                           registerMessage = "";
+                                          t.purge();
+                                          t.cancel();
+                                          t = null;
                                       }
                                     }
 
@@ -86,6 +97,9 @@ public class InscriptionActivity extends AppCompatActivity {
                     }else{
                         Toast toast = Toast.makeText(context,R.string.toastConfirmationPassword,Toast.LENGTH_LONG);
                         toast.show();
+                        if(Integer.valueOf(android.os.Build.VERSION.SDK)>21) {
+                            passwordConf.getBackground().setTint(getResources().getColor(R.color.colorRed));
+                        }
                     }
                 }
 
@@ -102,5 +116,15 @@ public class InscriptionActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onDestroy() {
+        if(t != null){
+            t.purge();
+            t.cancel();
+            t = null;
+        }
+        super.onDestroy();
     }
 }
