@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/options"
-        android:title="@string/menu_options" />
-    <item android:id="@+id/newRound"
-        android:title="@string/menu_new_round" />
-    <item android:id="@+id/populate"
-        android:title="@string/menu_populate"/>
-</menu>

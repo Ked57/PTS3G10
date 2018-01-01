@@ -58,27 +58,6 @@ public class GameActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.game_menu, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
-        switch (item.getItemId()) {
-            case R.id.newRound:
-                board.newRound();
-                return true;
-            case R.id.populate:
-                board.populate();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     public void updateText(int id,String str){
         TextView txt = (TextView) findViewById(id);
         txt.setText(str);
