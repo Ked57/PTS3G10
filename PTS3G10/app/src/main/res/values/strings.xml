@@ -21,6 +21,7 @@
     <string name="game_deck_empty">Votre deck est vide !</string>
     <string name="game_case_menu_move">Mouvement</string>
     <string name="game_case_menu_spell">Utiliser le sort</string>
+    <string name="logout_button">Se déconnecter</string>
 
     <!--Menu de connection et inscription-->
     <string name="email">Email :</string>

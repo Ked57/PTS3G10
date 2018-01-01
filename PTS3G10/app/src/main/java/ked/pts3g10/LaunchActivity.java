@@ -114,6 +114,17 @@ public class LaunchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        //
+        findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new PacketSendLogOut().call(ConnectionActivity.token);
+                Intent intent = new Intent(LaunchActivity.this, ConnectionActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        }
+        );
 
 
         //Check toutes les 500ms si réponse
