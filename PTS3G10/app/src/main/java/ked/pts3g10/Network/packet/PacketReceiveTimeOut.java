@@ -2,6 +2,7 @@ package ked.pts3g10.Network.packet;
 
 import java.net.DatagramPacket;
 
+import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.LaunchActivity;
 import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.PacketType;
@@ -15,7 +16,9 @@ import ked.pts3g10.Network.PacketType;
 public class PacketReceiveTimeOut implements ActionInterface {
     @Override
     public void onCall(String message, String[] args, PacketType action, DatagramPacket packet) {
-        LaunchActivity.timeoutMessage = args[1];
-        LaunchActivity.timeout = true;
+        if(ConnectionActivity.token != 0){
+            LaunchActivity.timeoutMessage = args[1];
+            LaunchActivity.timeout = true;
+        }
     }
 }

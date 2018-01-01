@@ -56,8 +56,10 @@ public class ConnectionActivity extends AppCompatActivity {
                 .permitNetwork()
                 .build());
 
-        com = new Communication();
-        com.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        if(com == null){
+            com = new Communication();
+            com.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+        }
 
         String str = getIntent().getStringExtra("timeout_message");
         if(str != null){
@@ -169,6 +171,7 @@ public class ConnectionActivity extends AppCompatActivity {
             t.cancel();
             t = null;
         }
+        connected = false;
         //Ajout de la condition que doit être identifié
         Intent launch = new Intent(context,LaunchActivity.class);
         //Envoie de variable a l'autre fenetre ?

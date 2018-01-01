@@ -159,7 +159,7 @@ public class LaunchActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        if(!timeout) {
+                        if(!timeout && ConnectionActivity.token != 0) {
                             new PacketSendImStillHere().call(ConnectionActivity.token);
                         }
                     }
