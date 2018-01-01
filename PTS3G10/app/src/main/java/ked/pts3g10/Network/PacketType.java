@@ -24,7 +24,8 @@ public enum PacketType {
     SENDLOGOUT(19,2),
     SENDREGISTER(20,4),
     RECEIVESUCCESSREGISTER(21,2),
-    RECEIVEERRORREGISTER(22,2);
+    RECEIVEERRORREGISTER(22,2),
+    SENDLEAVEWAITINGLIST(23,2);
 	
 	private int id;
 	private int paramLength;
