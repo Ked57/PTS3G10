@@ -42,6 +42,7 @@ public class LaunchActivity extends AppCompatActivity {
     private XMLParser xmlParser;
     private int version;
     public static ArrayList<Ability> abilities = new ArrayList<>();
+    private boolean quit;
 
     public static boolean displayEndGame;
     public static String endGameMessage;
@@ -55,6 +56,7 @@ public class LaunchActivity extends AppCompatActivity {
 
         xmlParser = new XMLParser();
         version = 0;
+        quit = false;
 
         displayEndGame = false;
         endGameMessage = "";
@@ -164,13 +166,22 @@ public class LaunchActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        Log.i("Destroy","Launch On Destroy");
+        new PacketSendLogOut().call(ConnectionActivity.token);
         super.onDestroy();
     }
 
     @Override
     public void onBackPressed()
     {
-        new PacketSendLogOut().call(ConnectionActivity.token);
+        if(!quit){
+            Toast t = Toast.makeText(this,R.string.toastQuitLaunch,Toast.LENGTH_SHORT);
+            t.show();
+            quit = true;
+        }else{
+            quit = false;
+            finish();
+        }
     }
 
     public void startGame(){
