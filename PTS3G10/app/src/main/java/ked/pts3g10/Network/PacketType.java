@@ -20,7 +20,11 @@ public enum PacketType {
 	PLAYCARD(15,5),
 	RECEIVEPLAYCARD(16,4),
 	SENDSPELL(17,5),
-	RECEIVESPELL(18,4);
+	RECEIVESPELL(18,4),
+    SENDLOGOUT(19,2),
+    SENDREGISTER(20,4),
+    RECEIVESUCCESSREGISTER(21,2),
+    RECEIVEERRORREGISTER(22,2);
 	
 	private int id;
 	private int paramLength;

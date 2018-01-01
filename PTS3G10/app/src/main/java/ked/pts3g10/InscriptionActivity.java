@@ -1,5 +1,6 @@
 package ked.pts3g10;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,12 +8,22 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import ked.pts3g10.Network.packet.PacketSendRegister;
+
 public class InscriptionActivity extends AppCompatActivity {
 
     private EditText pseudoIns,passwordIns,email,passwordConf;
     private Button creeCompte,annuler;
     private InscriptionActivity context;
     private String stringPseudo,stringPassword,stringEmail,stringPasswordconf;
+
+    public static boolean registered;
+    public static String registerMessage;
+
+    private Timer t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +38,9 @@ public class InscriptionActivity extends AppCompatActivity {
         creeCompte = (Button) findViewById(R.id.buttoncreationcompte);
         annuler = (Button) findViewById(R.id.buttonannuler);
         context=this;
+
+        registered = false;
+        registerMessage = "";
 
         //affiche la fenetre d'inscription et envoie les donnée d'inscription a la bdd
         creeCompte.setOnClickListener(new View.OnClickListener() {
@@ -44,14 +58,30 @@ public class InscriptionActivity extends AppCompatActivity {
                     //verifie si le "password" correspond bien a "confirmed password"
                     if(stringPassword.equals(stringPasswordconf)){
                         //Envoie des informations a la base de donnée et verifie si elles existes
-                        //
-                        //
-                        //
-                        //Affiche un toast pour dire création du compte réussie
-                        Toast toast = Toast.makeText(context,R.string.toastCreationDuCompte,Toast.LENGTH_LONG);
-                        toast.show();
-                        //Ferme la fenetre pour retourner sur l'ecran de connection
-                        context.finish();
+                        new PacketSendRegister().call(stringPseudo,stringEmail,stringPassword);
+                        //Check toutes les 500ms si réponse
+                        t = new Timer();
+                        t.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                      if (registered){
+                                          Intent intent = new Intent(InscriptionActivity.this, LaunchActivity.class);
+                                          registered = false;
+                                          finish();
+                                      }else if(!registerMessage.equals("")){
+                                          Toast toast = Toast.makeText(context,registerMessage,Toast.LENGTH_LONG);
+                                          toast.show();
+                                          registerMessage = "";
+                                      }
+                                    }
+
+                                });
+                            }
+
+                        }, 0, 500);
 
                     }else{
                         Toast toast = Toast.makeText(context,R.string.toastConfirmationPassword,Toast.LENGTH_LONG);

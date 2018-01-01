@@ -26,6 +26,7 @@ import ked.pts3g10.Gameplay.AbilityPackage.HealAndDamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Network.packet.PacketJoinGameWaitingList;
 import ked.pts3g10.Network.packet.PacketSendImStillHere;
+import ked.pts3g10.Network.packet.PacketSendLogOut;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
 import ked.pts3g10.Util.XMLParser;
 
@@ -164,6 +165,12 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        new PacketSendLogOut().call(ConnectionActivity.token);
     }
 
     public void startGame(){
