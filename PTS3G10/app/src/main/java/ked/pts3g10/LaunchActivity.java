@@ -103,6 +103,9 @@ public class LaunchActivity extends AppCompatActivity {
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                t2.cancel();
+                t2.purge();
+                t2 = null;
                 new PacketSendLogOut().call(ConnectionActivity.token);
                 Intent intent = new Intent(LaunchActivity.this, ConnectionActivity.class);
                 startActivity(intent);
@@ -163,7 +166,8 @@ public class LaunchActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         Log.i("Destroy","Launch On Destroy");
-        new PacketSendLogOut().call(ConnectionActivity.token);
+        if(ConnectionActivity.token != 0)
+            new PacketSendLogOut().call(ConnectionActivity.token);
         super.onDestroy();
     }
 
@@ -175,8 +179,11 @@ public class LaunchActivity extends AppCompatActivity {
             t.show();
             quit = true;
         }else{
+            t2.cancel();
+            t2.purge();
+            t2 = null;
             quit = false;
-            finish();
+            finishAffinity();
         }
     }
 
