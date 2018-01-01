@@ -11,6 +11,7 @@ import ked.pts3g10.Network.packet.PacketReceiveEndGame;
 import ked.pts3g10.Network.packet.PacketReceiveMovement;
 import ked.pts3g10.Network.packet.PacketReceivePlayCard;
 import ked.pts3g10.Network.packet.PacketReceiveSpell;
+import ked.pts3g10.Network.packet.PacketReceiveTimeOut;
 import ked.pts3g10.Network.packet.PacketReceiveUpdateHP;
 import ked.pts3g10.Network.packet.PacketSuccessAuth;
 
@@ -64,6 +65,9 @@ public class PacketManager {
 			case RECEIVESPELL:
 				packetI = new PacketReceiveSpell();
 				break;
+            case RECEIVETIMEOUT:
+                packetI = new PacketReceiveTimeOut();
+                break;
 			default: 
 				break;
 		}

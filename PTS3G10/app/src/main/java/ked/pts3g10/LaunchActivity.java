@@ -24,8 +24,8 @@ import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAndDamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.Card;
-import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.packet.PacketJoinGameWaitingList;
+import ked.pts3g10.Network.packet.PacketSendImStillHere;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
 import ked.pts3g10.Util.XMLParser;
 
@@ -37,13 +37,15 @@ public class LaunchActivity extends AppCompatActivity {
     private static String adversaryName = "";
     private static boolean starting = true;
     public static ArrayList<Card> cards = new ArrayList<>();
-    private Timer t;
+    private Timer t, t2;
     private XMLParser xmlParser;
     private int version;
     public static ArrayList<Ability> abilities = new ArrayList<>();
 
     public static boolean displayEndGame;
     public static String endGameMessage;
+    public static boolean timeout;
+    public static String timeoutMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class LaunchActivity extends AppCompatActivity {
 
         displayEndGame = false;
         endGameMessage = "";
+
+        timeout = false;
+        timeoutMessage = "";
 
         initAbilities();
         ActivityMgr.launchActivity = this;
@@ -124,12 +129,36 @@ public class LaunchActivity extends AppCompatActivity {
                             t.show();
                             displayEndGame = false;
                         }
+                        if(timeout){
+                            Intent intent = new Intent(LaunchActivity.this, ConnectionActivity.class);
+                            intent.putExtra("timeout_message",timeoutMessage);
+                            startActivity(intent);
+                            timeout = false;
+                            finish();
+                        }
+
                     }
 
                 });
             }
 
         }, 0, 500);
+
+        //Toutes les 5s envoi packet ImStillHere au serveur
+        t2 = new Timer();
+        t2.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        new PacketSendImStillHere().call(ConnectionActivity.token);
+                    }
+
+                });
+            }
+
+        }, 0, 5000);
     }
 
     @Override
