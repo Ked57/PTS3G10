@@ -93,7 +93,7 @@ public class ConnectionActivity extends AppCompatActivity {
                     toast.show();
                     emptyError = false;
                 }else if(unvalidCharError){
-                    Toast t = Toast.makeText(context,R.string.toastCaractereInvalide,Toast.LENGTH_SHORT);
+                    Toast t = Toast.makeText(context,R.string.toastCaractereInvalide,Toast.LENGTH_LONG);
                     t.show();
                     unvalidCharError = false;
                 }
@@ -178,7 +178,7 @@ public class ConnectionActivity extends AppCompatActivity {
         t.cancel();
         t = null;
 
-        Toast t = Toast.makeText(context,R.string.toastConnectionFailed ,Toast.LENGTH_SHORT);
+        Toast t = Toast.makeText(context,R.string.toastConnectionFailed ,Toast.LENGTH_LONG);
         t.show();
         token = 0;
         editTextError(pseudo);
