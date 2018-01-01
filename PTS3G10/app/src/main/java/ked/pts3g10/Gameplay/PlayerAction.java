@@ -176,12 +176,14 @@ public class PlayerAction {
     }
 
     public void heal(Case heal_case){
-        int ap = getCaseCard().getAttactPoints();
-        int hp = heal_case.getCard().getHealthPoints();
+        if(caseCard != null) {
+            int ap = getCaseCard().getAttactPoints();
+            int hp = heal_case.getCard().getHealthPoints();
 
-        heal_case.updateHp(hp+ap);
-        resetActionState();
-        caseCard.setHasMovedThisRound(true);
+            heal_case.updateHp(hp + ap);
+            resetActionState();
+            caseCard.setHasMovedThisRound(true);
+        }
     }
 
 
