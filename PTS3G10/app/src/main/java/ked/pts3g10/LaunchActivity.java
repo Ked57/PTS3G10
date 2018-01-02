@@ -67,7 +67,6 @@ public class LaunchActivity extends AppCompatActivity {
         timeoutMessage = "";
 
         initAbilities();
-        ActivityMgr.launchActivity = this;
         getDistantCards();
 
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
@@ -199,13 +198,13 @@ public class LaunchActivity extends AppCompatActivity {
         intent.putExtra("adversaryName",adversaryName);
         intent.putExtra("starting",""+starting);
         startActivity(intent);
-        ActivityMgr.waitingForGameActivity.finish();
+        WaitingForGameActivity.notifyFinish();
+        adversaryName = "";
     }
-    public void startGame(String adversaryName,String starting){
-        Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
-        intent.putExtra("adversaryName",adversaryName);
-        intent.putExtra("starting",starting);
-        startActivity(intent);
+
+    public static void notifyStartGame(String advName, String strting){
+        adversaryName = advName;
+        starting = strting.equals("true");
     }
 
     public void getDistantCards(){
@@ -226,7 +225,7 @@ public class LaunchActivity extends AppCompatActivity {
             try {
                 resultStream = new FileInputStream(save);
                 Log.i("Parser", "File Dir:" + save.getAbsolutePath());
-                cards = xmlParser.parse(resultStream);
+                cards = xmlParser.parse(resultStream,this);
                 version = xmlParser.getVersion();
                 resultStream.close();
 
@@ -275,7 +274,7 @@ public class LaunchActivity extends AppCompatActivity {
         return emptyAbility;
     }
 
-    public void displayEndGameMessage(String message){
+    public static void displayEndGameMessage(String message){
         displayEndGame = true;
         endGameMessage = message;
     }

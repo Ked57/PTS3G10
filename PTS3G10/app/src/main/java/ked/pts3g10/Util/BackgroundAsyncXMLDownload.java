@@ -54,7 +54,7 @@ public class BackgroundAsyncXMLDownload extends AsyncTask {
             conn.setDoInput(true);
             conn.connect();
             InputStream is = conn.getInputStream();
-            cards = xmlParser.parse(is);
+            cards = xmlParser.parse(is, context);
             version = xmlParser.getVersion();
             returnedResult = "ok";
         } catch (IOException e) {

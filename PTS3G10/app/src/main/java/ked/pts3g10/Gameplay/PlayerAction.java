@@ -1,21 +1,16 @@
 package ked.pts3g10.Gameplay;
 
-import android.content.Context;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
-import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.packet.PacketSendMovement;
-import ked.pts3g10.Network.packet.PacketSendSpell;
 import ked.pts3g10.Network.packet.PacketUpdateHP;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
@@ -114,7 +109,7 @@ public class PlayerAction {
         new_case.setCard(context, card);
         player.setCrystals(player.getCrystals()-card.getCrystalCost());
         player.getDeck().getCardList().remove(card);
-        ActivityMgr.gameActivity.getBoard().updateTexts();
+        GameActivity.getBoard().updateTexts();
         resetActionState();
         card.setHasMovedThisRound(true);
     }
@@ -126,7 +121,7 @@ public class PlayerAction {
         new_case.setCard(context,card);
         movingFrom.resetCard();
         caseCard = null;
-        ActivityMgr.gameActivity.getBoard().clearBoardActions();
+        GameActivity.getBoard().clearBoardActions();
         resetActionState();
         card.setHasMovedThisRound(true);
     }
@@ -136,7 +131,7 @@ public class PlayerAction {
         new_case.setCard(context,card);
         movingFrom.resetCard();
         caseCard = null;
-        ActivityMgr.gameActivity.getBoard().clearBoardActions();
+        GameActivity.getBoard().clearBoardActions();
         resetActionState();
         card.setHasMovedThisRound(true);
     }
@@ -144,12 +139,12 @@ public class PlayerAction {
     public void useSpellCard(Case new_case) {
         Log.i("Spell","Using spell");
         if(caseCard instanceof Spell){
-            ((Spell)caseCard).getAbility().use(ActivityMgr.gameActivity.getBoard(),new_case, caseCard.getRangePoints(),player.isAdversary());
+            ((Spell)caseCard).getAbility().use(GameActivity.getBoard(),new_case, caseCard.getRangePoints(),player.isAdversary());
             player.setCrystals(player.getCrystals()-caseCard.getCrystalCost());
             player.getDeck().getCardList().remove(caseCard);
             caseCard = null;
             resetActionState();
-            ActivityMgr.gameActivity.getBoard().updateTexts();
+            GameActivity.getBoard().updateTexts();
         }
     }
 
@@ -189,7 +184,7 @@ public class PlayerAction {
 
 
     public void chooseCaseToGoTo(Case base){
-        Board board = ActivityMgr.gameActivity.getBoard();
+        Board board = GameActivity.getBoard();
             actionState = 2;
             movingFrom = base;
             caseCard = movingFrom.getCard();
@@ -230,12 +225,12 @@ public class PlayerAction {
 
     public void resetActionState(){
         actionState = 0;
-        ActivityMgr.gameActivity.getBoard().clearBoardActions();
+        GameActivity.getBoard().clearBoardActions();
     }
     public int getActionState() {return actionState;}
 
     public void chooseInitialCase(BoardCard card){
-        Board board = ActivityMgr.gameActivity.getBoard();
+        Board board = GameActivity.getBoard();
         actionState = 1;
         caseCard = card;
 
@@ -248,7 +243,7 @@ public class PlayerAction {
     }
 
     public void chooseSpellAimPoint(Spell card){
-        Board board = ActivityMgr.gameActivity.getBoard();
+        Board board = GameActivity.getBoard();
         actionState = 1;
         caseCard = card;
         for(Case c : board.getCases()){

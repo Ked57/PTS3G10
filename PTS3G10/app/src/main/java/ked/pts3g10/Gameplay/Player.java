@@ -3,9 +3,9 @@ package ked.pts3g10.Gameplay;
 
 import java.util.ArrayList;
 
-import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.LaunchActivity;
 
 public class Player {
     private Deck deck;
@@ -24,21 +24,21 @@ public class Player {
         this.adversary = adversary;
         ArrayList<Card> cards = new ArrayList<Card>();
         if(adversary) {
-            cards.add(ActivityMgr.launchActivity.cards.get(3).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(3).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(5).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(5).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(7).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(9).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(11).clone(adversary));
+            cards.add(LaunchActivity.cards.get(3).clone(adversary));
+            cards.add(LaunchActivity.cards.get(3).clone(adversary));
+            cards.add(LaunchActivity.cards.get(5).clone(adversary));
+            cards.add(LaunchActivity.cards.get(5).clone(adversary));
+            cards.add(LaunchActivity.cards.get(7).clone(adversary));
+            cards.add(LaunchActivity.cards.get(9).clone(adversary));
+            cards.add(LaunchActivity.cards.get(11).clone(adversary));
         }else{
-            cards.add(ActivityMgr.launchActivity.cards.get(2).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(2).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(4).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(4).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(6).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(8).clone(adversary));
-            cards.add(ActivityMgr.launchActivity.cards.get(10).clone(adversary));
+            cards.add(LaunchActivity.cards.get(2).clone(adversary));
+            cards.add(LaunchActivity.cards.get(2).clone(adversary));
+            cards.add(LaunchActivity.cards.get(4).clone(adversary));
+            cards.add(LaunchActivity.cards.get(4).clone(adversary));
+            cards.add(LaunchActivity.cards.get(6).clone(adversary));
+            cards.add(LaunchActivity.cards.get(8).clone(adversary));
+            cards.add(LaunchActivity.cards.get(10).clone(adversary));
         }
         deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
         playerAction = new PlayerAction(this);

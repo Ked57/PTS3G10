@@ -1,9 +1,6 @@
 package ked.pts3g10.Network.packet;
 
-import java.net.DatagramPacket;
-
-import ked.pts3g10.ActivityMgr;
-import ked.pts3g10.Network.ActionInterface;
+import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.Network.PacketType;
 import ked.pts3g10.Util.CoordinateConverter;
 import ked.pts3g10.Util.Pos;
@@ -24,6 +21,6 @@ public class PacketUpdateHP {
 
         Pos p = CoordinateConverter.convert(pos);
 
-        ActivityMgr.connectionActivity.getCom().send(type.getId() + ":" + token+ ":" +new_hp+ ":" +p.getPosX()+ ":" +p.getPosY());
+        ConnectionActivity.getCom().send(type.getId() + ":" + token+ ":" +new_hp+ ":" +p.getPosX()+ ":" +p.getPosY());
     }
 }

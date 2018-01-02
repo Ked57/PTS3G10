@@ -11,12 +11,13 @@ import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.ConnectionActivity;
+import ked.pts3g10.DeckActivity;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Interface.Case;
+import ked.pts3g10.LaunchActivity;
 import ked.pts3g10.Network.packet.PacketEndRound;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
@@ -80,8 +81,8 @@ public class Board {
     }
 
     public void initCastles(){
-        Card castleFriend = ActivityMgr.launchActivity.cards.get(0);
-        Card castleEni = ActivityMgr.launchActivity.cards.get(1);
+        Card castleFriend = LaunchActivity.cards.get(0);
+        Card castleEni = LaunchActivity.cards.get(1);
         getCaseWithLinearLayoutNumber(2,0).setCard(context,(BoardCard)castleEni);
         getCaseWithLinearLayoutNumber(2,4).setCard(context,(BoardCard)castleFriend);
     }
@@ -143,11 +144,11 @@ public class Board {
         if(playersTurn){
             endRoundButton.setBackgroundColor(Color.rgb(76,49,35));
             endRoundButton.setClickable(true);
-            if(ActivityMgr.deckActivity != null) ActivityMgr.deckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice));
+            DeckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice));
         }else {
             endRoundButton.setBackgroundColor(Color.GRAY);
             endRoundButton.setClickable(false);
-            if(ActivityMgr.deckActivity != null) ActivityMgr.deckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice_wrong));
+            DeckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice_wrong));
         }
 
         clearBoardActions(); // Pour enlever les éventuelles actions en cours

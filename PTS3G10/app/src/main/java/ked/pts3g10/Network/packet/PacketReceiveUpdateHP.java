@@ -2,7 +2,7 @@ package ked.pts3g10.Network.packet;
 
 import java.net.DatagramPacket;
 
-import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.Board;
 import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.Interface.Case;
@@ -21,7 +21,7 @@ public class PacketReceiveUpdateHP implements ActionInterface {
         //args[2] : int LinearLayoutNumber -> X carte
         //args[3] : int CaseNumber -> Y carte
 
-        Board board = ActivityMgr.gameActivity.getBoard();
+        Board board = GameActivity.getBoard();
         PlayerAction adversaryAction = board.getAdversary().getPlayerAction();
         int new_hp = Integer.parseInt(args[1]);
         Pos pos = new Pos(Integer.parseInt(args[2]),Integer.parseInt(args[3]));

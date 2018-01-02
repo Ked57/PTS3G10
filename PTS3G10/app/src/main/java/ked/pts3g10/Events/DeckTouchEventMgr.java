@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.DeckActivity;
+import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.Board;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
@@ -33,8 +33,8 @@ public class DeckTouchEventMgr implements GestureDetector.OnGestureListener, Ges
 
             @Override
             public void onClick(View v) {
-                Player player = ActivityMgr.gameActivity.getBoard().getPlayer();
-                Board board = ActivityMgr.gameActivity.getBoard();
+                Board board = GameActivity.getBoard();
+                Player player = board.getPlayer();
                 if(board.isPlayersTurn() && player.getCrystals() >= player.getDeck().getCardList().get(context.getCurrIndex()).getCrystalCost()) {
                     if(player.getDeck().getCardList().get(context.getCurrIndex()) instanceof BoardCard) {
                         player.getPlayerAction().chooseInitialCase((BoardCard) player.getDeck().getCardList().get(context.getCurrIndex()));

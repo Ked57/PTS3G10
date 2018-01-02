@@ -10,8 +10,6 @@ L'intérêt ici est d'extend FrameLayout et de construire notre interface procé
 import android.app.ActivityManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -22,7 +20,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
@@ -31,7 +28,6 @@ import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.Network.packet.PacketPlayCard;
 import ked.pts3g10.R;
-import ked.pts3g10.Util.BitmapDecoder;
 import ked.pts3g10.Util.Pos;
 
 public class Case extends FrameLayout {
@@ -178,14 +174,14 @@ public class Case extends FrameLayout {
 
     public void onClickAction(){
         Toast t;
-        if(ActivityMgr.gameActivity.getBoard().isPlayersTurn()) {
-            PlayerAction pa = ActivityMgr.gameActivity.getBoard().getPlayer().getPlayerAction();
+        if(GameActivity.getBoard().isPlayersTurn()) {
+            PlayerAction pa = GameActivity.getBoard().getPlayer().getPlayerAction();
             if(pa.getActionState() == 2 && pa.getMovingFrom().equals(this)){
                 pa.resetActionState();
             }
             else if (isActionable && pa.getActionState() == 1) { // Choosing state
                 if(isCardThumbnailEmpty() && pa.getCaseCard() instanceof BoardCard) {
-                    new PacketPlayCard().call(ConnectionActivity.token,ActivityMgr.gameActivity.getBoard().getPlayer().getDeck().getCardList().indexOf(pa.getCaseCard()),pos);
+                    new PacketPlayCard().call(ConnectionActivity.token,GameActivity.getBoard().getPlayer().getDeck().getCardList().indexOf(pa.getCaseCard()),pos);
                     pa.placeBoardCard(context, (BoardCard) pa.getCaseCard(), this);
                 }
                 else if(pa.getCaseCard() instanceof Spell)
@@ -243,8 +239,11 @@ public class Case extends FrameLayout {
         ActivityManager.MemoryInfo memoryInfo = context.getAvailableMemory();
         if (!memoryInfo.lowMemory) {
             //effect.setBackground(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.heal_effect, this.getWidth(), this.getHeight()));
-            effect.setBackgroundResource(R.drawable.fire_effect);
-
+            try {
+                effect.setBackgroundResource(R.drawable.fire_effect);
+            }catch(OutOfMemoryError e){
+                Log.e("Animation",Log.getStackTraceString(e));
+            }
             // Get the background, which has been compiled to an AnimationDrawable object.
             AnimationDrawable frameAnimation = (AnimationDrawable) effect.getBackground();
             // Start the animation

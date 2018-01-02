@@ -1,7 +1,6 @@
 package ked.pts3g10.Util;
 
 import android.content.Context;
-import android.media.Image;
 import android.util.Log;
 import android.util.Xml;
 import android.widget.ImageView;
@@ -17,12 +16,12 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import ked.pts3g10.ActivityMgr;
 import ked.pts3g10.Gameplay.AbilityPackage.Ability;
 import ked.pts3g10.Gameplay.CardPackage.Army;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
+import ked.pts3g10.LaunchActivity;
 
 /**
  * Classe utilisée pour pour lire et écrire un fichier XML contenant les informations sur les cartes
@@ -68,7 +67,7 @@ public class XMLParser {
      * @param in le fichier contenant le XML
      * @return une liste d'objet de type Entry
      */
-    public ArrayList<Card> parse(InputStream in) throws XmlPullParserException, IOException {
+    public ArrayList<Card> parse(InputStream in,LaunchActivity context) throws XmlPullParserException, IOException {
         try {
             XmlPullParser parser = Xml.newPullParser();
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
@@ -80,12 +79,12 @@ public class XMLParser {
                     case "army":
                         boolean adversary = e.adversary.equals("true");
 
-                        ImageView bg = new ImageView(ActivityMgr.launchActivity);
+                        ImageView bg = new ImageView(context);
                         int bgId = ImagesEnum.getDrawableIdWithImageId(e.bg);
                         bg.setBackgroundResource(bgId);
                         bg.setTag(bgId);
 
-                        ImageView thmbn = new ImageView(ActivityMgr.launchActivity);
+                        ImageView thmbn = new ImageView(context);
                         int thmbnId = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
                         thmbn.setBackgroundResource(thmbnId);
                         thmbn.setTag(thmbnId);
@@ -94,17 +93,17 @@ public class XMLParser {
                     case "spell":
                         boolean adversary2 = e.adversary.equals("true");
 
-                        ImageView bg2 = new ImageView(ActivityMgr.launchActivity);
+                        ImageView bg2 = new ImageView(context);
                         int bgId2 = ImagesEnum.getDrawableIdWithImageId(e.bg);
                         bg2.setBackgroundResource(bgId2);
                         bg2.setTag(bgId2);
 
-                        ImageView thmbn2 = new ImageView(ActivityMgr.launchActivity);
+                        ImageView thmbn2 = new ImageView(context);
                         int thmbnId2 = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
                         thmbn2.setBackgroundResource(thmbnId2);
                         thmbn2.setTag(thmbnId2);
-                        Ability ability = ActivityMgr.launchActivity.getAbilityById(e.abilityId);
-                        if(ability.equals(ActivityMgr.launchActivity.emptyAbility)){
+                        Ability ability = context.getAbilityById(e.abilityId);
+                        if(ability.equals(context.emptyAbility)){
                             Log.e("Parser","Ability is null");
                             break;
                         }

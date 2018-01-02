@@ -4,7 +4,7 @@ import android.util.Log;
 
 import java.net.DatagramPacket;
 
-import ked.pts3g10.ActivityMgr;
+import ked.pts3g10.GameActivity;
 import ked.pts3g10.Network.ActionInterface;
 import ked.pts3g10.Network.PacketType;
 
@@ -18,6 +18,6 @@ public class PacketNextRound implements ActionInterface {
         //A utiliser seulement en cas de fin prématurée du round
         int round = Integer.parseInt(args[1]);
         Log.i("Network","Receive next round, number "+round);
-        ActivityMgr.gameActivity.getBoard().setEndRound(true, round);
+        GameActivity.getBoard().setEndRound(true, round);
     }
 }

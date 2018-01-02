@@ -22,7 +22,7 @@ public class DeckActivity extends AppCompatActivity {
     private TextView deckCrystalCost, deckCardName, deckCardDescription, deckAttackPoints, deckHealthPoints, deckRangePoints, deckMovementPoints;
     private int currIndex;
     private ImageView deckBackgroundImage;
-    private Button deckChoiceButton;
+    private static Button deckChoiceButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +34,7 @@ public class DeckActivity extends AppCompatActivity {
         int deckId = i.getIntExtra("deckId", 0);
         int pId = i.getIntExtra("pId", 0);
         String dName = i.getStringExtra("dName");
-        GameActivity gameActivity = ActivityMgr.gameActivity;
-        deck = gameActivity.getBoard().getPlayer().getDeck();//Java .................
+        deck = GameActivity.getBoard().getPlayer().getDeck();//Java .................
 
         deckCrystalCost = (TextView) findViewById(R.id.deckCrystalCost);
         deckCardName = (TextView) findViewById(R.id.deckCardName);
@@ -47,15 +46,12 @@ public class DeckActivity extends AppCompatActivity {
         deckBackgroundImage = (ImageView) findViewById(R.id.deckBackgroundImage);
 
         deckChoiceButton = (Button) findViewById(R.id.deckChoiceButton);
-        if(ActivityMgr.gameActivity.getBoard().isPlayersTurn())
+        if(GameActivity.getBoard().isPlayersTurn())
             setChoiceButtonText(getResources().getString(R.string.deck_choice));
         else setChoiceButtonText(getResources().getString(R.string.deck_choice_wrong));
 
         currIndex = 0;
         displayCardForIndex(currIndex);
-
-        ActivityMgr.deckActivity = this;
-
     }
 
     @Override
@@ -103,7 +99,8 @@ public class DeckActivity extends AppCompatActivity {
 
     }
 
-    public void setChoiceButtonText(String text){
-        deckChoiceButton.setText(text);
+    public static void setChoiceButtonText(String text){
+        if(deckChoiceButton != null)
+            deckChoiceButton.setText(text);
     }
 }
