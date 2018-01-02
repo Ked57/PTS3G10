@@ -9,12 +9,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.8">
+
         <TextView
             android:id="@+id/Paragraphe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:text="@string/para_credits" />
+            android:text="@string/para_credits"
+            android:textSize="18sp" />
     </LinearLayout>
 
 
