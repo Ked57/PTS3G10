@@ -78,30 +78,14 @@ public class XMLParser {
                 switch(e.type){
                     case "army":
                         boolean adversary = e.adversary.equals("true");
-
-                        ImageView bg = new ImageView(context);
-                        int bgId = ImagesEnum.getDrawableIdWithImageId(e.bg);
-                        bg.setBackgroundResource(bgId);
-                        bg.setTag(bgId);
-
-                        ImageView thmbn = new ImageView(context);
-                        int thmbnId = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
-                        thmbn.setBackgroundResource(thmbnId);
-                        thmbn.setTag(thmbnId);
+                        int bg = ImagesEnum.getDrawableIdWithImageId(e.bg);
+                        int thmbn = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
                         cards.add(new Army(e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,bg,thmbn,adversary));
                         break;
                     case "spell":
                         boolean adversary2 = e.adversary.equals("true");
-
-                        ImageView bg2 = new ImageView(context);
-                        int bgId2 = ImagesEnum.getDrawableIdWithImageId(e.bg);
-                        bg2.setBackgroundResource(bgId2);
-                        bg2.setTag(bgId2);
-
-                        ImageView thmbn2 = new ImageView(context);
-                        int thmbnId2 = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
-                        thmbn2.setBackgroundResource(thmbnId2);
-                        thmbn2.setTag(thmbnId2);
+                        int bg2 = ImagesEnum.getDrawableIdWithImageId(e.bg);
+                        int thmbn2 = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
                         Ability ability = context.getAbilityById(e.abilityId);
                         if(ability.equals(context.emptyAbility)){
                             Log.e("Parser","Ability is null");
@@ -361,11 +345,11 @@ public class XMLParser {
             xmlSerializer.endTag(null, "mp");
 
             xmlSerializer.startTag(null, "bg");
-            xmlSerializer.text(""+c.getBackground().getTag());
+            xmlSerializer.text(""+ImagesEnum.getImageIdWithDrawableId(c.getBackground()));
             xmlSerializer.endTag(null, "bg");
 
             xmlSerializer.startTag(null, "thmbn");
-            xmlSerializer.text(""+c.getThumbnail().getTag());
+            xmlSerializer.text(""+ImagesEnum.getImageIdWithDrawableId(c.getBackground()));
             xmlSerializer.endTag(null, "thmbn");
 
             xmlSerializer.endTag(null, "entry");

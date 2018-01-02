@@ -70,7 +70,7 @@ public class DeckActivity extends AppCompatActivity {
         }
         deckRangePoints.setText(card.getRangePoints() + "");
         deckAttackPoints.setText(card.getAttactPoints() + "");
-        int bgResource = Integer.parseInt(card.getBackground().getTag().toString());
+        int bgResource = card.getBackground();
         deckBackgroundImage.setBackgroundResource(bgResource);
     }
 

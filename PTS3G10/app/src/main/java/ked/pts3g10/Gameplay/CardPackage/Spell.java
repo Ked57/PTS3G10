@@ -9,7 +9,7 @@ public class Spell extends Card {
 
     private Ability ability;
 
-    public Spell(String name,String description,int crystalCost,int ap, int rp, ImageView bg, ImageView thmbn, Ability ability, boolean adversary){
+    public Spell(String name,String description,int crystalCost,int ap, int rp, int bg, int thmbn, Ability ability, boolean adversary){
         super(name,description,crystalCost,ap,rp,bg,thmbn, adversary);
         this.ability = ability;
     }

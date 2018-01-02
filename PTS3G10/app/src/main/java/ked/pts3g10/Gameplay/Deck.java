@@ -40,32 +40,6 @@ public class Deck{
         //initPlaceholder(context);
     }
 
-    public void initPlaceholder(GameActivity context){
-        /* Placeholder */
-        for(int i = 0; i < 15; ++i){
-            ImageView bg = new ImageView(context);
-            bg.setBackgroundResource(R.drawable.sword);
-            bg.setTag(R.drawable.sword);//Pour pouvoir récupérer l'id du drawale plus tard
-            ImageView thmbn = new ImageView(context);
-            thmbn.setBackgroundResource(R.drawable.sword);
-            thmbn.setTag(R.drawable.sword);
-            cardList.add(new Army("Placeholder "+i ,"Description du placeholder "+i,2, 3, 1, 2, 1, bg,thmbn,false));
-        }
-    }
-
-    public void initPlaceholder(DeckActivity context){
-        /* Placeholder */
-        for(int i = 0; i < 15; ++i){
-            ImageView bg = new ImageView(context);
-            bg.setBackgroundResource(R.drawable.sword);
-            bg.setTag(R.drawable.sword);//Pour pouvoir récupérer l'id du drawale plus tard
-            ImageView thmbn = new ImageView(context);
-            thmbn.setBackgroundResource(R.drawable.sword);
-            thmbn.setTag(R.drawable.sword);
-            cardList.add(new Army("Placeholder "+i ,"Description du placeholder "+i,2, 3, 1, 2, 1, bg,thmbn,false));
-        }
-    }
-
 
     public int getPlayerId() {
         return playerId;

@@ -9,7 +9,7 @@ public class Hero extends BoardCard {
 
     private Ability ability;
 
-    public Hero(String name,String description,int crystalCost, int ap, int rp, int hp, int mp, ImageView bg, ImageView thmbn, Ability ability, boolean adversary){
+    public Hero(String name,String description,int crystalCost, int ap, int rp, int hp, int mp, int bg, int thmbn, Ability ability, boolean adversary){
         super(name,description,crystalCost,ap,rp,hp,mp,bg,thmbn, adversary);
         this.ability = ability;
     }

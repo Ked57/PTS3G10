@@ -34,4 +34,9 @@ public enum ImagesEnum {
         throw new NullPointerException();
     }
 
+    public static int getImageIdWithDrawableId(int drawableId){
+        for(ImagesEnum e : values()) if(e.drawableId == drawableId) return e.imageId;
+        throw new NullPointerException();
+    }
+
 }
