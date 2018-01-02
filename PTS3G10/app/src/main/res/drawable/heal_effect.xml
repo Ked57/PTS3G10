@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list android:id="@+id/selected"
+    android:oneshot="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+        <item android:drawable="@drawable/heal_003_01_01" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_02" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_03" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_04" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_05" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_06" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_07" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_08" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_09" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_10" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_11" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_12" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_13" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_14" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_15" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_16" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_17" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_18" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_19" android:duration="50" />
+        <item android:drawable="@drawable/heal_003_01_20" android:duration="50" />
+    </animation-list>

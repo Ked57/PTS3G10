@@ -7,7 +7,11 @@ L'intérêt ici est d'extend FrameLayout et de construire notre interface procé
  */
 
 
+import android.app.ActivityManager;
 import android.graphics.Typeface;
+import android.graphics.drawable.AnimationDrawable;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
@@ -27,11 +31,13 @@ import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Gameplay.PlayerAction;
 import ked.pts3g10.Network.packet.PacketPlayCard;
 import ked.pts3g10.R;
+import ked.pts3g10.Util.BitmapDecoder;
 import ked.pts3g10.Util.Pos;
 
 public class Case extends FrameLayout {
 
     private ImageView grass;
+    private ImageView effect;
     private ImageView cardThumbnail; //Pas inspiré pour ce nom, représente l'image de la carte sur la case
     private TextView healthPointsView;
     private BoardCard card;
@@ -70,6 +76,9 @@ public class Case extends FrameLayout {
         grass = new ImageView(context);
         grass.setBackgroundResource(R.drawable.grass);
         this.addView(grass);
+
+        effect = new ImageView(context);
+        this.addView(effect);
 
         cardThumbnail = new ImageView(context);
         this.addView(cardThumbnail);
@@ -215,6 +224,31 @@ public class Case extends FrameLayout {
         if(resetCard){
             resetCard();
             resetCard = false;
+        }
+    }
+
+    public void playHealAnimation(){
+        ActivityManager.MemoryInfo memoryInfo = context.getAvailableMemory();
+        if (!memoryInfo.lowMemory) {
+            //effect.setBackground(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.heal_effect, this.getWidth(), this.getHeight()));
+            effect.setBackgroundResource(R.drawable.heal_effect);
+            // Get the background, which has been compiled to an AnimationDrawable object.
+            AnimationDrawable frameAnimation = (AnimationDrawable) effect.getBackground();
+            // Start the animation
+            frameAnimation.start();
+        }
+    }
+
+    public void playFireAnimation(){
+        ActivityManager.MemoryInfo memoryInfo = context.getAvailableMemory();
+        if (!memoryInfo.lowMemory) {
+            //effect.setBackground(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.heal_effect, this.getWidth(), this.getHeight()));
+            effect.setBackgroundResource(R.drawable.fire_effect);
+
+            // Get the background, which has been compiled to an AnimationDrawable object.
+            AnimationDrawable frameAnimation = (AnimationDrawable) effect.getBackground();
+            // Start the animation
+            frameAnimation.start();
         }
     }
 

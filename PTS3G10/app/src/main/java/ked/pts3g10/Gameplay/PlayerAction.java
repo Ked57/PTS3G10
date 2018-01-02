@@ -144,10 +144,6 @@ public class PlayerAction {
     public void useSpellCard(Case new_case) {
         Log.i("Spell","Using spell");
         if(caseCard instanceof Spell){
-            if(!player.isAdversary()) {
-                //new PacketSendSpell().call(ConnectionActivity.token, player.getDeck().getCardList().indexOf(caseCard), new_case.getPos());
-            }
-
             ((Spell)caseCard).getAbility().use(ActivityMgr.gameActivity.getBoard(),new_case, caseCard.getRangePoints(),player.isAdversary());
             player.setCrystals(player.getCrystals()-caseCard.getCrystalCost());
             player.getDeck().getCardList().remove(caseCard);
@@ -174,13 +170,14 @@ public class PlayerAction {
             attack_case.getCard().setHealthPoints(eniHp);
             attack_case.updateHp(eniHp);
         }
-
+        attack_case.playFireAnimation(); // TODO: différencier les spells des attaques normales
         resetActionState();
         caseCard.setHasMovedThisRound(true);
     }
 
     public void heal(Case heal_case){
         if(caseCard != null) {
+            heal_case.playHealAnimation();
             int ap = getCaseCard().getAttactPoints();
             int hp = heal_case.getCard().getHealthPoints();
             heal_case.updateHp(hp + ap);
