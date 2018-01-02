@@ -9,9 +9,7 @@ import ked.pts3g10.Network.PacketType;
 
 public class PacketSendImStillHere {
 
-    static PacketType type = PacketType.IMSTILLHERE;
-
     public void call(int token){
-        ConnectionActivity.getCom().send(type.getId()+":"+token);
+        ConnectionActivity.getCom().send(PacketType.IMSTILLHERE.getId()+":"+token);
     }
 }

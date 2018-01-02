@@ -12,11 +12,9 @@ import ked.pts3g10.Network.PacketType;
 
 public class PacketEndGame{
 
-    static PacketType type = PacketType.ENDGAME;
-
     public void call(String message) {
         // args[1] : token client
         // args[2] : message raison de déconnexion
-        ConnectionActivity.getCom().send(type.getId()+":"+ConnectionActivity.token+":"+message);
+        ConnectionActivity.getCom().send(PacketType.ENDGAME.getId()+":"+ConnectionActivity.token+":"+message);
     }
 }

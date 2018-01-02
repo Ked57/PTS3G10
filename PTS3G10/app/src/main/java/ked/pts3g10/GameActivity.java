@@ -77,6 +77,7 @@ public class GameActivity extends AppCompatActivity {
         }
         new PacketEndGame().call(messageToSend);
         LaunchActivity.displayEndGameMessage(message);
+        board = null;
         super.onDestroy();
     }
 

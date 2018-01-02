@@ -13,9 +13,7 @@ import ked.pts3g10.Network.PacketType;
 
 public class PacketSendRegister {
 
-    static PacketType type = PacketType.SENDREGISTER;
-
     public void call(String pseudo, String email, String password){
-        ConnectionActivity.getCom().send(type.getId()+":"+pseudo+":"+email+":"+password);
+        ConnectionActivity.getCom().send(PacketType.SENDREGISTER.getId()+":"+pseudo+":"+email+":"+password);
     }
 }

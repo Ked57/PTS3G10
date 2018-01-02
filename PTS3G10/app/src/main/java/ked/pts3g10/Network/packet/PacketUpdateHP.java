@@ -11,8 +11,6 @@ import ked.pts3g10.Util.Pos;
 
 public class PacketUpdateHP {
 
-    static PacketType type = PacketType.UPDATEHP;
-
     public void call(int token, int new_hp, Pos pos) {
         //args[1] : int token
         //args[2] : int new_hp
@@ -21,6 +19,6 @@ public class PacketUpdateHP {
 
         Pos p = CoordinateConverter.convert(pos);
 
-        ConnectionActivity.getCom().send(type.getId() + ":" + token+ ":" +new_hp+ ":" +p.getPosX()+ ":" +p.getPosY());
+        ConnectionActivity.getCom().send(PacketType.UPDATEHP.getId() + ":" + token+ ":" +new_hp+ ":" +p.getPosX()+ ":" +p.getPosY());
     }
 }

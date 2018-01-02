@@ -11,9 +11,7 @@ import ked.pts3g10.Network.PacketType;
 
 public class PacketSendLogOut {
 
-    static PacketType type = PacketType.SENDLOGOUT;
-
     public void call(int token){
-        ConnectionActivity.getCom().send(type.getId()+":"+token);
+        ConnectionActivity.getCom().send(PacketType.SENDLOGOUT.getId()+":"+token);
     }
 }

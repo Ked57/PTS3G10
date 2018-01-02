@@ -13,6 +13,7 @@ import ked.pts3g10.Network.packet.PacketLeaveWaitingList;
 public class WaitingForGameActivity extends AppCompatActivity {
 
     private static boolean quit,backQuit;
+    private Timer t;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,22 +22,30 @@ public class WaitingForGameActivity extends AppCompatActivity {
         quit = false;
         backQuit = false;
 
-        Timer t = new Timer();
+        t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
-
                     @Override
                     public void run() {
-                        if(quit)
+                        if(quit) {
                             finish();
+                        }
                     }
 
                 });
             }
 
         }, 0, 500);
+    }
+
+    @Override
+    public void onDestroy() {
+        t.cancel();
+        t.purge();
+        t = null;
+        super.onDestroy();
     }
 
     @Override
