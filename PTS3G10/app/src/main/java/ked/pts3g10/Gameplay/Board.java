@@ -34,7 +34,7 @@ public class Board {
     private boolean endRound;
     private boolean playersTurn; // true -> le joueur, false -> l'adversaire
     private int roundNumber;
-    private Timer t;
+    private Timer t,t2;
 
     private int serverRound;
 
@@ -61,6 +61,7 @@ public class Board {
         initLayout(V4,3);
         initLayout(V5,4);
 
+
         initCastles();
 
         /*Init des text view */
@@ -77,7 +78,11 @@ public class Board {
         this.playersTurn = !playersTurn; // Valeur acheminée du serveur, implémenté plus tard
 
         t = new Timer();
+        t2 = new Timer();
+
         newRound();
+
+        initNetLoop();
     }
 
     public void initCastles(){
@@ -85,6 +90,55 @@ public class Board {
         Card castleEni = LaunchActivity.cards.get(1);
         getCaseWithLinearLayoutNumber(2,0).setCard(context,(BoardCard)castleEni);
         getCaseWithLinearLayoutNumber(2,4).setCard(context,(BoardCard)castleFriend);
+    }
+
+    public void initNetLoop(){
+        t2.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                context.runOnUiThread(new Runnable() {
+
+                    @Override
+                    public void run() {
+
+                        if(adversary.getPlayerAction().isPlaceBoardCardNext()){
+                            adversary.getPlayerAction().placeBoardCardNext(context);
+                        }
+                        if(adversary.getPlayerAction().isMoveBoardCardNext()){
+                            adversary.getPlayerAction().moveBoardCardNext(context);
+                        }
+                        if(adversary.getPlayerAction().isUpdateHp()){
+                            for(Case c : adversary.getPlayerAction().getCaseToUpdateHp()){
+                                c.notifyUpdateHp();
+                            }
+                            adversary.getPlayerAction().clearUpdateHp();
+                            adversary.getPlayerAction().setUpdateHp(false);
+                        }
+                        if(adversary.getPlayerAction().isResetCard()){
+                            for(Case c : adversary.getPlayerAction().getCaseToResetCard()){
+                                c.notifyResetCard();
+                                if(c.isPlayersCastle()){
+                                    context.setNormalFinish(true);
+                                    context.endGame("Vous avez perdu !","Vous avez gagné !");
+                                }else if(c.isAdversaryCastle()){
+                                    context.setNormalFinish(true);
+                                    context.endGame("Vous avez gagné !","Vous avez perdu !");
+                                }
+                            }
+                            adversary.getPlayerAction().clearResetHp();
+                            adversary.getPlayerAction().setResetCard(false);
+                        }
+
+                        if(adversary.getPlayerAction().isUseSpell()){
+                            adversary.getPlayerAction().useSpellCard(adversary.getPlayerAction().getCaseToUseSpellOn());
+                            adversary.getPlayerAction().setUseSpell(false);
+                        }
+                    }
+
+                });
+            }
+
+        }, 0, 100);
     }
 
     public ArrayList<Case> getCases() {
@@ -170,46 +224,12 @@ public class Board {
                             roundNumber = serverRound;
                             newRound();
                         }
-
-                        if(adversary.getPlayerAction().isPlaceBoardCardNext()){
-                            adversary.getPlayerAction().placeBoardCardNext(context);
-                        }
-                        if(adversary.getPlayerAction().isMoveBoardCardNext()){
-                            adversary.getPlayerAction().moveBoardCardNext(context);
-                        }
-                        if(adversary.getPlayerAction().isUpdateHp()){
-                            for(Case c : adversary.getPlayerAction().getCaseToUpdateHp()){
-                                c.notifyUpdateHp();
-                            }
-                            adversary.getPlayerAction().clearUpdateHp();
-                            adversary.getPlayerAction().setUpdateHp(false);
-                        }
-                        if(adversary.getPlayerAction().isResetCard()){
-                            for(Case c : adversary.getPlayerAction().getCaseToResetCard()){
-                                c.notifyResetCard();
-                                if(c.isPlayersCastle()){
-                                    context.setNormalFinish(true);
-                                    context.endGame("Vous avez perdu !","Vous avez gagné !");
-                                }else if(c.isAdversaryCastle()){
-                                    context.setNormalFinish(true);
-                                    context.endGame("Vous avez gagné !","Vous avez perdu !");
-                                }
-                            }
-                            adversary.getPlayerAction().clearResetHp();
-                            adversary.getPlayerAction().setResetCard(false);
-                        }
-
-                        if(adversary.getPlayerAction().isUseSpell()){
-                            adversary.getPlayerAction().useSpellCard(adversary.getPlayerAction().getCaseToUseSpellOn());
-                            adversary.getPlayerAction().setUseSpell(false);
-                        }
                     }
 
                 });
             }
 
         }, 0, 1000);
-
     }
 
     public Player getAdversary(){return adversary;}

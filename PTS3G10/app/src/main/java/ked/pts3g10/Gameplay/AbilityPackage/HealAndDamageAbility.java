@@ -20,13 +20,18 @@ public class HealAndDamageAbility extends Ability {
         for(Case c : board.getCases()){
             if(c.getXDistanceWith(base) <= radius && c.getYDistanceWith(base) <= radius){
                 if(!c.isCardThumbnailEmpty()){
-                        if(c.getCard().isAdversary()){
-                            Log.i("SpellAttack","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
-                            board.getPlayer().getPlayerAction().attack(c);
-                        }else{
-                            Log.i("SpellHeal","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
-                            board.getPlayer().getPlayerAction().heal(c);
-                        }
+                    Log.i("SpellAttack","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
+                    if(adversary){
+                        c.playHealAnimation();
+                    }else {
+                        board.getPlayer().getPlayerAction().attack(c);
+                    }
+                }else{
+                    Log.i("SpellHeal","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
+                    if(adversary){c.playHealAnimation();
+                    }else {
+                        board.getPlayer().getPlayerAction().heal(c);
+                    }
                 }
             }
         }

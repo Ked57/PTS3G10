@@ -11,6 +11,7 @@ import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.packet.PacketSendMovement;
+import ked.pts3g10.Network.packet.PacketSendSpell;
 import ked.pts3g10.Network.packet.PacketUpdateHP;
 import ked.pts3g10.R;
 import ked.pts3g10.Util.Pos;
@@ -140,10 +141,13 @@ public class PlayerAction {
         Log.i("Spell","Using spell");
         if(caseCard instanceof Spell){
             ((Spell)caseCard).getAbility().use(GameActivity.getBoard(),new_case, caseCard.getRangePoints(),player.isAdversary());
+            if(!player.isAdversary())
+                new PacketSendSpell().call(ConnectionActivity.token,player.getDeck().getCardList().indexOf(caseCard),new_case.getPos());
             player.setCrystals(player.getCrystals()-caseCard.getCrystalCost());
             player.getDeck().getCardList().remove(caseCard);
             caseCard = null;
             resetActionState();
+
             GameActivity.getBoard().updateTexts();
         }
     }
