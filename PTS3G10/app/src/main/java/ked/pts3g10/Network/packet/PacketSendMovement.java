@@ -12,8 +12,6 @@ import ked.pts3g10.Util.Pos;
 
 public class PacketSendMovement  {
 
-    static PacketType type = PacketType.SENDMOVEMENT;
-
     public void call(int token, int base_x, int base_y, int new_x, int new_y) {
         //args[1] : int token
         //args[2] : int LinearLayoutNumber -> X actuel
@@ -24,7 +22,7 @@ public class PacketSendMovement  {
         Pos base = CoordinateConverter.convert(new Pos(base_x,base_y));
         Pos new_case = CoordinateConverter.convert(new Pos(new_x,new_y));
 
-        ConnectionActivity.getCom().send(type.getId() + ":" + token+ ":" +base.getPosX()+ ":" +base.getPosY()+ ":" +new_case.getPosX()+ ":" +new_case.getPosY());
+        ConnectionActivity.getCom().send(PacketType.SENDMOVEMENT.getId() + ":" + token+ ":" +base.getPosX()+ ":" +base.getPosY()+ ":" +new_case.getPosX()+ ":" +new_case.getPosY());
 
     }
 }

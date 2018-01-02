@@ -17,10 +17,8 @@ import ked.pts3g10.Util.Pos;
 
 public class PacketPlayCard {
 
-    static PacketType type = PacketType.PLAYCARD;
-
     public void call(int token, int cardIndex, Pos p){
         Pos pos = CoordinateConverter.convert(p);
-        ConnectionActivity.getCom().send(type.getId()+":"+token+":"+cardIndex+":"+pos.getPosX()+":"+pos.getPosY());
+        ConnectionActivity.getCom().send(PacketType.PLAYCARD.getId()+":"+token+":"+cardIndex+":"+pos.getPosX()+":"+pos.getPosY());
     }
 }

@@ -9,12 +9,10 @@ import ked.pts3g10.Network.PacketType;
 
 public class PacketEndRound {
 
-    static PacketType type = PacketType.ENDROUND;
-
     public void call(int token) {
         // A envoyer arg[0] : id packet
         //           arg[1] : token client
 
-        ConnectionActivity.getCom().send(type.getId() + ":" + token);
+        ConnectionActivity.getCom().send(PacketType.ENDROUND.getId() + ":" + token);
     }
 }

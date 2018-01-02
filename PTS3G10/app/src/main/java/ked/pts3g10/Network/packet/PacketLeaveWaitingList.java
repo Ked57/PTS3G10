@@ -11,9 +11,7 @@ import ked.pts3g10.Network.PacketType;
 
 public class PacketLeaveWaitingList {
 
-    static PacketType type = PacketType.SENDLEAVEWAITINGLIST;
-
     public void call(int token){
-        ConnectionActivity.getCom().send(type.getId()+":"+token);
+        ConnectionActivity.getCom().send(PacketType.SENDLEAVEWAITINGLIST.getId()+":"+token);
     }
 }
