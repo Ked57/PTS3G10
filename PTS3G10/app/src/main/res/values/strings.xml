@@ -50,7 +50,7 @@
             - Mignot Kévin \n
             - Fassot Clément \n
             - Gonet Logan \n
-            - Chauvet Mael \n
+            - Chauvet Maël \n
         dans le cadre de notre projet tuteuré de semestre 3. \n\n
 
         tuteur du projet : Clément Laborie \n\n
@@ -64,7 +64,7 @@
     </string>
 
     <!--Menu création d'un deck-->
-    <string name="selectionner">Sélectionner</string>
+    <string name="selectionner">Ajouter au deck</string>
     <string name="CarteDeck">Nb Cartes Deck :</string>
 
 
