@@ -97,28 +97,28 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
-
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
                 android:text="@string/CarteDeck" />
-
             <TextView
-                android:id="@+id/NbCarteDeck"
+                android:id="@+id/deckCardCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:textStyle="bold"
                 android:text="" />
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/terminer"
+        <Button
+            android:id="@+id/saveDeck"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="0.3"
-            app:srcCompat="?android:attr/textCheckMark" />
-
+            android:layout_weight="0.2"
+            android:text="@string/save" />
 
     </LinearLayout>
 </android.widget.LinearLayout>

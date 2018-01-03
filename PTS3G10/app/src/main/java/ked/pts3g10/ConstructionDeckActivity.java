@@ -21,9 +21,17 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,10 +45,9 @@ import ked.pts3g10.Util.XMLParser;
 public class ConstructionDeckActivity extends AppCompatActivity {
 
     private ConstructionDeckActivity context;
-    private ImageButton terminer;
     private ImageView cardView;
-    private Button addToDeck, removeFromDeck, leftArrow, rightArrow;
-    private TextView cardName;
+    private Button saveDeck, addToDeck, removeFromDeck, leftArrow, rightArrow;
+    private TextView cardName, deckCardCount;
     private LinearLayout cardInfoLinear;
     private List<Card> card_list = new ArrayList<>();
     private List<Card> deck_card = new ArrayList<>();
@@ -53,11 +60,12 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         //Liason éléments interface avec variables
         leftArrow = (Button) findViewById(R.id.leftArrow);
         rightArrow = (Button) findViewById(R.id.rightArrow);
-        terminer = (ImageButton) findViewById(R.id.terminer);
+        saveDeck = (Button) findViewById(R.id.saveDeck);
         cardView = (ImageView) findViewById(R.id.cardView);
         addToDeck = (Button) findViewById(R.id.addToDeck);
         removeFromDeck = (Button) findViewById(R.id.removeFromDeck);
         cardName = (TextView) findViewById(R.id.cardName);
+        deckCardCount = (TextView) findViewById(R.id.deckCardCount);
         cardInfoLinear = (LinearLayout) findViewById(R.id.cardInfoLinear);
         leftArrow.setEnabled(false);
         removeFromDeck.setEnabled(false);
@@ -90,12 +98,45 @@ public class ConstructionDeckActivity extends AppCompatActivity {
                 removeFromDeckCall();
             }
         });
+        saveDeck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveDeck();
+            }
+        });
         loadCard();
         showCardForIndex();
     }
 
+    private void saveDeck() {
+        if(deck_card.size() == 10 || deck_card.size() == card_list.size()*2) {
+            try {
+                URL url = new URL ("http://shyndard.eu/iut/pts3/save-deck.php");
+                URLConnection urlConn = url.openConnection();
+                urlConn.setDoInput(true);
+                urlConn.setDoOutput(true);
+                urlConn.setUseCaches(false);
+                urlConn.setRequestProperty("Content-Type","application/json");
+                urlConn.setRequestProperty("Host", "android.schoolportal.gr");
+                urlConn.connect();
+
+                DataOutputStream printout = new DataOutputStream(urlConn.getOutputStream ());
+                printout.writeBytes(URLEncoder.encode(new JSONArray(deck_card).toString(),"UTF-8"));
+                printout.flush ();
+                printout.close ();
+                Toast.makeText(context, "Deck enregistré", Toast.LENGTH_SHORT).show();
+            } catch(Exception ex) {
+                Toast.makeText(context, "Un problème est survenu. Veuillez réessayer", Toast.LENGTH_LONG).show();
+                ex.printStackTrace();
+            }
+        } else {
+            Toast.makeText(context, "Vous devez sélectionner 10 cartes", Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void updateAddCardButton(int count) {
         addToDeck.setText("AJOUTER (" + count + "/2)");
+        deckCardCount.setText(" " + deck_card.size());
     }
 
     private void addToDeckCall() {
@@ -143,9 +184,13 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     private void showCardForIndex() {
         Card c = card_list.get(index);
 
-        LinearLayout layout = new LinearLayout(this);
-        layout.setOrientation(LinearLayout.HORIZONTAL);
-        layout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
+        LinearLayout layoutLine1 = new LinearLayout(this);
+        layoutLine1.setOrientation(LinearLayout.HORIZONTAL);
+        layoutLine1.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
+
+        LinearLayout layoutLine2 = new LinearLayout(this);
+        layoutLine2.setOrientation(LinearLayout.HORIZONTAL);
+        layoutLine2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1f));
 
         LinearLayout range = new LinearLayout(this);
         range.setOrientation(LinearLayout.VERTICAL);
@@ -168,7 +213,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         cristal.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.2f));
 
         LinearLayout ability = new LinearLayout(this);
-        ability.setOrientation(LinearLayout.HORIZONTAL);
+        ability.setOrientation(LinearLayout.VERTICAL);
         ability.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT, 0.6f));
 
         TextView rangeValue = new TextView(this);
@@ -223,9 +268,9 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         ability.addView(abilityName);
         ability.addView(abilityDescription);
 
-        layout.addView(range);
-        layout.addView(attack);
-        layout.addView(cristal);
+        layoutLine1.addView(range);
+        layoutLine1.addView(attack);
+        layoutLine1.addView(cristal);
 
         rangeValue.setText(c.getRangePoints() + "");
         attackValue.setText(c.getAttactPoints() + "");
@@ -235,23 +280,27 @@ public class ConstructionDeckActivity extends AppCompatActivity {
             BoardCard bc = (BoardCard)c;
             moveValue.setText(bc.getMovementPoints() + "");
             healthValue.setText(bc.getHealthPoints() + "");
-            layout.addView(move);
-            layout.addView(health);
+            layoutLine2.addView(move);
+            layoutLine2.addView(health);
         } else {
             if(c instanceof Spell) {
                 Spell s = (Spell) c;
                 abilityName.setText(s.getAbility().getName());
-                abilityDescription.setText(s.getAbility().getName());
+                abilityDescription.setText(s.getAbility().getDescription());
             } else if(c instanceof Hero) {
                 Hero h = (Hero) c;
                 abilityName.setText(h.getAbility().getName());
-                abilityDescription.setText(h.getAbility().getName());
+                abilityDescription.setText(h.getAbility().getDescription());
             }
-            layout.addView(ability);
+            layoutLine2.addView(ability);
         }
 
-        if(cardInfoLinear.getChildCount() == 4) cardInfoLinear.removeViewAt(2);
-        cardInfoLinear.addView(layout, 2);
+        if(cardInfoLinear.getChildCount() == 5) {
+            cardInfoLinear.removeViewAt(2);
+            cardInfoLinear.removeViewAt(2);
+        }
+        cardInfoLinear.addView(layoutLine1, 2);
+        cardInfoLinear.addView(layoutLine2, 3);
 
         cardView.setBackgroundResource(c.getBackground());
         cardName.setText(c.getName());
