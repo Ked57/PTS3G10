@@ -16,7 +16,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".InscriptionActivity"
             android:screenOrientation="portrait"></activity>
-        <activity android:name=".GameActivity" />
+        <activity android:name=".GameActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden"/>
         <activity
             android:name=".DeckActivity"
             android:theme="@style/DeckActivity" />
