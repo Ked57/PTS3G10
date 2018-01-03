@@ -90,6 +90,9 @@ public class GameActivity extends AppCompatActivity {
             t.show();
             quit = true;
         }else{
+            normalFinish = true;
+            messageToSend = "L'adversaire a quitté la partie";
+            message = "Vous avez quitté la partie";
             quit = false;
             finish();
         }

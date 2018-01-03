@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/noborder"
     android:orientation="vertical"
     tools:context="ked.pts3g10.DeckActivity">
 
@@ -28,6 +29,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
                 android:text="6"
+                android:textColor="@color/colorPrimary"
                 android:textSize="30sp" />
 
             <ImageView
@@ -47,6 +49,7 @@
             android:padding="10dp"
             android:text="Archers"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="30sp" />
 
         <TextView
@@ -58,7 +61,8 @@
             android:background="@drawable/border"
             android:padding="10dp"
             android:text="Une armée d'archers"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -84,6 +88,7 @@
                     android:paddingLeft="15dp"
                     android:text="2"
                     android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="30sp" />
 
                 <ImageView
@@ -111,6 +116,7 @@
                     android:paddingLeft="15dp"
                     android:text="2"
                     android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="30sp" />
 
                 <ImageView
@@ -148,6 +154,7 @@
                     android:paddingLeft="15dp"
                     android:text="1"
                     android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="30sp" />
 
                 <ImageView
@@ -173,6 +180,7 @@
                     android:paddingLeft="15dp"
                     android:text="2"
                     android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="30sp" />
 
                 <ImageView
@@ -191,6 +199,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="@string/deck_choice" />
+        android:background="@drawable/border"
+        android:text="@string/deck_choice"
+        android:textColor="@color/colorPrimary" />
 
 </android.widget.LinearLayout>

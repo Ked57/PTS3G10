@@ -1,10 +1,8 @@
 package ked.pts3g10;
 
 import android.content.Intent;
-import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -28,6 +26,8 @@ public class DeckActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck);
+
+        //this.getWindow().getDecorView().setBackgroundResource(R.color.colorAccent);
 
         dtemgr = new DeckTouchEventMgr(this);
         Intent i = getIntent();
