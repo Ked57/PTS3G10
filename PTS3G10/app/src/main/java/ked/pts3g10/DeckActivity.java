@@ -3,6 +3,7 @@ package ked.pts3g10;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +22,7 @@ public class DeckActivity extends AppCompatActivity {
     private int currIndex;
     private ImageView deckBackgroundImage;
     private static Button deckChoiceButton;
+    private boolean flipAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +52,25 @@ public class DeckActivity extends AppCompatActivity {
             setChoiceButtonText(getResources().getString(R.string.deck_choice));
         else setChoiceButtonText(getResources().getString(R.string.deck_choice_wrong));
 
-        currIndex = 0;
-        displayCardForIndex(currIndex);
+
+        currIndex = i.getIntExtra("currIndex",-1);
+        Log.i("currIndex","currIndex = "+currIndex);
+        if(currIndex != -1) {
+            overridePendingTransition(R.anim.flip_leftout, R.anim.flip_leftin);
+            displayCardForIndex(currIndex);
+            overridePendingTransition(R.anim.flipt_rightin, R.anim.flip_rightout);
+            finish();
+        }else{
+            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+            currIndex = 0;
+            displayCardForIndex(currIndex);
+        }
+
     }
 
     @Override
     protected void onDestroy() {
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         super.onDestroy();
     }
 
