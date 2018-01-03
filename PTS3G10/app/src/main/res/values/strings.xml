@@ -73,6 +73,10 @@
         Vous n\'avez pas sélectionné un nombre de cartes suffisant pour créer un deck.
         Souhaitez vous remplir le deck de manière aléatoire?
     </string>
+    <string name="supprimer">SUPPRIMER</string>
+    <string name="ajouter">AJOUTER</string>
+    <string name="suivant">Suivant</string>
+    <string name="precedent">Précédent</string>
 
 
 </resources>
