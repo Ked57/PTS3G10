@@ -22,15 +22,13 @@ public class HealAndDamageAbility extends Ability {
                 if(!c.isCardThumbnailEmpty()){
                     Log.i("SpellAttack","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
                     if(adversary){
-                        c.playHealAnimation();
-                    }else {
-                        board.getPlayer().getPlayerAction().attack(c);
-                    }
-                }else{
-                    Log.i("SpellHeal","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
-                    if(adversary){c.playHealAnimation();
-                    }else {
-                        board.getPlayer().getPlayerAction().heal(c);
+                        if(c.getCard().isAdversary())
+                            c.playHealAnimation();
+                        else c.playFireAnimation();
+                    }else{
+                        if(!c.getCard().isAdversary())
+                            board.getPlayer().getPlayerAction().heal(c);
+                        else board.getPlayer().getPlayerAction().attack(c);
                     }
                 }
             }

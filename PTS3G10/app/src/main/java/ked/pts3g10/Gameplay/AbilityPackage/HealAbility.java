@@ -17,10 +17,9 @@ public class HealAbility extends Ability {
             if(c.getXDistanceWith(base) <= radius && c.getYDistanceWith(base) <= radius){
                 if(!c.isCardThumbnailEmpty()){
                     Log.i("SpellHeal","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
-                    board.getPlayer().getPlayerAction().heal(c);
-                    if(adversary){
+                    if(adversary && c.getCard().isAdversary()){
                         c.playHealAnimation();
-                    }else {
+                    }else if(!adversary && !c.getCard().isAdversary()){
                         board.getPlayer().getPlayerAction().heal(c);
                     }
                 }

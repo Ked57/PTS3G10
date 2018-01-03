@@ -18,9 +18,9 @@ public class DamageAbility extends Ability {
         for(Case c : board.getCases()){
             if(c.getXDistanceWith(base) <= radius && c.getYDistanceWith(base) <= radius){
                 if(!c.isCardThumbnailEmpty()){
-                    if(adversary){
+                    if(adversary && !c.getCard().isAdversary()){
                         c.playFireAnimation();
-                    }else {
+                    }else if(!adversary && c.getCard().isAdversary()){
                         board.getPlayer().getPlayerAction().attack(c);
                     }
                     Log.i("SpellAttack","Case: ("+c.getPos().getPosX()+","+c.getPos().getPosY()+") -> Xdistance with base is "+c.getXDistanceWith(base)+"; y distance with base is "+c.getYDistanceWith(base)+"; radius is "+radius);
