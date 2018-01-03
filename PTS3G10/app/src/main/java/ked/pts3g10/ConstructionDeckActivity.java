@@ -21,14 +21,19 @@ import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -111,20 +116,25 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     private void saveDeck() {
         if(deck_card.size() == 10 || deck_card.size() == card_list.size()*2) {
             try {
-                URL url = new URL ("http://shyndard.eu/iut/pts3/save-deck.php");
-                URLConnection urlConn = url.openConnection();
-                urlConn.setDoInput(true);
-                urlConn.setDoOutput(true);
-                urlConn.setUseCaches(false);
-                urlConn.setRequestProperty("Content-Type","application/json");
-                urlConn.setRequestProperty("Host", "android.schoolportal.gr");
-                urlConn.connect();
+                String json = new Gson().toJson(card_list);
+                String url = "http://shyndard.eu/iut/s3/save-deck.php?"+json;
+                Log.i("URL", url);
 
-                DataOutputStream printout = new DataOutputStream(urlConn.getOutputStream ());
-                printout.writeBytes(URLEncoder.encode(new JSONArray(deck_card).toString(),"UTF-8"));
-                printout.flush ();
-                printout.close ();
-                Toast.makeText(context, "Deck enregistré", Toast.LENGTH_SHORT).show();
+                URL obj = new URL(url);
+                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", "Mozilla/5.0");
+                int responseCode = con.getResponseCode();
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(con.getInputStream()));
+                String inputLine;
+                StringBuffer response = new StringBuffer();
+
+                while ((inputLine = in.readLine()) != null) {
+                    response.append(inputLine);
+                }
+                in.close();
+                Log.i("REPONSE", response.toString());
             } catch(Exception ex) {
                 Toast.makeText(context, "Un problème est survenu. Veuillez réessayer", Toast.LENGTH_LONG).show();
                 ex.printStackTrace();

@@ -8,8 +8,8 @@ public abstract class BoardCard extends Card {
     protected int healthPoints;
     protected int movementPoints;
 
-    public BoardCard(String name,String description,int crystalCost, int ap, int rp, int hp, int mp, int bg, int thmbn, boolean adversary){
-        super(name,description,crystalCost,ap,rp,bg,thmbn, adversary);
+    public BoardCard(int id, String name,String description,int crystalCost, int ap, int rp, int hp, int mp, int bg, int thmbn, boolean adversary){
+        super(id, name,description,crystalCost,ap,rp,bg,thmbn, adversary);
         healthPoints = hp;
         movementPoints = mp;
     }

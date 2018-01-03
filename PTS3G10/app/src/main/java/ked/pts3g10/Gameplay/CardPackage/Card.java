@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import ked.pts3g10.R;
 
 public abstract class Card {
+    protected int id;
     protected String name;
     protected String description;
     protected int attactPoints;
@@ -17,7 +18,8 @@ public abstract class Card {
     protected boolean hasMovedThisRound;
     protected boolean adversary;
 
-    public Card(String name,String description,int crystalCost, int ap, int rp, int bg, int thmbn, boolean adversary){
+    public Card(int id, String name,String description,int crystalCost, int ap, int rp, int bg, int thmbn, boolean adversary){
+        this.id = id;
         this.name = name;
         this.description = description;
         this.crystalCost = crystalCost;
@@ -39,6 +41,10 @@ public abstract class Card {
            }
         }*/
 
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getName() {

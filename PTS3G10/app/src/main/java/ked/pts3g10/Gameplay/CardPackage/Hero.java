@@ -9,8 +9,8 @@ public class Hero extends BoardCard {
 
     private Ability ability;
 
-    public Hero(String name,String description,int crystalCost, int ap, int rp, int hp, int mp, int bg, int thmbn, Ability ability, boolean adversary){
-        super(name,description,crystalCost,ap,rp,hp,mp,bg,thmbn, adversary);
+    public Hero(int id, String name,String description,int crystalCost, int ap, int rp, int hp, int mp, int bg, int thmbn, Ability ability, boolean adversary){
+        super(id, name,description,crystalCost,ap,rp,hp,mp,bg,thmbn, adversary);
         this.ability = ability;
     }
 
@@ -24,6 +24,6 @@ public class Hero extends BoardCard {
     }
 
     public Hero clone(boolean adversary){
-        return new Hero(name,description,crystalCost,attactPoints,rangePoints, healthPoints, movementPoints, background, thumbnail,ability, adversary);
+        return new Hero(id, name,description,crystalCost,attactPoints,rangePoints, healthPoints, movementPoints, background, thumbnail,ability, adversary);
     }
 }

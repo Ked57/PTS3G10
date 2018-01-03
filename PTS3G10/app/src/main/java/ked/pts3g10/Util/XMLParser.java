@@ -40,11 +40,12 @@ public class XMLParser {
 
         // Attributs de la classe Entry - String name,String description,int crystalCost, int ap, int rp, int hp, int mp, ImageView bg, ImageView thmbn, boolean adversary
         public final String name,description,adversary,type;
-        public final int crystalCost,ap,rp,hp,mp,abilityId,bg,thmbn;
+        public final int id,crystalCost,ap,rp,hp,mp,abilityId,bg,thmbn;
 
 
 
-        private Entry(String name,String description, String type,int crystalCost, int ap, int rp, int hp, int mp,int abilityId, int bg, int thmbn, String adversary) {
+        private Entry(int id, String name,String description, String type,int crystalCost, int ap, int rp, int hp, int mp,int abilityId, int bg, int thmbn, String adversary) {
+            this.id = id;
             this.name = name;
             this.description = description;
             this.adversary = adversary;
@@ -80,7 +81,7 @@ public class XMLParser {
                         boolean adversary = e.adversary.equals("true");
                         int bg = ImagesEnum.getDrawableIdWithImageId(e.bg);
                         int thmbn = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
-                        cards.add(new Army(e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,bg,thmbn,adversary));
+                        cards.add(new Army(e.id, e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,bg,thmbn,adversary));
                         break;
                     case "spell":
                         boolean adversary2 = e.adversary.equals("true");
@@ -91,7 +92,7 @@ public class XMLParser {
                             Log.e("Parser","Ability is null");
                             break;
                         }
-                        cards.add(new Spell(e.name,e.description,e.crystalCost,e.ap,e.rp,bg2,thmbn2,ability,adversary2));
+                        cards.add(new Spell(e.id, e.name,e.description,e.crystalCost,e.ap,e.rp,bg2,thmbn2,ability,adversary2));
                         break;
                     //TODO: Hero cards
                 }
@@ -154,6 +155,7 @@ public class XMLParser {
     private Entry readEntry(XmlPullParser parser) throws XmlPullParserException, IOException {
         // le XML doit commencer par "<entry>"
         parser.require(XmlPullParser.START_TAG, null, "entry");
+        int id = 0;
         String name = "";
         String description = "";
         String adversary = "";
@@ -176,6 +178,9 @@ public class XMLParser {
             String n = parser.getName();
 
             switch (n) {
+                case "id":
+                    id = Integer.parseInt(readTag(parser, "id"));
+                    break;
                 case "name":
                     name = readTag(parser, "name");
                     break;
@@ -220,7 +225,7 @@ public class XMLParser {
             }
         }
         // retourner une nouvelle Entry avec le nom et message extrait du XML
-        return new Entry(name, description, type, crystalCost,ap,rp,hp,mp,abilityId,bg,thmbn,adversary);
+        return new Entry(id, name, description, type, crystalCost,ap,rp,hp,mp,abilityId,bg,thmbn,adversary);
     }
 
 
