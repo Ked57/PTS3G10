@@ -40,7 +40,7 @@ public class BackgroundAsyncXMLDownload extends AsyncTask {
         String returnedResult = "";
         Log.i("Parser","in do in background");
         try {
-            url = new URL("http://vps238052.ovh.net/cards.xml");
+            url = new URL("http://shyndard.eu/iut/s3/cards.xml");
             Log.i("Parser","url is :"+url.getPath());
         } catch (MalformedURLException e) {
             Log.e("Parser", Log.getStackTraceString(e));

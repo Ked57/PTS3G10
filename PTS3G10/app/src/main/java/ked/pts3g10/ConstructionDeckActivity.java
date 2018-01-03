@@ -45,6 +45,7 @@ import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Gameplay.Player;
+import ked.pts3g10.Util.DeckManager;
 import ked.pts3g10.Util.XMLParser;
 
 public class ConstructionDeckActivity extends AppCompatActivity {
@@ -74,7 +75,6 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         cardInfoLinear = (LinearLayout) findViewById(R.id.cardInfoLinear);
         leftArrow.setEnabled(false);
         removeFromDeck.setEnabled(false);
-        updateAddCardButton(0);
 
         context = this;
 
@@ -109,35 +109,21 @@ public class ConstructionDeckActivity extends AppCompatActivity {
                 saveDeck();
             }
         });
+
+        deck_card = DeckManager.getPlayerDeck(ConnectionActivity.token);
         loadCard();
         showCardForIndex();
+        addToDeckCall();
     }
 
     private void saveDeck() {
         if(deck_card.size() == 10 || deck_card.size() == card_list.size()*2) {
-            try {
-                String json = new Gson().toJson(card_list);
-                String url = "http://shyndard.eu/iut/s3/save-deck.php?"+json;
-                Log.i("URL", url);
-
-                URL obj = new URL(url);
-                HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-                con.setRequestMethod("GET");
-                con.setRequestProperty("User-Agent", "Mozilla/5.0");
-                int responseCode = con.getResponseCode();
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(con.getInputStream()));
-                String inputLine;
-                StringBuffer response = new StringBuffer();
-
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-                Log.i("REPONSE", response.toString());
-            } catch(Exception ex) {
+            List<Integer> deck_card_id_list = new ArrayList<>();
+            for(Card c : deck_card) deck_card_id_list.add(c.getId());
+            if(DeckManager.save(deck_card_id_list, ConnectionActivity.token)) {
+                Toast.makeText(context, "Deck enregistré", Toast.LENGTH_SHORT).show();
+            } else {
                 Toast.makeText(context, "Un problème est survenu. Veuillez réessayer", Toast.LENGTH_LONG).show();
-                ex.printStackTrace();
             }
         } else {
             Toast.makeText(context, "Vous devez sélectionner 10 cartes", Toast.LENGTH_SHORT).show();
@@ -157,7 +143,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
             count++;
         }
         if(count > 0) {
-            if(count == 2) addToDeck.setEnabled(false);
+            if(count >= 2) addToDeck.setEnabled(false);
             removeFromDeck.setEnabled(true);
         }
         updateAddCardButton(count);
