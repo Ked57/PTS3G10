@@ -22,14 +22,11 @@ public class DeckActivity extends AppCompatActivity {
     private int currIndex;
     private ImageView deckBackgroundImage;
     private static Button deckChoiceButton;
-    private boolean flipAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_deck);
-
-        //this.getWindow().getDecorView().setBackgroundResource(R.color.colorAccent);
 
         dtemgr = new DeckTouchEventMgr(this);
         Intent i = getIntent();
@@ -52,20 +49,9 @@ public class DeckActivity extends AppCompatActivity {
             setChoiceButtonText(getResources().getString(R.string.deck_choice));
         else setChoiceButtonText(getResources().getString(R.string.deck_choice_wrong));
 
-
-        currIndex = i.getIntExtra("currIndex",-1);
-        Log.i("currIndex","currIndex = "+currIndex);
-        if(currIndex != -1) {
-            overridePendingTransition(R.anim.flip_leftout, R.anim.flip_leftin);
-            displayCardForIndex(currIndex);
-            overridePendingTransition(R.anim.flipt_rightin, R.anim.flip_rightout);
-            finish();
-        }else{
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-            currIndex = 0;
-            displayCardForIndex(currIndex);
-        }
-
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        currIndex = 0;
+        displayCardForIndex(currIndex);
     }
 
     @Override

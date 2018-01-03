@@ -133,12 +133,6 @@ public class GameActivity extends AppCompatActivity {
         finish = true;
     }
 
-    public void displayCard(int index){
-        Intent i = new Intent(GameActivity.this, DeckActivity.class);
-        i.putExtra("currIndex",index);
-        startActivity(i);
-    }
-
     public boolean isNormalFinish() {
         return normalFinish;
     }

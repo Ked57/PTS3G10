@@ -107,7 +107,6 @@ public class PlayerAction {
     }
 
     public void placeBoardCard(GameActivity context, BoardCard card, Case new_case) {
-        context.displayCard(player.getDeck().getCardList().indexOf(card));
         new_case.setCard(context, card);
         player.setCrystals(player.getCrystals()-card.getCrystalCost());
         player.getDeck().getCardList().remove(card);
