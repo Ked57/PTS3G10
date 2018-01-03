@@ -30,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
     private GameTouchEventMgr temgr;
     private static boolean normalFinish, finish;
     private static String message, messageToSend;
+    private boolean quit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,19 @@ public class GameActivity extends AppCompatActivity {
         LaunchActivity.displayEndGameMessage(message);
         board = null;
         super.onDestroy();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        if(!quit){
+            Toast t = Toast.makeText(this,R.string.toastQuitLaunch,Toast.LENGTH_SHORT);
+            t.show();
+            quit = true;
+        }else{
+            quit = false;
+            finish();
+        }
     }
 
     @Override
