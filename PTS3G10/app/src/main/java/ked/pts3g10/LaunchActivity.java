@@ -184,6 +184,18 @@ public class LaunchActivity extends AppCompatActivity {
             Toast t = Toast.makeText(this,R.string.toastQuitLaunch,Toast.LENGTH_SHORT);
             t.show();
             quit = true;
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            quit = false;
+                        }
+                    });
+                }
+            },4000);
         }else{
             t2.cancel();
             t2.purge();
