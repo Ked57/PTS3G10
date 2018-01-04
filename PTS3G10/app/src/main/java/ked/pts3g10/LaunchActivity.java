@@ -253,6 +253,10 @@ public class LaunchActivity extends AppCompatActivity {
         starting = strting.equals("true");
     }
 
+    public static void initDeck(){
+        playerDeck = DeckManager.getPlayerDeck(ConnectionActivity.token,false);
+    }
+
     public int getDistantVersion(){
         int version = 0;
         try {

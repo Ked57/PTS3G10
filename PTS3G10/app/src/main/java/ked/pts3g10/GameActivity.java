@@ -85,6 +85,7 @@ public class GameActivity extends AppCompatActivity {
             message = "Une erreur inconnue est arrivée";
             messageToSend = "Une erreur inconnue est arrivée";
         }
+        LaunchActivity.initDeck();
         new PacketEndGame().call(messageToSend);
         LaunchActivity.displayEndGameMessage(message);
         board = null;
