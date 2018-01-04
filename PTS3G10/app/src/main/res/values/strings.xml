@@ -20,6 +20,8 @@
     <string name="game_case_menu_move">Mouvement</string>
     <string name="game_case_menu_spell">Utiliser le sort</string>
     <string name="logout_button">Se déconnecter</string>
+    <string name="game_context_menu_info">Voir la carte</string>
+    <string name="game_context_menu_spell">Utiliser le sort</string>
 
     <!--Menu de connection et inscription-->
     <string name="email">Email :</string>

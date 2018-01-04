@@ -246,7 +246,7 @@ public class PlayerAction {
         }
     }
 
-    public void chooseSpellAimPoint(Spell card){
+    public void chooseSpellAimPoint(Card card){
         Board board = GameActivity.getBoard();
         actionState = 1;
         caseCard = card;

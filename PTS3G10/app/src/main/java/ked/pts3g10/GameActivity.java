@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,13 +17,14 @@ import java.util.TimerTask;
 
 import ked.pts3g10.Events.GameTouchEventMgr;
 import ked.pts3g10.Gameplay.Board;
+import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Gameplay.CardPackage.Hero;
+import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.Gameplay.Player;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.packet.PacketEndGame;
-import ked.pts3g10.Network.packet.PacketEndRound;
-import ked.pts3g10.Network.packet.PacketSendImStillHere;
 import ked.pts3g10.Util.DeckManager;
 
 public class GameActivity extends AppCompatActivity {
@@ -34,6 +34,7 @@ public class GameActivity extends AppCompatActivity {
     private static boolean normalFinish, finish;
     private static String message, messageToSend;
     private boolean quit;
+    private Case clickedCase;
 
     public static Deck adversaryDeck = new Deck(new ArrayList<Card>());
 
@@ -50,6 +51,8 @@ public class GameActivity extends AppCompatActivity {
 
         normalFinish = false;
         finish = false;
+
+        clickedCase = null;
 
         board = new Board(this, new Player(this,ConnectionActivity.stringPseudo,false,LaunchActivity.playerDeck), new Player(this,adversaryName,true, adversaryDeck),starting);
         temgr = new GameTouchEventMgr(this);
@@ -120,9 +123,38 @@ public class GameActivity extends AppCompatActivity {
     public void onCreateContextMenu(ContextMenu menu, View v,
                                     ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
-        if(((Case)v).isHero()) {
-            MenuInflater inflater = getMenuInflater();
-            inflater.inflate(R.menu.case_menu, menu);
+        Case c = (Case)v;
+        if(!c.isCardThumbnailEmpty()) {
+            if(c.getCard() instanceof Hero){
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.case_menu_hero, menu);
+                clickedCase = c;
+            }else if(c.getCard() instanceof BoardCard) {
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.case_menu_boardcard, menu);
+                clickedCase = c;
+            }
+        }
+    }
+
+    public void onInfoClick(MenuItem item){
+        if(clickedCase != null){
+            if(!clickedCase.isCardThumbnailEmpty()){
+                getBoard().getPlayer().getPlayerAction().resetActionState();
+                Intent intent = new Intent(this, DeckActivity.class);
+                intent.putExtra("info",true);
+                intent.putExtra("idCard",clickedCase.getCard().getId());
+                startActivity(intent);
+            }
+        }
+    }
+
+    public void onUseSpellClick(MenuItem item) {
+        if (clickedCase != null) {
+            if (!clickedCase.isCardThumbnailEmpty() && clickedCase.getCard() instanceof Hero) {
+                board.clearBoardActions();
+                board.getPlayer().getPlayerAction().chooseSpellAimPoint(clickedCase.getCard());
+            }
         }
     }
 

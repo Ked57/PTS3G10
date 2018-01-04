@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ public class DeckActivity extends AppCompatActivity {
     private int currIndex;
     private ImageView deckBackgroundImage;
     private static Button deckChoiceButton;
+    private Intent i;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,11 +31,12 @@ public class DeckActivity extends AppCompatActivity {
         setContentView(R.layout.activity_deck);
 
         dtemgr = new DeckTouchEventMgr(this);
-        Intent i = getIntent();
-        int deckId = i.getIntExtra("deckId", 0);
-        int pId = i.getIntExtra("pId", 0);
-        String dName = i.getStringExtra("dName");
+        i = getIntent();
         deck = GameActivity.getBoard().getPlayer().getDeck();//Java .................
+
+        if(GameActivity.getBoard().isPlayersTurn())
+            setChoiceButtonText(getResources().getString(R.string.deck_choice));
+        else setChoiceButtonText(getResources().getString(R.string.deck_choice_wrong));
 
         deckCrystalCost = (TextView) findViewById(R.id.deckCrystalCost);
         deckCardName = (TextView) findViewById(R.id.deckCardName);
@@ -43,15 +46,22 @@ public class DeckActivity extends AppCompatActivity {
         deckMovementPoints = (TextView) findViewById(R.id.deckMovementPoints);
         deckAttackPoints = (TextView) findViewById(R.id.deckAttackPoints);
         deckBackgroundImage = (ImageView) findViewById(R.id.deckBackgroundImage);
-
-        deckChoiceButton = (Button) findViewById(R.id.deckChoiceButton);
-        if(GameActivity.getBoard().isPlayersTurn())
-            setChoiceButtonText(getResources().getString(R.string.deck_choice));
-        else setChoiceButtonText(getResources().getString(R.string.deck_choice_wrong));
-
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         currIndex = 0;
-        displayCardForIndex(currIndex);
+
+        deckChoiceButton = (Button) findViewById(R.id.deckChoiceButton);
+        if(i.getBooleanExtra("info",false)){
+            deckChoiceButton.setText(R.string.end_button);
+            int id = i.getIntExtra("idCard",0);
+            displayCardForId(id);
+            deckChoiceButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    finish();
+                }
+            });
+        }else displayCardForIndex(currIndex);
     }
 
     @Override
@@ -62,6 +72,21 @@ public class DeckActivity extends AppCompatActivity {
 
     public void displayCardForIndex(int k) {
         Card card = deck.getCardList().get(k);
+        deckCrystalCost.setText("" + card.getCrystalCost());
+        deckCardName.setText("" + card.getName());
+        deckCardDescription.setText("" + card.getDescription());
+        if (card instanceof BoardCard) {
+            deckHealthPoints.setText(((BoardCard) card).getHealthPoints() + "");
+            deckMovementPoints.setText(((BoardCard) card).getMovementPoints() + "");
+        }
+        deckRangePoints.setText(card.getRangePoints() + "");
+        deckAttackPoints.setText(card.getAttactPoints() + "");
+        deckBackgroundImage.setBackgroundResource(0);
+        deckBackgroundImage.setBackgroundResource(card.getBackground());
+    }
+
+    public void displayCardForId(int k){
+        Card card = LaunchActivity.getCardById(k);
         deckCrystalCost.setText("" + card.getCrystalCost());
         deckCardName.setText("" + card.getName());
         deckCardDescription.setText("" + card.getDescription());

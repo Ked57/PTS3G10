@@ -240,6 +240,13 @@ public class LaunchActivity extends AppCompatActivity {
         adversaryName = "";
     }
 
+    public static Card getCardById(int id){
+        for(Card c : cards){
+            if(c.getId() == id)return c;
+        }
+        return null;
+    }
+
     public static void notifyStartGame(String advName, int token, String strting){
         adversaryName = advName;
         adversaryToken = token;
