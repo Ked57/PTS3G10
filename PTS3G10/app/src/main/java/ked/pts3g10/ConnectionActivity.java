@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.security.MessageDigest;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -145,9 +146,7 @@ public class ConnectionActivity extends AppCompatActivity {
                 }
                 else{
                     // envoyer les info vers la bdd
-                    new PacketAuth().call(stringPseudo,stringPassword);
-                    //Ouvre la popup
-
+                    new PacketAuth().call(stringPseudo, getMd5Pass(stringPassword));
                     //Check toutes les 500ms si réponse
                     t = new Timer();
                     t.scheduleAtFixedRate(new TimerTask() {
@@ -182,6 +181,17 @@ public class ConnectionActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private String getMd5Pass(String stringPassword) {
+        try {
+            byte[] bytesOfMessage = stringPassword.getBytes("UTF-8");
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            return md.digest(bytesOfMessage).toString();
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return null;
     }
 
     private void devConnect(String name, String pass) {
