@@ -21,7 +21,7 @@ import ked.pts3g10.Network.packet.PacketAuth;
 public class ConnectionActivity extends AppCompatActivity {
 
     private EditText pseudo,password;
-    private Button connection, inscription, dev;
+    private Button connection, inscription, dev, aCon, bCon, adminCon, shynCon;
     private String stringPassword;
     public static String stringPseudo;
     private ConnectionActivity context;
@@ -43,6 +43,45 @@ public class ConnectionActivity extends AppCompatActivity {
         password =(EditText)findViewById(R.id.password);
         connection = (Button) findViewById(R.id.buttonconnection);
         inscription = (Button) findViewById(R.id.buttoninscription);
+
+        //dev
+        aCon = (Button) findViewById(R.id.aCon);
+        bCon = (Button) findViewById(R.id.bCon);
+        adminCon = (Button) findViewById(R.id.adminCon);
+        shynCon = (Button) findViewById(R.id.shynCon);
+
+        aCon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        devConnect("a", "a");
+                    }
+                }
+        );
+        bCon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        devConnect("b", "b");
+                    }
+                }
+        );
+        adminCon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        devConnect("admin", "admin");
+                    }
+                }
+        );
+        shynCon.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        devConnect("shyndard", "mot2passe");
+                    }
+                }
+        );
         context=this;
 
         token = 0;
@@ -143,6 +182,28 @@ public class ConnectionActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void devConnect(String name, String pass) {
+        new PacketAuth().call(name, pass);
+        t = new Timer();
+        t.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                context.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if(connected && token > 0){
+                            toLauncher();
+                        }else if(token == -1){
+                            connectionFailed();
+                        }
+                    }
+
+                });
+            }
+
+        }, 0, 500);
     }
 
 
