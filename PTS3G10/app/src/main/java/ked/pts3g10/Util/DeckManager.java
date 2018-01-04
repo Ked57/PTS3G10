@@ -20,10 +20,11 @@ import java.util.List;
 
 import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.LaunchActivity;
 
 /**
- * Created by Mael on 03/01/2018.
+ * Récupère le deck du joueur sur le serveur
  */
 
 public class DeckManager {
@@ -51,8 +52,8 @@ public class DeckManager {
         return false;
     }
 
-    public static List<Card> getPlayerDeck(int user_token) {
-        List<Card> user_deck = new ArrayList<>();
+    public static Deck getPlayerDeck(int user_token, boolean adversary) {
+        ArrayList<Card> user_deck = new ArrayList<>();
         try {
             String url = "http://shyndard.eu/iut/s3/load-deck.php?token="+user_token;
             URL obj = new URL(url);
@@ -69,16 +70,20 @@ public class DeckManager {
             }
             in.close();
 
+            int offset = 0;
+            if(adversary) offset = 1000;
+
             Log.i("DATA", response.toString());
             for(String id : response.toString().split(",")) {
-                Card c = getCardById(Integer.parseInt(id));
+                Card c = getCardById(Integer.parseInt(id)+offset);
                 if(c != null) user_deck.add(c);
             }
         } catch(Exception ex) {
             ex.printStackTrace();
         }
         if(user_deck.size() < 10) user_deck.clear();
-        return user_deck;
+
+        return new Deck(user_deck);
     }
 
     private static Card getCardById(int id) {

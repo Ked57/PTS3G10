@@ -12,8 +12,9 @@ public class PacketPrepareGame implements ActionInterface {
 	public void onCall(String message, String[] args, PacketType action, DatagramPacket packet) {
 		//Event quand serveur a trouv� un partenaire
 		//args[1] : string pseudo adversaire
-        //args[2] : boolean commence ou pas
+		//args[2] : token adversaire
+        //args[3] : boolean commence ou pas
 
-		LaunchActivity.notifyStartGame(args[1],args[2]);
+		LaunchActivity.notifyStartGame(args[1],Integer.parseInt(args[2]),args[3]);
 	}
 }

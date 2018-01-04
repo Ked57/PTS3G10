@@ -1,42 +1,14 @@
 package ked.pts3g10;
 
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.opengl.Visibility;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.gson.Gson;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,9 +16,8 @@ import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
-import ked.pts3g10.Gameplay.Player;
+import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.Util.DeckManager;
-import ked.pts3g10.Util.XMLParser;
 
 public class ConstructionDeckActivity extends AppCompatActivity {
 
@@ -56,7 +27,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     private TextView cardName, deckCardCount;
     private LinearLayout cardInfoLinear;
     private List<Card> card_list = new ArrayList<>();
-    private List<Card> deck_card = new ArrayList<>();
+    private Deck deck_card;
     private int index = 0;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,16 +81,16 @@ public class ConstructionDeckActivity extends AppCompatActivity {
             }
         });
 
-        deck_card = DeckManager.getPlayerDeck(ConnectionActivity.token);
+        deck_card = LaunchActivity.playerDeck;
         loadCard();
         showCardForIndex();
         if(countCard(card_list.get(index)) >= 2) addToDeck.setEnabled(false);
     }
 
     private void saveDeck() {
-        if(deck_card.size() == 10 || deck_card.size() == card_list.size()*2) {
+        if(deck_card.getCardList().size() == 10 || deck_card.getCardList().size() == card_list.size()*2) {
             List<Integer> deck_card_id_list = new ArrayList<>();
-            for(Card c : deck_card) deck_card_id_list.add(c.getId());
+            for(Card c : deck_card.getCardList()) deck_card_id_list.add(c.getId());
             if(DeckManager.save(deck_card_id_list, ConnectionActivity.token)) {
                 Toast.makeText(context, "Deck enregistré", Toast.LENGTH_SHORT).show();
             } else {
@@ -128,18 +99,19 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         } else {
             Toast.makeText(context, "Vous devez sélectionner 10 cartes", Toast.LENGTH_SHORT).show();
         }
+        LaunchActivity.playerDeck = deck_card;
     }
 
     private void updateAddCardButton(int count) {
         addToDeck.setText("AJOUTER (" + count + "/2)");
-        deckCardCount.setText(" " + deck_card.size());
+        deckCardCount.setText(" " + deck_card.getCardList().size());
     }
 
     private void addToDeckCall() {
         Card selectedCard = card_list.get(index);
         int count = countCard(selectedCard);
         if(count < 2) {
-            deck_card.add(selectedCard);
+            deck_card.addCard(selectedCard);
             count++;
         }
         if(count > 0) {
@@ -153,7 +125,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         Card selectedCard = card_list.get(index);
         int count = countCard(selectedCard);
         if(count > 0) {
-            deck_card.remove(selectedCard);
+            deck_card.removeCard(selectedCard);
             count--;
         }
         if(count < 2) {
@@ -165,7 +137,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
 
     private int countCard(Card selectedCard) {
         int v = 0;
-        for(Card c : deck_card) if(selectedCard == c) v++;
+        for(Card c : deck_card.getCardList()) if(selectedCard == c) v++;
         return v;
     }
 

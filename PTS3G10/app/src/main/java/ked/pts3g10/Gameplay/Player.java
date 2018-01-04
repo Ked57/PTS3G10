@@ -16,7 +16,7 @@ public class Player {
     private PlayerAction playerAction;
     private boolean adversary;
 
-    public Player(GameActivity context,String nick, boolean adversary){
+    public Player(GameActivity context,String nick, boolean adversary, Deck deck){
         nickName = nick;
         crystals = 1;
         healthPoints = 30; //A définir
@@ -40,16 +40,8 @@ public class Player {
             cards.add(LaunchActivity.cards.get(8).clone(adversary));
             cards.add(LaunchActivity.cards.get(10).clone(adversary));
         }
-        deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
+        this.deck = deck;
         playerAction = new PlayerAction(this);
-    }
-
-    public Player(GameActivity context,String nick,ArrayList<Card> cards){
-        nickName = nick;
-        crystals = 0;
-        healthPoints = 30; //A définir
-        this.context = context;
-        deck = new Deck(context,1,1,cards, "Un deck");//Valeurs exemple
     }
 
     public int getCrystals() {

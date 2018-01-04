@@ -12,17 +12,20 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import ked.pts3g10.Events.GameTouchEventMgr;
 import ked.pts3g10.Gameplay.Board;
+import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.Gameplay.Player;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.packet.PacketEndGame;
 import ked.pts3g10.Network.packet.PacketEndRound;
 import ked.pts3g10.Network.packet.PacketSendImStillHere;
+import ked.pts3g10.Util.DeckManager;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -32,20 +35,23 @@ public class GameActivity extends AppCompatActivity {
     private static String message, messageToSend;
     private boolean quit;
 
+    public static Deck adversaryDeck = new Deck(new ArrayList<Card>());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
         Intent intent = getIntent();
         String adversaryName = intent.getStringExtra("adversaryName");
-        String starting = intent.getStringExtra("starting");
-        boolean b;
-        if(starting.equals("true")) b = true;
-        else b = false;
+        boolean starting = intent.getBooleanExtra("starting",true);
+        int adversaryToken = intent.getIntExtra("adversaryToken",0);
+
+        adversaryDeck = DeckManager.getPlayerDeck(adversaryToken,true);
+
         normalFinish = false;
         finish = false;
 
-        board = new Board(this, new Player(this,ConnectionActivity.stringPseudo,false), new Player(this,adversaryName,true),b); //Valeurs d'exemple
+        board = new Board(this, new Player(this,ConnectionActivity.stringPseudo,false,LaunchActivity.playerDeck), new Player(this,adversaryName,true, adversaryDeck),starting);
         temgr = new GameTouchEventMgr(this);
 
         message = "";
@@ -89,6 +95,18 @@ public class GameActivity extends AppCompatActivity {
             Toast t = Toast.makeText(this,R.string.toastQuitLaunch,Toast.LENGTH_SHORT);
             t.show();
             quit = true;
+            Timer timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                              quit = false;
+                        }
+                    });
+                }
+            },4000);
         }else{
             normalFinish = true;
             messageToSend = "L'adversaire a quitté la partie";
