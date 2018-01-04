@@ -183,19 +183,33 @@ public class ConnectionActivity extends AppCompatActivity {
 
     }
 
-    public static String getMd5Pass(String stringPassword) {
+    public static String getMd5Pass(String pass) {
+        final String MD5 = "MD5";
         try {
-            byte[] bytesOfMessage = stringPassword.getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            return md.digest(bytesOfMessage).toString();
-        } catch(Exception ex) {
-            ex.printStackTrace();
+            // Create MD5 Hash
+            MessageDigest digest = java.security.MessageDigest
+                    .getInstance(MD5);
+            digest.update(pass.getBytes());
+            byte messageDigest[] = digest.digest();
+
+            // Create Hex String
+            StringBuilder hexString = new StringBuilder();
+            for (byte aMessageDigest : messageDigest) {
+                String h = Integer.toHexString(0xFF & aMessageDigest);
+                while (h.length() < 2)
+                    h = "0" + h;
+                hexString.append(h);
+            }
+            return hexString.toString();
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return null;
+        return "";
     }
 
     private void devConnect(String name, String pass) {
-        new PacketAuth().call(name, pass);
+        new PacketAuth().call(name, getMd5Pass(pass));
         t = new Timer();
         t.scheduleAtFixedRate(new TimerTask() {
             @Override
