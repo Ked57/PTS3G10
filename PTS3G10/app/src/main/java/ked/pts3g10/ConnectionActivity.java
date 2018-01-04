@@ -183,7 +183,7 @@ public class ConnectionActivity extends AppCompatActivity {
 
     }
 
-    private String getMd5Pass(String stringPassword) {
+    public static String getMd5Pass(String stringPassword) {
         try {
             byte[] bytesOfMessage = stringPassword.getBytes("UTF-8");
             MessageDigest md = MessageDigest.getInstance("MD5");

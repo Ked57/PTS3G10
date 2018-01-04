@@ -112,7 +112,7 @@ public class InscriptionActivity extends AppCompatActivity {
                     //verifie si le "password" correspond bien a "confirmed password"
                     if(stringPassword.equals(stringPasswordconf)){
                         //Envoie des informations a la base de donnée et verifie si elles existes
-                        new PacketSendRegister().call(stringPseudo,stringEmail,stringPassword);
+                        new PacketSendRegister().call(stringPseudo,stringEmail,ConnectionActivity.getMd5Pass(stringPassword));
                         //Check toutes les 500ms si réponse
                         t = new Timer();
                         t.scheduleAtFixedRate(new TimerTask() {
