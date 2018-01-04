@@ -38,8 +38,6 @@ public class GameTouchEventMgr {
                 if(d.getCardList().size() > 0) {
                     context.getBoard().getPlayer().getPlayerAction().resetActionState();
                     Intent intent = new Intent(context, DeckActivity.class);
-                    Log.i("deckId", "" + d.getDeckId());
-                    intent.putExtra("deckId", d.getDeckId());
                     context.startActivity(intent);
                 }else{
                     Toast t = Toast.makeText(context,R.string.game_deck_empty,Toast.LENGTH_SHORT);

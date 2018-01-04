@@ -6,7 +6,7 @@ public enum PacketType {
 	ERRORAUTH(1, 1),
 	SUCCESSAUTH(2, 2),
 	WAITINGGAME(3, 2),
-	PREPAREGAME(4, 3),
+	PREPAREGAME(4, 4),
 	ENDGAME(5, 3),
 	ENDROUND(6, 2),
 	NEXTROUND(7, 2),

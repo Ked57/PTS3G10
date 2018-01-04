@@ -1,8 +1,6 @@
 package ked.pts3g10;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -26,10 +24,12 @@ import ked.pts3g10.Gameplay.AbilityPackage.DamageAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAbility;
 import ked.pts3g10.Gameplay.AbilityPackage.HealAndDamageAbility;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Gameplay.Deck;
 import ked.pts3g10.Network.packet.PacketJoinGameWaitingList;
 import ked.pts3g10.Network.packet.PacketSendImStillHere;
 import ked.pts3g10.Network.packet.PacketSendLogOut;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
+import ked.pts3g10.Util.DeckManager;
 import ked.pts3g10.Util.XMLParser;
 
 
@@ -40,6 +40,7 @@ public class LaunchActivity extends AppCompatActivity {
     private static String adversaryName = "";
     private static boolean starting = true;
     public static ArrayList<Card> cards = new ArrayList<>();
+    public static Deck playerDeck;
     private Timer t, t2;
     private XMLParser xmlParser;
     private int version;
@@ -50,6 +51,7 @@ public class LaunchActivity extends AppCompatActivity {
     public static String endGameMessage;
     public static boolean timeout;
     public static String timeoutMessage;
+    public static int adversaryToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +70,8 @@ public class LaunchActivity extends AppCompatActivity {
 
         initAbilities();
         getDistantCards();
+
+        playerDeck = DeckManager.getPlayerDeck(ConnectionActivity.token,false);
 
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
              @Override
@@ -208,14 +212,16 @@ public class LaunchActivity extends AppCompatActivity {
     public void startGame(){
         Intent intent = new Intent(LaunchActivity.this, GameActivity.class);
         intent.putExtra("adversaryName",adversaryName);
-        intent.putExtra("starting",""+starting);
+        intent.putExtra("starting",starting);
+        intent.putExtra("adversaryToken",adversaryToken);
         startActivity(intent);
         WaitingForGameActivity.notifyFinish();
         adversaryName = "";
     }
 
-    public static void notifyStartGame(String advName, String strting){
+    public static void notifyStartGame(String advName, int token, String strting){
         adversaryName = advName;
+        adversaryToken = token;
         starting = strting.equals("true");
     }
 
