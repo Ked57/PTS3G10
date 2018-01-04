@@ -3,7 +3,6 @@ package ked.pts3g10.Util;
 import android.content.Context;
 import android.util.Log;
 import android.util.Xml;
-import android.widget.ImageView;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -29,8 +28,6 @@ import ked.pts3g10.LaunchActivity;
  */
 
 public class XMLParser {
-
-    public int version = 0;
 
     /**
      * Cette classe représente une "entry" dans le fichier XML
@@ -126,13 +123,9 @@ public class XMLParser {
             }
             String name = parser.getName();
 
-            if(name.equals("version")){
-                version = Integer.parseInt(readTag(parser,"version"));
-            }
-
             // si cette balise est un <entry>, extraire le contenu de cette balise avec readEntry()
             // et ajouter le nouvel object Entry dans la liste entries
-            else if (name.equals("entry")) {
+            if (name.equals("entry")) {
                 entries.add(readEntry(parser));
                 // sinon, sauter la balise
             } else {
@@ -280,17 +273,14 @@ public class XMLParser {
      * @param cards
      * @throws IOException
      */
-    public void write(Context context, ArrayList<Card> cards, int version) throws IOException {
+    public void write(Context context, ArrayList<Card> cards) throws IOException {
 
-        FileOutputStream fileos = new FileOutputStream(context.getFilesDir()+"/save.xml");//Environment.getExternalStorageDirectory().getAbsolutePath()+"/Android/data/ked.atc-simulator/files/save.xml");
+        FileOutputStream fileos = new FileOutputStream(context.getFilesDir()+"/cards.xml");//Environment.getExternalStorageDirectory().getAbsolutePath()+"/Android/data/ked.atc-simulator/files/save.xml");
         XmlSerializer xmlSerializer = Xml.newSerializer();
         StringWriter writer = new StringWriter();
         xmlSerializer.setOutput(writer);
         xmlSerializer.startDocument("UTF-8", true);
         xmlSerializer.startTag(null, "data");
-        xmlSerializer.startTag(null, "version");
-        xmlSerializer.text(""+version); // TODO: Récup la version et la réécrire ici
-        xmlSerializer.endTag(null,"version");
         for(Card c : cards) {
             xmlSerializer.startTag(null, "entry");
             xmlSerializer.startTag(null, "name");
@@ -335,9 +325,9 @@ public class XMLParser {
 
             xmlSerializer.startTag(null, "abilityId");
             if(c instanceof Hero)
-                xmlSerializer.text("0");
+                xmlSerializer.text(""+((Hero) c).getAbility().getId());
             else if(c instanceof Spell)
-                xmlSerializer.text("0");
+                xmlSerializer.text(""+((Spell) c).getAbility().getId());
             else xmlSerializer.text("0");
             xmlSerializer.endTag(null, "abilityId");
 
@@ -367,6 +357,4 @@ public class XMLParser {
         fileos.write(dataWrite.getBytes());
         fileos.close();
     }
-
-    public int getVersion(){ return version;}
 }

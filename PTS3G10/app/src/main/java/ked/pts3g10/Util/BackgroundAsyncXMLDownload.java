@@ -55,7 +55,6 @@ public class BackgroundAsyncXMLDownload extends AsyncTask {
             conn.connect();
             InputStream is = conn.getInputStream();
             cards = xmlParser.parse(is, context);
-            version = xmlParser.getVersion();
             returnedResult = "ok";
         } catch (IOException e) {
             Log.e("Parser", Log.getStackTraceString(e));
@@ -69,7 +68,8 @@ public class BackgroundAsyncXMLDownload extends AsyncTask {
         String s = (String)o;
         super.onPostExecute(s);
         if(s.equals("ok")){
-            context.initCards(version,cards);
+            LaunchActivity.cards = cards;
+            LaunchActivity.saveCards = true;
         }else Log.i("Parser","Error parsing distant file");
     }
 

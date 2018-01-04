@@ -10,11 +10,15 @@ import android.widget.Toast;
 
 import org.xmlpull.v1.XmlPullParserException;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -30,6 +34,7 @@ import ked.pts3g10.Network.packet.PacketSendImStillHere;
 import ked.pts3g10.Network.packet.PacketSendLogOut;
 import ked.pts3g10.Util.BackgroundAsyncXMLDownload;
 import ked.pts3g10.Util.DeckManager;
+import ked.pts3g10.Util.Preferences;
 import ked.pts3g10.Util.XMLParser;
 
 
@@ -52,6 +57,7 @@ public class LaunchActivity extends AppCompatActivity {
     public static boolean timeout;
     public static String timeoutMessage;
     public static int adversaryToken;
+    public static boolean saveCards;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,8 +74,10 @@ public class LaunchActivity extends AppCompatActivity {
         timeout = false;
         timeoutMessage = "";
 
+        saveCards = false;
+
+        initCards(getDistantVersion());
         initAbilities();
-        getDistantCards();
 
         playerDeck = DeckManager.getPlayerDeck(ConnectionActivity.token,false);
 
@@ -145,6 +153,10 @@ public class LaunchActivity extends AppCompatActivity {
                             timeoutMessage = "";
                             timeout = false;
                             finish();
+                        }
+                        if(saveCards){
+                            saveCards();
+                            saveCards = false;
                         }
 
                     }
@@ -225,51 +237,78 @@ public class LaunchActivity extends AppCompatActivity {
         starting = strting.equals("true");
     }
 
+    public int getDistantVersion(){
+        int version = 0;
+        try {
+            String url = "http://shyndard.eu/iut/s3/card-version.php";
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            con.setRequestProperty("User-Agent", "Mozilla/5.0");
+            int responseCode = con.getResponseCode();
+            BufferedReader in = new BufferedReader(
+                    new InputStreamReader(con.getInputStream()));
+            String inputLine;
+            StringBuffer response = new StringBuffer();
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+
+            Log.i("DATA", response.toString());
+            for(String str : response.toString().split(",")) {
+                version = Integer.parseInt(str);
+            }
+        } catch(Exception ex) {
+            ex.printStackTrace();
+        }
+        return version;
+    }
+
     public void getDistantCards(){
         Log.i("Parser","Retrieving cards from server ...");
         BackgroundAsyncXMLDownload backgroundAsyncXMLDownload = new BackgroundAsyncXMLDownload(new XMLParser(),this);
         backgroundAsyncXMLDownload.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
     }
 
-    public void initCards(int distantVersion, ArrayList<Card> distantCards){
-
-        Log.i("Parser","distantVersion :"+distantVersion);
-        Log.i("Parser","distantCards :"+distantCards.toString());
-
-        File save = new File(getApplicationContext().getFilesDir() + "/cards.xml");
-        Log.i("Parser", "File Dir:" + getApplicationContext().getFilesDir() + "/cards.xml");
-        if (save.exists()) {
-            InputStream resultStream = null;
-            try {
-                resultStream = new FileInputStream(save);
-                Log.i("Parser", "File Dir:" + save.getAbsolutePath());
-                cards = xmlParser.parse(resultStream,this);
-                version = xmlParser.getVersion();
-                resultStream.close();
-
-                Log.i("parser","version : "+version);
-                Log.i("parser","cards : "+cards.toString());
-            } catch (FileNotFoundException e) {
-                Log.e("Parser", Log.getStackTraceString(e));
-            } catch (IOException e) {
-                Log.e("Parser", Log.getStackTraceString(e));
-            } catch (XmlPullParserException e) {
-                Log.e("Parser", Log.getStackTraceString(e));
+    public void initCards(int distantVersion){
+        version = Preferences.getVersion(this);
+        Log.i("Parser","Local version is "+version+", distant version is "+distantVersion);
+        if(version < distantVersion){
+            version = distantVersion;
+            getDistantCards();
+            Log.i("Parser","Loaded version and cards from server");
+        }else{
+            File save = new File(getApplicationContext().getFilesDir() + "/cards.xml");
+            Log.i("Parser", "File Dir:" + getApplicationContext().getFilesDir() + "/cards.xml");
+            if (!save.exists()) getDistantCards();
+            else {
+                InputStream resultStream = null;
+                try {
+                    resultStream = new FileInputStream(save);
+                    Log.i("Parser", "File Dir:" + save.getAbsolutePath());
+                    cards = xmlParser.parse(resultStream, this);
+                    resultStream.close();
+                    Log.i("parser", "version : " + version);
+                    Log.i("parser", "cards : " + cards.toString());
+                } catch (FileNotFoundException e) {
+                    Log.e("Parser", Log.getStackTraceString(e));
+                } catch (IOException e) {
+                    Log.e("Parser", Log.getStackTraceString(e));
+                } catch (XmlPullParserException e) {
+                    Log.e("Parser", Log.getStackTraceString(e));
+                }
             }
         }
-        if(version <= distantVersion){
-            cards = distantCards;
-            version = distantVersion;
-            Log.i("Parser","Loaded version and cards from server");
-        }
-        saveCards(cards,version);
+        Log.i("Parser","distantVersion :"+distantVersion);
     }
 
-    public void saveCards(ArrayList<Card> cards, int version){
+    public void saveCards(){
         Log.i("parser","WRITE version : "+version);
         Log.i("parser","WRITE cards : "+cards.toString());
         try {
-            xmlParser.write(this,cards,version);
+            xmlParser.write(this,cards);
+            Preferences.setVersion(this,version);
         } catch (IOException e) {
             Log.e("Parser", Log.getStackTraceString(e));
         }
