@@ -226,7 +226,6 @@ public class Case extends FrameLayout {
     public void playHealAnimation(){
         ActivityManager.MemoryInfo memoryInfo = context.getAvailableMemory();
         if (!memoryInfo.lowMemory) {
-            //effect.setBackground(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.heal_effect, this.getWidth(), this.getHeight()));
             effect.setBackgroundResource(R.drawable.heal_effect);
             // Get the background, which has been compiled to an AnimationDrawable object.
             AnimationDrawable frameAnimation = (AnimationDrawable) effect.getBackground();
@@ -238,7 +237,6 @@ public class Case extends FrameLayout {
     public void playFireAnimation(){
         ActivityManager.MemoryInfo memoryInfo = context.getAvailableMemory();
         if (!memoryInfo.lowMemory) {
-            //effect.setBackground(BitmapDecoder.decodeSampledBitmapFromResource(getResources(), R.drawable.heal_effect, this.getWidth(), this.getHeight()));
             try {
                 effect.setBackgroundResource(R.drawable.fire_effect);
             }catch(OutOfMemoryError e){
