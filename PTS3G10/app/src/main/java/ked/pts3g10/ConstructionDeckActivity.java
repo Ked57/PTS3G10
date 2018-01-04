@@ -2,6 +2,7 @@ package ked.pts3g10;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -122,11 +123,11 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     }
 
     private void removeFromDeckCall() {
-        Card selectedCard = card_list.get(index);
+        Card selectedCard = deck_card.getWithId(card_list.get(index).getId());
         int count = countCard(selectedCard);
         if(count > 0) {
             deck_card.removeCard(selectedCard);
-            count--;
+            count = countCard(selectedCard);
         }
         if(count < 2) {
             if(count == 0) removeFromDeck.setEnabled(false);
@@ -137,14 +138,15 @@ public class ConstructionDeckActivity extends AppCompatActivity {
 
     private int countCard(Card selectedCard) {
         int v = 0;
-        for(Card c : deck_card.getCardList()) if(selectedCard == c) v++;
+        for(Card c : deck_card.getCardList()) if(selectedCard.getId() == c.getId()) v++;
         return v;
     }
 
     private void loadCard() {
         for(Card c : LaunchActivity.cards) {
             if(!c.isAdversary() && !c.getName().equals("Chateau")) {
-                card_list.add(c);
+                Log.i("DeckConstruction","loaded card "+c.getName());
+                card_list.add(c.clone(false));
             }
         }
     }

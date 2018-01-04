@@ -287,6 +287,12 @@ public class XMLParser {
             xmlSerializer.text(c.getName());
             xmlSerializer.endTag(null, "name");
 
+            if(c.getId() != 0){
+                xmlSerializer.startTag(null, "id");
+                xmlSerializer.text(""+c.getId());
+                xmlSerializer.endTag(null, "id");
+            }
+
             xmlSerializer.startTag(null, "description");
             xmlSerializer.text(c.getDescription());
             xmlSerializer.endTag(null, "description");

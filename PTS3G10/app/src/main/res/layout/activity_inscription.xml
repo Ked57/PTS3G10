@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
             android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/DeckActivity"
             android:inputType="textEmailAddress"/>
 
     </LinearLayout>
@@ -47,6 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
             android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/DeckActivity"
             android:inputType="text" />
     </LinearLayout>
 
@@ -68,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
             android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/DeckActivity"
             android:inputType="textPassword" />
     </LinearLayout>
 
@@ -89,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
             android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/DeckActivity"
             android:inputType="textPassword" />
     </LinearLayout>
 

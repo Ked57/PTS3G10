@@ -22,24 +22,6 @@ public class Player {
         healthPoints = 30; //A définir
         this.context = context;
         this.adversary = adversary;
-        ArrayList<Card> cards = new ArrayList<Card>();
-        if(adversary) {
-            cards.add(LaunchActivity.cards.get(3).clone(adversary));
-            cards.add(LaunchActivity.cards.get(3).clone(adversary));
-            cards.add(LaunchActivity.cards.get(5).clone(adversary));
-            cards.add(LaunchActivity.cards.get(5).clone(adversary));
-            cards.add(LaunchActivity.cards.get(7).clone(adversary));
-            cards.add(LaunchActivity.cards.get(9).clone(adversary));
-            cards.add(LaunchActivity.cards.get(11).clone(adversary));
-        }else{
-            cards.add(LaunchActivity.cards.get(2).clone(adversary));
-            cards.add(LaunchActivity.cards.get(2).clone(adversary));
-            cards.add(LaunchActivity.cards.get(4).clone(adversary));
-            cards.add(LaunchActivity.cards.get(4).clone(adversary));
-            cards.add(LaunchActivity.cards.get(6).clone(adversary));
-            cards.add(LaunchActivity.cards.get(8).clone(adversary));
-            cards.add(LaunchActivity.cards.get(10).clone(adversary));
-        }
         this.deck = deck;
         playerAction = new PlayerAction(this);
     }

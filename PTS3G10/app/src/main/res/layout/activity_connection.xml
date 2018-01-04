@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
-            android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/DeckActivity"
             android:inputType="text" />
     </LinearLayout>
 
@@ -46,8 +46,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.75"
-            android:backgroundTint="@color/colorPrimary"
+            android:theme="@style/DeckActivity"
             android:inputType="textPassword" />
+
+        <CheckBox
+            android:id="@+id/rememberMe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:layout_weight="0.25"
+            android:text="@string/rememberMe" />
     </LinearLayout>
 
             <LinearLayout

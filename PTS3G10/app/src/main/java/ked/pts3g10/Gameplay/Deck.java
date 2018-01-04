@@ -27,4 +27,11 @@ public class Deck{
             cardList.remove(card);
         }
     }
+
+    public Card getWithId(int id){
+        for(Card c : cardList){
+            if(c.getId() == id) return c;
+        }
+        return null;
+    }
 }

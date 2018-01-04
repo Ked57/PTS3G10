@@ -26,6 +26,7 @@
     <string name="passwordconf">Confirmez le mot de passe:</string>
     <string name="pseudo">Pseudo :</string>
     <string name="password">Mot de passe :</string>
+    <string name="rememberMe">Connexion automatique</string>
     <string name="creeCompte">Créer un compte</string>
     <string name="annuler">Annuler</string>
     <string name="connection">Connexion</string>
@@ -38,6 +39,9 @@
     <string name="toastConnectionFailed">La connexion a échouée, mauvais pseudo ou mot de passe, veuillez recommencer</string>
     <string name="toastLoadingCards">Attendez la fin du chargement des cartes ...</string>
     <string name="toastQuitLaunch">Appuyez une nouvelle fois pour quitter</string>
+    <string name="connection_alert_loading_title">Connexion</string>
+    <string name="connection_alert_loading_message">Connexion automatique en cours ...</string>
+    <string name="toastUncompleteDeck">Votre deck est incomplet ! Veuillez le remplir dans le menu de constitution de deck</string>
 
 
     <!-- Chargement -->

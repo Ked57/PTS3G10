@@ -76,19 +76,22 @@ public class LaunchActivity extends AppCompatActivity {
 
         saveCards = false;
 
-        initCards(getDistantVersion());
         initAbilities();
+        initCards(getDistantVersion());
 
         playerDeck = DeckManager.getPlayerDeck(ConnectionActivity.token,false);
 
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 if(cards.size() > 0) {
+                 if(cards.size() > 0 && playerDeck.getCardList().size() >= 10) {
                      new PacketJoinGameWaitingList().call();
                      Intent intent = new Intent(LaunchActivity.this, WaitingForGameActivity.class);
                      startActivity(intent);
-                 }else {
+                 }else if(playerDeck.getCardList().size() < 10){
+                     Toast t = Toast.makeText(LaunchActivity.this,R.string.toastUncompleteDeck,Toast.LENGTH_SHORT);
+                     t.show();
+                 } else {
                      Toast t = Toast.makeText(LaunchActivity.this,R.string.toastLoadingCards,Toast.LENGTH_SHORT);
                      t.show();
                  }
@@ -108,8 +111,13 @@ public class LaunchActivity extends AppCompatActivity {
         findViewById(R.id.constituerDeck).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(LaunchActivity.this, ConstructionDeckActivity.class);
-                startActivity(intent);
+                if(cards.size() > 0) {
+                    Intent intent = new Intent(LaunchActivity.this, ConstructionDeckActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast t = Toast.makeText(LaunchActivity.this,R.string.toastLoadingCards,Toast.LENGTH_SHORT);
+                    t.show();
+                }
             }
         });
         //
@@ -121,6 +129,7 @@ public class LaunchActivity extends AppCompatActivity {
                 t2 = null;
                 new PacketSendLogOut().call(ConnectionActivity.token);
                 Intent intent = new Intent(LaunchActivity.this, ConnectionActivity.class);
+                intent.putExtra("logout",true);
                 startActivity(intent);
                 finish();
             }
@@ -305,7 +314,6 @@ public class LaunchActivity extends AppCompatActivity {
 
     public void saveCards(){
         Log.i("parser","WRITE version : "+version);
-        Log.i("parser","WRITE cards : "+cards.toString());
         try {
             xmlParser.write(this,cards);
             Preferences.setVersion(this,version);
