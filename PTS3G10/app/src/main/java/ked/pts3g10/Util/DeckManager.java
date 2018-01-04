@@ -77,6 +77,7 @@ public class DeckManager {
         } catch(Exception ex) {
             ex.printStackTrace();
         }
+        if(user_deck.size() < 10) user_deck.clear();
         return user_deck;
     }
 

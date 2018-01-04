@@ -90,17 +90,17 @@
             android:layout_weight="1"
             android:text="B" />
         <Button
-            android:id="@+id/adminCon"
+            android:id="@+id/cCon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="ADMIN" />
+            android:text="C" />
         <Button
-            android:id="@+id/shynCon"
+            android:id="@+id/dCon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="SHYN" />
+            android:text="D" />
 
 
     </LinearLayout>

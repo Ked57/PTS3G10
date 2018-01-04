@@ -113,7 +113,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         deck_card = DeckManager.getPlayerDeck(ConnectionActivity.token);
         loadCard();
         showCardForIndex();
-        addToDeckCall();
+        if(countCard(card_list.get(index)) >= 2) addToDeck.setEnabled(false);
     }
 
     private void saveDeck() {

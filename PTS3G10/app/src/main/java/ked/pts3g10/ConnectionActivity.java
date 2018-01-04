@@ -21,7 +21,7 @@ import ked.pts3g10.Network.packet.PacketAuth;
 public class ConnectionActivity extends AppCompatActivity {
 
     private EditText pseudo,password;
-    private Button connection, inscription, dev, aCon, bCon, adminCon, shynCon;
+    private Button connection, inscription, dev, aCon, bCon, cCon, dCon;
     private String stringPassword;
     public static String stringPseudo;
     private ConnectionActivity context;
@@ -47,8 +47,8 @@ public class ConnectionActivity extends AppCompatActivity {
         //dev
         aCon = (Button) findViewById(R.id.aCon);
         bCon = (Button) findViewById(R.id.bCon);
-        adminCon = (Button) findViewById(R.id.adminCon);
-        shynCon = (Button) findViewById(R.id.shynCon);
+        cCon = (Button) findViewById(R.id.cCon);
+        dCon = (Button) findViewById(R.id.dCon);
 
         aCon.setOnClickListener(
                 new View.OnClickListener() {
@@ -66,19 +66,19 @@ public class ConnectionActivity extends AppCompatActivity {
                     }
                 }
         );
-        adminCon.setOnClickListener(
+        cCon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        devConnect("admin", "admin");
+                        devConnect("c", "c");
                     }
                 }
         );
-        shynCon.setOnClickListener(
+        dCon.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        devConnect("shyndard", "mot2passe");
+                        devConnect("d", "d");
                     }
                 }
         );
