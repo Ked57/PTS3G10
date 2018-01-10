@@ -39,35 +39,39 @@
     <string name="toastCaractereInvalide">Votre pseudo ou mot de passe contient des caractères invalides ( : n\'est pas autorisé)</string>
     <string name="toastEmailInvalide">Votre adresse mail est invalide</string>
     <string name="toastConnectionFailed">La connexion a échouée, mauvais pseudo ou mot de passe, veuillez recommencer</string>
-    <string name="toastLoadingCards">Attendez la fin du chargement des cartes ...</string>
+    <string name="toastLoadingCards">Attendez la fin du chargement des cartes &#8230;</string>
     <string name="toastQuitLaunch">Appuyez une nouvelle fois pour quitter</string>
     <string name="connection_alert_loading_title">Connexion</string>
-    <string name="connection_alert_loading_message">Connexion automatique en cours ...</string>
+    <string name="connection_alert_loading_message">Connexion automatique en cours &#8230;</string>
     <string name="toastUncompleteDeck">Votre deck est incomplet ! Veuillez le remplir dans le menu de constitution de deck</string>
 
 
     <!-- Chargement -->
-    <string name="waiting_for_game">Recherche de partie en cours ...</string>
+    <string name="waiting_for_game">Recherche de partie en cours &#8230;</string>
 
     <!--Menu crédits-->
-    <string name="credits">credits</string>
-    <string name="para_credits">
-        Cette application a été créée par : \n
-            - Mignot Kévin \n
-            - Fassot Clément \n
-            - Gonet Logan \n
-            - Chauvet Maël \n
-        dans le cadre de notre projet tuteuré de semestre 3. \n\n
-
-        tuteur du projet : Clément Laborie \n\n
-
-        Images : \n
-         - thenounproject.com \n
-        Effets : \n
-         - mrbubblewand.wordpress.com \n
-
-
+    <string name="credits">Credits</string>
+    <string name="titreCreation">Créé par :</string>
+    <string name="creation">
+            - Mignot Kévin\n
+            - Fassot Clément\n
+            - Gonet Logan\n
+            - Chauvet Maël
     </string>
+    <string name="cadre">Cadre : PTS3</string>
+    <string name="tuteur">Tuteur : Clément Laborie</string>
+    <string name="titreImage">Crédit images :</string>
+    <string name="images">
+        - thenounproject.com
+    </string>
+    <string name="titreEffets">Crédit effets :</string>
+    <string name="effets">
+        - mrbubblewand.wordpress.com
+    </string>
+    <string name="logo">Représente le logo de l\'université de Laval</string>
+    
+    <string name="buttonCreditToMenu">Retourner au menu</string>
+
 
     <!--Menu création d'un deck-->
     <string name="selectionner">Ajouter au deck</string>

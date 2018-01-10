@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".InscriptionActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"/>
         <activity android:name=".GameActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"/>
@@ -30,13 +30,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreditActivity" />
+        <activity android:name=".CreditActivity"
+            android:label="@string/credits"/>
         <activity android:name=".LaunchActivity"
             android:label="@string/menu"/>
         <activity android:name=".ConstructionDeckActivity"
             android:label="@string/construction_deck"
             android:screenOrientation="portrait"/>
-        <activity android:name=".WaitingForGameActivity"></activity>
+        <activity android:name=".WaitingForGameActivity"/>
     </application>
 
 </manifest>
