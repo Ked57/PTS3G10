@@ -26,7 +26,7 @@ import ked.pts3g10.Util.Preferences;
 public class ConnectionActivity extends AppCompatActivity {
 
     private EditText pseudo,password;
-    private Button connection, inscription, dev, aCon, bCon, cCon, dCon;
+    private Button connection, inscription;
     private String stringPassword;
     public static String stringPseudo;
     private ConnectionActivity context;
@@ -92,46 +92,6 @@ public class ConnectionActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-        //dev
-        aCon = (Button) findViewById(R.id.aCon);
-        bCon = (Button) findViewById(R.id.bCon);
-        cCon = (Button) findViewById(R.id.cCon);
-        dCon = (Button) findViewById(R.id.dCon);
-
-        aCon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        devConnect("a", "a");
-                    }
-                }
-        );
-        bCon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        devConnect("b", "b");
-                    }
-                }
-        );
-        cCon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        devConnect("c", "c");
-                    }
-                }
-        );
-        dCon.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        devConnect("d", "d");
-                    }
-                }
-        );
         context=this;
 
         token = 0;
@@ -236,13 +196,6 @@ public class ConnectionActivity extends AppCompatActivity {
            sendAuthPacket();
         }
     }
-
-    private void devConnect(String name, String pass) {
-       stringPseudo = name;
-       stringPassword = pass;
-       auth();
-    }
-
 
     public static Communication getCom() {
         return com;
