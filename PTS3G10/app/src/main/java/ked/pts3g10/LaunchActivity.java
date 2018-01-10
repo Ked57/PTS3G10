@@ -120,7 +120,18 @@ public class LaunchActivity extends AppCompatActivity {
                 }
             }
         });
-        //
+
+        //Boutton pour afficher le tutoriel
+        findViewById(R.id.Tutoriel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+
+
+        //Button pour se deconnecter et retourner a la page de connection
         findViewById(R.id.logout).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

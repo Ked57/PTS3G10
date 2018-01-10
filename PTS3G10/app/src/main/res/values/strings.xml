@@ -8,7 +8,7 @@
     <!--Jeux-->
     <string name="app_name">PTS3G10</string>
     <string name="play_button">Jouer</string>
-    <string name="dev_button">Dev</string>
+    <string name="Tutoriel">Tutoriel</string>
     <string name="end_button">Terminer</string>
     <string name="deck_choice">Jouer cette carte</string>
     <string name="deck_choice_wrong">Vous devez attendre votre tour</string>
