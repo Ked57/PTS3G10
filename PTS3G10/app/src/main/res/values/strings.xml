@@ -6,7 +6,7 @@
 
 
     <!--Jeux-->
-    <string name="app_name">PTS3G10</string>
+    <string name="app_name">CastleWar</string>
     <string name="play_button">Jouer</string>
     <string name="Tutoriel">Tutoriel</string>
     <string name="end_button">Terminer</string>
