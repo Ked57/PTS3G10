@@ -45,10 +45,7 @@
             android:label="@string/construction_deck"
             android:screenOrientation="portrait" />
         <activity android:name=".WaitingForGameActivity" />
-        <activity
-            android:name=".TutorielActivity"
-            android:label="@string/title_activity_tutoriel"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+  
     </application>
 
 </manifest>
