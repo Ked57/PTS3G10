@@ -99,6 +99,8 @@
         <string name="LancerPartie3">Si vous voyez cette fenêtre alors vous êtes bien sur une partie</string>
         <!--Tuto Comment Jouer-->
         <string name="tutoCommentJouer">2) Comment jouer</string>
+         <!--Tuto Comment Jouer-->
+          <string name="tutoCreationDeck">3) Créer un deck</string>
 
 
     <!-- Test Tutoriel-->

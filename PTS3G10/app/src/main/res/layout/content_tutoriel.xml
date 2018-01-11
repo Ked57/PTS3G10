@@ -83,6 +83,21 @@ tools:showIn="@layout/activity_tutoriel">
             android:text="@string/tutoCommentJouer"
             />
 
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/tuto_board" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="italic"
+            android:layout_marginTop="16dp"
+            android:text="@string/tutoCreationDeck"
+            />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
