@@ -14,15 +14,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".InscriptionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".GameActivity"
-            android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden"/>
+        <activity
+            android:name=".InscriptionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".GameActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".DeckActivity"
             android:theme="@style/DeckActivity" />
-        <activity android:name=".ConnectionActivity"
+        <activity
+            android:name=".ConnectionActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,14 +33,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreditActivity"
-            android:label="@string/credits"/>
-        <activity android:name=".LaunchActivity"
-            android:label="@string/menu"/>
-        <activity android:name=".ConstructionDeckActivity"
+        <activity
+            android:name=".CreditActivity"
+            android:label="@string/credits"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LaunchActivity"
+            android:label="@string/menu" />
+        <activity
+            android:name=".ConstructionDeckActivity"
             android:label="@string/construction_deck"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".WaitingForGameActivity"/>
+            android:screenOrientation="portrait" />
+        <activity android:name=".WaitingForGameActivity" />
+        <activity
+            android:name=".TutorielActivity"
+            android:label="@string/title_activity_tutoriel"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
