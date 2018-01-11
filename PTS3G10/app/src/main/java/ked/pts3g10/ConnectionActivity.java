@@ -28,7 +28,7 @@ public class ConnectionActivity extends AppCompatActivity {
     private EditText pseudo,password;
     private Button connection, inscription;
     private String stringPassword;
-    public static String stringPseudo;
+    public static String stringPseudo, errorMessage;
     private ConnectionActivity context;
     public static Communication com;
     public static boolean connected;
@@ -205,10 +205,11 @@ public class ConnectionActivity extends AppCompatActivity {
         return ":";
     }
 
-    public static void connectionCallBack(int tokenReceived){
+    public static void connectionCallBack(int tokenReceived, String error){
         if(tokenReceived < 0){
             //Connexion a échouée
             token = -1;
+            errorMessage = error;
         }else{
             //Connexion réussie
             connected = true;
@@ -237,7 +238,7 @@ public class ConnectionActivity extends AppCompatActivity {
         t.cancel();
         t = null;
 
-        Toast t = Toast.makeText(context,R.string.toastConnectionFailed ,Toast.LENGTH_LONG);
+        Toast t = Toast.makeText(context, errorMessage, Toast.LENGTH_LONG);
         t.show();
         token = 0;
         editTextError(pseudo);

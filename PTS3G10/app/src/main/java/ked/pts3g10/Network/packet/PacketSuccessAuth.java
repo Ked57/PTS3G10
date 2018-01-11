@@ -17,7 +17,7 @@ public class PacketSuccessAuth implements ActionInterface {
 
 		int token = Integer.parseInt(args[1]);
 
-		ConnectionActivity.connectionCallBack(token);
+		ConnectionActivity.connectionCallBack(token, null);
 				
 	}
 }

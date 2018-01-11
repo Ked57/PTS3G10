@@ -196,7 +196,7 @@ public class Board {
         }
 
         if(playersTurn){
-            endRoundButton.setBackgroundColor(Color.rgb(76,49,35));
+            endRoundButton.setBackgroundColor(Color.rgb(0,153,0));
             endRoundButton.setClickable(true);
             DeckActivity.setChoiceButtonText(context.getResources().getString(R.string.deck_choice));
         }else {
