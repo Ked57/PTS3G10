@@ -28,7 +28,7 @@ public class ConnectionActivity extends AppCompatActivity {
     private EditText pseudo,password;
     private Button connection, inscription;
     private String stringPassword;
-    public static String stringPseudo;
+    public static String stringPseudo, errorMessage;
     private ConnectionActivity context;
     public static Communication com;
     public static boolean connected;
@@ -188,7 +188,7 @@ public class ConnectionActivity extends AppCompatActivity {
             toast.show();
             emptyError = false;
         }else if(unvalidCharError){
-            Toast t = Toast.makeText(context,R.string.toastCaractereInvalide,Toast.LENGTH_LONG);
+            Toast t = Toast.makeText(context, errorMessage, Toast.LENGTH_LONG);
             t.show();
             unvalidCharError = false;
         }
@@ -205,10 +205,11 @@ public class ConnectionActivity extends AppCompatActivity {
         return ":";
     }
 
-    public static void connectionCallBack(int tokenReceived){
+    public static void connectionCallBack(int tokenReceived, String error){
         if(tokenReceived < 0){
             //Connexion a échouée
             token = -1;
+            errorMessage = error;
         }else{
             //Connexion réussie
             connected = true;

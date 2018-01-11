@@ -3,7 +3,7 @@ package ked.pts3g10.Network;
 public enum PacketType {
 
 	AUTH(0, 3),
-	ERRORAUTH(1, 1),
+	ERRORAUTH(1, 2),
 	SUCCESSAUTH(2, 2),
 	WAITINGGAME(3, 2),
 	PREPAREGAME(4, 4),

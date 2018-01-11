@@ -14,6 +14,7 @@ public class PacketErrorAuth implements ActionInterface {
 	public void onCall(String message, String[] args, PacketType action, DatagramPacket packet) {
 		//Appel en cas d'erreur d'authentification
 		//args[0] : INTEGER : id du packet
-		ConnectionActivity.connectionCallBack(-1);
+		//args[1] : STRING : message d'erreur
+		ConnectionActivity.connectionCallBack(-1, args[1]);
 	}
 }
