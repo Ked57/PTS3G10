@@ -125,7 +125,8 @@ public class LaunchActivity extends AppCompatActivity {
         findViewById(R.id.Tutoriel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(LaunchActivity.this,TutorielActivity.class);
+                startActivity(intent);
             }
         });
 

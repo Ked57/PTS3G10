@@ -35,8 +35,7 @@
         </activity>
         <activity
             android:name=".CreditActivity"
-            android:label="@string/credits"
-            android:screenOrientation="portrait" />
+            android:label="@string/credits" />
         <activity
             android:name=".LaunchActivity"
             android:label="@string/menu" />
@@ -45,7 +44,9 @@
             android:label="@string/construction_deck"
             android:screenOrientation="portrait" />
         <activity android:name=".WaitingForGameActivity" />
-  
+        <activity android:name=".TutorielActivity"
+            android:label="@string/Tutoriel"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
