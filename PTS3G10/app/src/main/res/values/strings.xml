@@ -101,13 +101,16 @@
         <string name="tutoCommentJouer">2) Comment jouer</string>
         <!--Tuto crée un deck-->
         <string name="tutoCreationDeck">3) Créer un deck</string>
+        <string name="CreationDeck0">Pour créer un deck cliqué sur le bouton \"crée un deck\"</string>
         <string name="CreationDeck1">Pour la construction de deck tout ce passera dans l\'interface suivante</string>
         <string name="CreationDeck2">Tout d\'abord un deck est composé au maximum de 15 cartes et aura un minimum de 10 cartes ce nombre et indiquer à l\'endroit ci-dessous</string>
-        <string name="CreationDeck3">Par la suite vous pouvez naviguer entre les différentes cartes du jeu à l\'aide des boutons "suivant" et "precedent"</string>
+        <string name="CreationDeck3">Par la suite vous pouvez naviguer entre les différentes cartes du jeu à l\'aide des boutons \"suivant\" et \"precedent\"</string>
         <string name="CreationDeck4">Si vous souhaitez mettre une carte dans votre deck il vous suffit alors de cliquer sur le bouton "Ajouter" ce bouton indique par la même occasion le maximum de carte du type</string>
-        <string name="CreationDeck5">Ou au contraire si une carte vous plaît moins alors il vous suffit de cliquer sur "supprimer"</string>
+        <string name="CreationDeck5">Ou au contraire si une carte vous plaît moins alors il vous suffit de cliquer sur \"supprimer\"</string>
         <string name="CreationDeck6">Une fois votre deck terminé selon vos préférences il vous suffit alors de cliquer sur enregistrer</string>
         <string name="CreationDeck7">Pour quitter cette fenêtre il vous suffit alors de cliquer sur la flèche retour de votre téléphone</string>
+        <dimen name="textsize">15sp</dimen>
+        <dimen name="titleSize">20sp</dimen>
 
 
     <!-- Test Tutoriel-->
