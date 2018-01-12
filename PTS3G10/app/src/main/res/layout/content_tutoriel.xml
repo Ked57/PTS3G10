@@ -101,7 +101,105 @@ tools:showIn="@layout/activity_tutoriel">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/large_text" />
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="@string/CreationDeck1"/>
+
+        <ImageView
+            android:id="@+id/creation_de_deck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/CreationDeck1"
+            app:srcCompat="@drawable/creation_de_deck" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="@string/CreationDeck2"/>
+
+        <ImageView
+            android:id="@+id/creation_de_deck_tuto_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/CreationDeck2"
+            app:srcCompat="@drawable/creation_de_deck_tuto_1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="@string/CreationDeck3"/>
+
+        <ImageView
+            android:id="@+id/creation_de_deck_tuto_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/CreationDeck3"
+            app:srcCompat="@drawable/creation_de_deck_tuto_2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="@string/CreationDeck4"/>
+
+        <ImageView
+            android:id="@+id/creation_de_deck_tuto_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/CreationDeck4"
+            app:srcCompat="@drawable/creation_de_deck_tuto_3" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="@string/CreationDeck5"/>
+
+        <ImageView
+            android:id="@+id/creation_de_deck_tuto_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/CreationDeck5"
+            app:srcCompat="@drawable/creation_de_deck_tuto_4" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="@string/CreationDeck6"/>
+
+        <ImageView
+            android:id="@+id/creation_de_deck_tuto_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/CreationDeck6"
+            app:srcCompat="@drawable/creation_de_deck_tuto_5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="6dp"
+            android:text="@string/CreationDeck7"/>
+
+        <ImageView
+            android:id="@+id/creation_de_deck_tuto_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/CreationDeck7"
+            app:srcCompat="@drawable/fleche_retour" />
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/large_text" />-->
 
     </LinearLayout>
 
