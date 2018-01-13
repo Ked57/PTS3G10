@@ -4,37 +4,37 @@
     xmlns:tools= "http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop= "0dp"
     android:orientation="vertical"
     tools:context="ked.pts3g10.LaunchActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.3"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="50dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:paddingTop= "50dp">
+
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logo_castlewar_Title" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.7"
-        android:orientation="vertical"
-        android:layout_margin="50dp"
-        android:gravity="center_horizontal"
-        >
-
+            app:srcCompat="@drawable/logo_castlewar" />
 
         <Button
         android:id="@+id/playButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/play_button"
+
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="196dp"
             />
 
         <Button
@@ -42,28 +42,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="constituer deck"
-            />
+            tools:layout_editor_absoluteX="136dp"
+
+            tools:layout_editor_absoluteY="196dp" />
 
         <Button
             android:id="@+id/credits"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/credits"
-            />
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="196dp" />
 
         <Button
             android:id="@+id/Tutoriel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/Tutoriel"
-            />
+            tools:layout_editor_absoluteY="196dp"
+            tools:layout_editor_absoluteX="136dp"
+            android:text="@string/Tutoriel" />
 
         <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/logout_button"
-            />
+            tools:layout_editor_absoluteX="136dp"
+            tools:layout_editor_absoluteY="196dp" />
 
 
     </LinearLayout>
