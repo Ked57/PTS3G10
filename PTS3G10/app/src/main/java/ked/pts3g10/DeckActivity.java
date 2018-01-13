@@ -24,6 +24,7 @@ public class DeckActivity extends AppCompatActivity {
     private ImageView deckBackgroundImage;
     private static Button deckChoiceButton;
     private Intent i;
+    private boolean cardInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +55,7 @@ public class DeckActivity extends AppCompatActivity {
             deckChoiceButton.setText(R.string.end_button);
             int id = i.getIntExtra("idCard",0);
             displayCardForId(id);
+            cardInfo = true;
             deckChoiceButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -61,7 +63,10 @@ public class DeckActivity extends AppCompatActivity {
                     finish();
                 }
             });
-        }else displayCardForIndex(currIndex);
+        }else {
+            displayCardForIndex(currIndex);
+            cardInfo = false;
+        }
     }
 
     @Override
@@ -128,5 +133,9 @@ public class DeckActivity extends AppCompatActivity {
     public static void setChoiceButtonText(String text){
         if(deckChoiceButton != null)
             deckChoiceButton.setText(text);
+    }
+
+    public boolean isCardInfo() {
+        return cardInfo;
     }
 }

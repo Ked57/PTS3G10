@@ -100,10 +100,12 @@ public class DeckTouchEventMgr implements GestureDetector.OnGestureListener, Ges
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        float dir = e2.getX() - e1.getX();
-        if(dir < 0)
-            context.swipeRight();
-        else context.swipeLeft();
-        return false;
+        if(!context.isCardInfo()) {
+            float dir = e2.getX() - e1.getX();
+            if (dir < 0)
+                context.swipeRight();
+            else context.swipeLeft();
+            return false;
+        }else return false;
     }
 }
