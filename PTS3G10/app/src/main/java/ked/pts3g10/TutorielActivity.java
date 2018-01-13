@@ -14,4 +14,10 @@ public class TutorielActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutoriel);
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        finish();
+    }
 }

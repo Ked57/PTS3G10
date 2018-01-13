@@ -46,4 +46,10 @@ public class CreditActivity extends AppCompatActivity {
 
 
     }
+
+    @Override
+    public void onBackPressed()
+    {
+        finish();
+    }
 }

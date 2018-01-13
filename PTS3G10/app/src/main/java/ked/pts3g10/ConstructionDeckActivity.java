@@ -87,6 +87,11 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         showCardForIndex();
         if(countCard(card_list.get(index)) >= 2) addToDeck.setEnabled(false);
     }
+    @Override
+    public void onBackPressed()
+    {
+        finish();
+    }
 
     private void saveDeck() {
         if(deck_card.getCardList().size() == 10 || deck_card.getCardList().size() == card_list.size()*2) {
