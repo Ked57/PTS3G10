@@ -89,6 +89,51 @@ tools:showIn="@layout/activity_tutoriel">
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/tuto_board" />
 
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoCommentJouer1"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoCommentJouer2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoCommentJouer3"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titleSize"
+
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerSort"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/titleSize"
+
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerArmée"
+            />
+
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
