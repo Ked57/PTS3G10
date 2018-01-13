@@ -40,7 +40,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/menu_tuto_1_0"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/LancerPartie1"
             app:srcCompat="@drawable/menu_tuto_1" />
@@ -55,7 +55,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/menu_tuto_1_1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/LancerPartie2"
             app:srcCompat="@drawable/chargement" />
@@ -69,7 +69,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/menu_tuto_1_2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/LancerPartie3"
             app:srcCompat="@drawable/partie_vide" />
@@ -107,7 +107,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/menu_tuto_3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck0"
             app:srcCompat="@drawable/menu_tuto_3" />
@@ -122,7 +122,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/creation_de_deck"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck1"
             app:srcCompat="@drawable/creation_de_deck" />
@@ -136,7 +136,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/creation_de_deck_tuto_1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck2"
             app:srcCompat="@drawable/creation_de_deck_tuto_1" />
@@ -150,7 +150,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/creation_de_deck_tuto_2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck3"
             app:srcCompat="@drawable/creation_de_deck_tuto_2" />
@@ -164,7 +164,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/creation_de_deck_tuto_3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck4"
             app:srcCompat="@drawable/creation_de_deck_tuto_3" />
@@ -178,7 +178,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/creation_de_deck_tuto_4"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck5"
             app:srcCompat="@drawable/creation_de_deck_tuto_4" />
@@ -192,7 +192,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/creation_de_deck_tuto_5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck6"
             app:srcCompat="@drawable/creation_de_deck_tuto_5" />
@@ -206,7 +206,7 @@ tools:showIn="@layout/activity_tutoriel">
 
         <ImageView
             android:id="@+id/creation_de_deck_tuto_6"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:contentDescription="@string/CreationDeck7"
             app:srcCompat="@drawable/fleche_retour" />
