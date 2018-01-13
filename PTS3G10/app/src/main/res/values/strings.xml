@@ -103,11 +103,20 @@
         <string name="tutoCommentJouer2">Appuyez sur la carte que vous souhaitez jouer.</string>
         <string name="tutoCommentJouer3">Les cartes sont de 2 types : Armée ou héros et sort. Référez vous à la partie du tutoriel correspond à votre choix.</string>
              <!--Tuto Jouer Sort -->
-             <string name="tutoJouerSort">a) Jouer un sort</string>
+                <string name="tutoJouerSort">a) Jouer un sort</string>
+                <string name="tutoJouerSort1">Cliquez sur “Jouer cette carte”</string>
+                <string name="tutoJouerSort2">Les cases disponibles pour jouer votre sort apparaissent. Les cases bleus sont des unités, et les vertes, les cases du terrain.</string>
+                <string name="tutoJouerSort3">Appuyer sur une case pour jouer le sort.</string>
+
 
 
             <!--Tuto Jouer  Armée -->
-             <string name="tutoJouerArmée">b) Jouer une armée</string>
+                 <string name="tutoJouerArmée">b) Jouer une armée</string>
+                <string name="tutoJouerArmée1">Cliquez sur “Jouer cette carte”</string>
+                <string name="tutoJouerArmée2">Les cases disponibles pour placer votre unité apparaissent en verts.</string>
+                <string name="tutoJouerArmée3">Appuyez sur une case verte pour placer la carte</string>
+
+
 
     <!--Tuto créer un deck-->
         <string name="tutoCreationDeck">3) Créer un deck</string>

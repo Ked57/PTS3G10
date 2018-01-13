@@ -123,6 +123,29 @@ tools:showIn="@layout/activity_tutoriel">
             android:layout_marginTop="6dp"
             android:text="@string/tutoJouerSort"
             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerSort1"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerSort2"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerSort3"
+            />
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -131,6 +154,28 @@ tools:showIn="@layout/activity_tutoriel">
 
             android:layout_marginTop="6dp"
             android:text="@string/tutoJouerArmée"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerArmée1"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerArmée2"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/textsize"
+            android:layout_marginTop="6dp"
+            android:text="@string/tutoJouerArmée3"
             />
 
 
