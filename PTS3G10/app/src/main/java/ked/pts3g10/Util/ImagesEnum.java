@@ -20,6 +20,7 @@ public enum ImagesEnum {
     KED(6, R.drawable.ked),
     LOGAN(7, R.drawable.warlock_logan),
     KNIGHT(8, R.drawable.knight),
+    GOBELIN(9, R.drawable.gobelin),
     //RED
     CASTLERED(1000, R.drawable.castlered),
     SWORDRED(1001, R.drawable.swordred),
@@ -29,7 +30,8 @@ public enum ImagesEnum {
     KEVINRED(1005, R.drawable.kevinred),
     KEDRED(1006, R.drawable.kedred),
     LOGANRED(1007, R.drawable.warlock_loganred),
-    KNIGHTRED(1008, R.drawable.knightred);
+    KNIGHTRED(1008, R.drawable.knightred),
+    GOBELINRED(1009, R.drawable.gobelinred);
 
     private int imageId;
     private int drawableId;
