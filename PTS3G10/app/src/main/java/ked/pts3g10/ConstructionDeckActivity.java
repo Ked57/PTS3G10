@@ -94,7 +94,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     }
 
     private void saveDeck() {
-        if(deck_card.getCardList().size() == 10 || deck_card.getCardList().size() == card_list.size()*2) {
+        if(deck_card.getCardList().size() == 15) {
             List<Integer> deck_card_id_list = new ArrayList<>();
             for(Card c : deck_card.getCardList()) deck_card_id_list.add(c.getId());
             if(DeckManager.save(deck_card_id_list, ConnectionActivity.token)) {
@@ -103,13 +103,13 @@ public class ConstructionDeckActivity extends AppCompatActivity {
                 Toast.makeText(context, "Un problème est survenu. Veuillez réessayer", Toast.LENGTH_LONG).show();
             }
         } else {
-            Toast.makeText(context, "Vous devez sélectionner 10 cartes", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Vous devez sélectionner 15 cartes", Toast.LENGTH_SHORT).show();
         }
         LaunchActivity.playerDeck = deck_card;
     }
 
-    private void updateAddCardButton(int count) {
-        addToDeck.setText("AJOUTER (" + count + "/2)");
+    private void updateAddCardButton(int count, int total) {
+        addToDeck.setText("AJOUTER (" + count + "/" + total + ")");
         deckCardCount.setText(" " + deck_card.getCardList().size());
     }
 
@@ -124,10 +124,10 @@ public class ConstructionDeckActivity extends AppCompatActivity {
             if(selectedCard instanceof Hero && count == 1) {
                 addToDeck.setEnabled(false);
             }
-            else if(count >= 2 || deck_card.getCardList().size() == 10) addToDeck.setEnabled(false);
+            else if(count >= 2 || deck_card.getCardList().size() == 15) addToDeck.setEnabled(false);
             removeFromDeck.setEnabled(true);
         }
-        updateAddCardButton(count);
+        updateAddCardButton(count, selectedCard instanceof Hero ? 1 : 2);
     }
 
     private void removeFromDeckCall() {
@@ -141,7 +141,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
             if(count == 0) removeFromDeck.setEnabled(false);
             addToDeck.setEnabled(true);
         }
-        updateAddCardButton(count);
+        updateAddCardButton(count, selectedCard instanceof Hero ? 1 : 2);
     }
 
     private int countCard(Card selectedCard) {
@@ -283,8 +283,8 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         cardView.setBackgroundResource(c.getBackground());
         cardName.setText(c.getName());
         int count = countCard(c);
-        updateAddCardButton(count);
-        if(deck_card.getCardList().size() == 10 || count == 2 || (c instanceof Hero && count == 1)) addToDeck.setEnabled(false);
+        updateAddCardButton(count, c instanceof Hero ? 1 : 2);
+        if(deck_card.getCardList().size() == 15 || count == 2 || (c instanceof Hero && count == 1)) addToDeck.setEnabled(false);
         else if(count < 2) addToDeck.setEnabled(true);
         if(count == 0) removeFromDeck.setEnabled(false);
         else if(count > 0) removeFromDeck.setEnabled(true);
