@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
+import ked.pts3g10.Gameplay.CardPackage.Army;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
 import ked.pts3g10.Gameplay.CardPackage.Hero;
@@ -181,7 +182,8 @@ public class PlayerAction {
             attack_case.getCard().setHealthPoints(eniHp);
             attack_case.updateHp(eniHp);
         }
-        attack_case.playFireAnimation(); // TODO: différencier les spells des attaques normales
+        if(getCaseCard() instanceof Spell)
+            attack_case.playFireAnimation();
         resetActionState();
         attack_case.getCard().setHasMovedThisRound(true);
     }
