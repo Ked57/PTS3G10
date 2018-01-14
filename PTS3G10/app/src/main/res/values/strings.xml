@@ -94,8 +94,8 @@
     <string name="title_activity_tutoriel">Tutoriel</string>
         <!--Tuto Lancer Partie-->
         <string name="tutoLancePartie">1) Lancer une partie</string>
-        <string name="LancerPartie1">Tout d\'abord cliquer sur le bouton \"JOUER\"</string>
-        <string name="LancerPartie2">Vous arrivez alors sur cette fenêtre attendez jusqu\'à ce qu \'un joueur vous rejoigne</string>
+        <string name="LancerPartie1">Tout d\'abord cliquez sur le bouton \"JOUER\"</string>
+        <string name="LancerPartie2">Vous arrivez alors sur cette fenêtre, attendez jusqu\'à ce qu \'un joueur vous rejoigne</string>
         <string name="LancerPartie3">Si vous voyez cette fenêtre alors vous êtes bien sur une partie</string>
         <!--Tuto Comment Jouer-->
         <string name="tutoCommentJouer">2) Comment jouer</string>
