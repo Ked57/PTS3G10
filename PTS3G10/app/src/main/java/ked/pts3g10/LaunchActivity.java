@@ -79,8 +79,6 @@ public class LaunchActivity extends AppCompatActivity {
         initAbilities();
         initCards(getDistantVersion());
 
-        playerDeck = DeckManager.getPlayerDeck(ConnectionActivity.token,false);
-
         findViewById(R.id.playButton).setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
@@ -321,6 +319,7 @@ public class LaunchActivity extends AppCompatActivity {
                     Log.i("Parser", "File Dir:" + save.getAbsolutePath());
                     cards = xmlParser.parse(resultStream, this);
                     resultStream.close();
+                    playerDeck = DeckManager.getPlayerDeck(ConnectionActivity.token,false);
                     Log.i("parser", "version : " + version);
                     Log.i("parser", "cards : " + cards.toString());
                 } catch (FileNotFoundException e) {
