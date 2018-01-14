@@ -121,7 +121,10 @@ public class ConstructionDeckActivity extends AppCompatActivity {
             count++;
         }
         if(count > 0) {
-            if(count >= 2) addToDeck.setEnabled(false);
+            if(selectedCard instanceof Hero && count == 1) {
+                addToDeck.setEnabled(false);
+            }
+            else if(count >= 2 || deck_card.getCardList().size() == 10) addToDeck.setEnabled(false);
             removeFromDeck.setEnabled(true);
         }
         updateAddCardButton(count);
@@ -281,7 +284,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
         cardName.setText(c.getName());
         int count = countCard(c);
         updateAddCardButton(count);
-        if(count == 2) addToDeck.setEnabled(false);
+        if(deck_card.getCardList().size() == 10 || count == 2 || (c instanceof Hero && count == 1)) addToDeck.setEnabled(false);
         else if(count < 2) addToDeck.setEnabled(true);
         if(count == 0) removeFromDeck.setEnabled(false);
         else if(count > 0) removeFromDeck.setEnabled(true);
