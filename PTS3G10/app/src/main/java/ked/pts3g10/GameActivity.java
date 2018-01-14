@@ -4,6 +4,7 @@ import android.app.ActivityManager;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -47,6 +48,7 @@ public class GameActivity extends AppCompatActivity {
         boolean starting = intent.getBooleanExtra("starting",true);
         int adversaryToken = intent.getIntExtra("adversaryToken",0);
 
+        Log.i("Network","adversary token is "+adversaryToken);
         adversaryDeck = DeckManager.getPlayerDeck(adversaryToken,true);
 
         normalFinish = false;

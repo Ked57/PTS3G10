@@ -100,7 +100,7 @@ public class XMLParser {
                             Log.e("Parser","Ability is null");
                             break;
                         }
-                        cards.add(new Hero(e.id,e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,thmbn3,thmbn3,ability2,adversary3));
+                        cards.add(new Hero(e.id,e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,bg3,thmbn3,ability2,adversary3));
                         break;
                 }
             }

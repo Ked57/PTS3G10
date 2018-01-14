@@ -8,6 +8,7 @@ import ked.pts3g10.ConnectionActivity;
 import ked.pts3g10.GameActivity;
 import ked.pts3g10.Gameplay.CardPackage.BoardCard;
 import ked.pts3g10.Gameplay.CardPackage.Card;
+import ked.pts3g10.Gameplay.CardPackage.Hero;
 import ked.pts3g10.Gameplay.CardPackage.Spell;
 import ked.pts3g10.Interface.Case;
 import ked.pts3g10.Network.packet.PacketSendMovement;
@@ -82,54 +83,58 @@ public class PlayerAction {
         this.moveBoardCardNext = moveBoardCardNext;
     }
 
-    public void setCaseToPlaceIt(Case caseToPlaceIt){
+    public void setCaseToPlaceIt(Case caseToPlaceIt) {
         this.caseToPlaceIt = caseToPlaceIt;
     }
 
-    public void setToBePlaced(BoardCard toBePlaced){
+    public void setToBePlaced(BoardCard toBePlaced) {
         this.toBePlaced = toBePlaced;
     }
 
-    public void setPlaceBoardCardNext(boolean placeBoardCardNext){
+    public void setPlaceBoardCardNext(boolean placeBoardCardNext) {
         this.placeBoardCardNext = placeBoardCardNext;
     }
 
-    public boolean isPlaceBoardCardNext(){return placeBoardCardNext;}
+    public boolean isPlaceBoardCardNext() {
+        return placeBoardCardNext;
+    }
 
-    public void placeBoardCardNext(GameActivity context){
-        placeBoardCard(context,toBePlaced, caseToPlaceIt);
+    public void placeBoardCardNext(GameActivity context) {
+        placeBoardCard(context, toBePlaced, caseToPlaceIt);
         placeBoardCardNext = false;
     }
 
-    public void moveBoardCardNext(GameActivity context){
-        moveCard(context,caseItComesFrom,caseItsGoingTo);
+    public void moveBoardCardNext(GameActivity context) {
+        moveCard(context, caseItComesFrom, caseItsGoingTo);
         moveBoardCardNext = false;
     }
 
     public void placeBoardCard(GameActivity context, BoardCard card, Case new_case) {
         new_case.setCard(context, card);
-        player.setCrystals(player.getCrystals()-card.getCrystalCost());
+        player.setCrystals(player.getCrystals() - card.getCrystalCost());
         player.getDeck().getCardList().remove(card);
         GameActivity.getBoard().updateTexts();
         resetActionState();
         new_case.getCard().setHasMovedThisRound(true);
     }
+
     //Appelé quand c'est le joueur qui bouge une carte
     public void moveCard(GameActivity context, BoardCard card, Case new_case) {
         Pos basePos = movingFrom.getPos();
         Pos newPos = new_case.getPos();
-        new PacketSendMovement().call(ConnectionActivity.token,basePos.getPosX(),basePos.getPosY(),newPos.getPosX(),newPos.getPosY());
-        new_case.setCard(context,card);
+        new PacketSendMovement().call(ConnectionActivity.token, basePos.getPosX(), basePos.getPosY(), newPos.getPosX(), newPos.getPosY());
+        new_case.setCard(context, card);
         movingFrom.resetCard();
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
         resetActionState();
         new_case.getCard().setHasMovedThisRound(true);
     }
+
     //Appelé quand c'est l'adversaire
-    public void moveCard(GameActivity context,Case movingFrom, Case new_case) {
+    public void moveCard(GameActivity context, Case movingFrom, Case new_case) {
         BoardCard card = movingFrom.getCard();
-        new_case.setCard(context,card);
+        new_case.setCard(context, card);
         movingFrom.resetCard();
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
@@ -138,18 +143,20 @@ public class PlayerAction {
     }
 
     public void useSpellCard(Case new_case) {
-        Log.i("Spell","Using spell");
-        if(caseCard instanceof Spell){
-            ((Spell)caseCard).getAbility().use(GameActivity.getBoard(),new_case, caseCard.getRangePoints(),player.isAdversary());
-            if(!player.isAdversary())
-                new PacketSendSpell().call(ConnectionActivity.token,player.getDeck().getCardList().indexOf(caseCard),new_case.getPos());
-            player.setCrystals(player.getCrystals()-caseCard.getCrystalCost());
-            player.getDeck().getCardList().remove(caseCard);
-            caseCard = null;
-            resetActionState();
+        Log.i("Spell", "Using spell");
+        if (caseCard instanceof Spell) {
+            ((Spell) caseCard).getAbility().use(GameActivity.getBoard(), new_case, caseCard.getRangePoints(), player.isAdversary());
+        } else if (caseCard instanceof Hero) {
+            ((Hero) caseCard).getAbility().use(GameActivity.getBoard(), new_case, caseCard.getRangePoints(), player.isAdversary());
+        } else return;
+        if (!player.isAdversary())
+            new PacketSendSpell().call(ConnectionActivity.token, player.getDeck().getCardList().indexOf(caseCard), new_case.getPos());
+        player.setCrystals(player.getCrystals() - caseCard.getCrystalCost());
+        player.getDeck().getCardList().remove(caseCard);
+        caseCard = null;
+        resetActionState();
 
-            GameActivity.getBoard().updateTexts();
-        }
+        GameActivity.getBoard().updateTexts();
     }
 
     public void attack(Case attack_case) {
@@ -161,11 +168,11 @@ public class PlayerAction {
 
         eniHp -= ap;
 
-        new PacketUpdateHP().call(ConnectionActivity.token,eniHp,attack_case.getPos());
+        new PacketUpdateHP().call(ConnectionActivity.token, eniHp, attack_case.getPos());
 
-        if(eniHp <= 0){
+        if (eniHp <= 0) {
             attack_case.resetCard();
-        }else {
+        } else {
             attack_case.getCard().setHealthPoints(eniHp);
             attack_case.updateHp(eniHp);
         }
@@ -174,83 +181,82 @@ public class PlayerAction {
         attack_case.getCard().setHasMovedThisRound(true);
     }
 
-    public void heal(Case heal_case){
-        if(caseCard != null) {
+    public void heal(Case heal_case) {
+        if (caseCard != null) {
             heal_case.playHealAnimation();
             int ap = getCaseCard().getAttactPoints();
             int hp = heal_case.getCard().getHealthPoints();
             heal_case.updateHp(hp + ap);
-            new PacketUpdateHP().call(ConnectionActivity.token,hp+ap,heal_case.getPos());
+            new PacketUpdateHP().call(ConnectionActivity.token, hp + ap, heal_case.getPos());
             resetActionState();
             heal_case.getCard().setHasMovedThisRound(true);
         }
     }
 
 
-    public void chooseCaseToGoTo(Case base){
+    public void chooseCaseToGoTo(Case base) {
         Board board = GameActivity.getBoard();
-            actionState = 2;
-            movingFrom = base;
-            caseCard = movingFrom.getCard();
-            for (Case c : board.getCases()) {
-                if (base.getXDistanceWith(c) <= base.getCard().getMovementPoints() && base.getYDistanceWith(c) <= base.getCard().getMovementPoints()) {
-                    if (c.isCardThumbnailEmpty()) {
-                        c.setCaseActionable(R.color.colorGreen);
-                    }else if(c.isPlayersCastle()){
-                        c.setCaseNonActionable();
-                    }else if(c.isAdversaryCastle()){
-                        c.setCaseActionable(R.color.colorBlue);
-                    }
-                    else if(c.getCard().isAdversary()){
-                        c.setCaseActionable(R.color.colorBlue);
-                    }
-                    else {
-                        c.setCaseNonActionable();
-                    }
-                }
-                if(base.getCard().getRangePoints() > base.getCard().getMovementPoints()
-                        && !c.isCardThumbnailEmpty()
-                        && base.getXDistanceWith(c) <= base.getCard().getRangePoints()
-                        && base.getYDistanceWith(c) <= base.getCard().getRangePoints()) {
-                    if(c.isPlayersCastle()){
-                        c.setCaseNonActionable();
-                    }else if(c.isAdversaryCastle()){
-                        c.setCaseActionable(R.color.colorBlue);
-                    }
-                    else if(c.getCard().isAdversary()){
-                        c.setCaseActionable(R.color.colorBlue);
-                    }
-                    else {
-                        c.setCaseNonActionable();
-                    }
+        actionState = 2;
+        movingFrom = base;
+        caseCard = movingFrom.getCard();
+        for (Case c : board.getCases()) {
+            if (base.getXDistanceWith(c) <= base.getCard().getMovementPoints() && base.getYDistanceWith(c) <= base.getCard().getMovementPoints()) {
+                if (c.isCardThumbnailEmpty()) {
+                    c.setCaseActionable(R.color.colorGreen);
+                } else if (c.isPlayersCastle()) {
+                    c.setCaseNonActionable();
+                } else if (c.isAdversaryCastle()) {
+                    c.setCaseActionable(R.color.colorBlue);
+                } else if (c.getCard().isAdversary()) {
+                    c.setCaseActionable(R.color.colorBlue);
+                } else {
+                    c.setCaseNonActionable();
                 }
             }
-    }
-
-    public void resetActionState(){
-        actionState = 0;
-        GameActivity.getBoard().clearBoardActions();
-    }
-    public int getActionState() {return actionState;}
-
-    public void chooseInitialCase(BoardCard card){
-        Board board = GameActivity.getBoard();
-        actionState = 1;
-        caseCard = card;
-
-        for(int i = 0; i < 5; ++i){
-            Case c = board.getCaseWithLinearLayoutNumber(i,4);
-            if(c.isCardThumbnailEmpty()){
-                c.setCaseActionable(R.color.colorGreen);
-            }else c.setCaseActionable(R.color.colorRed);
+            if (base.getCard().getRangePoints() > base.getCard().getMovementPoints()
+                    && !c.isCardThumbnailEmpty()
+                    && base.getXDistanceWith(c) <= base.getCard().getRangePoints()
+                    && base.getYDistanceWith(c) <= base.getCard().getRangePoints()) {
+                if (c.isPlayersCastle()) {
+                    c.setCaseNonActionable();
+                } else if (c.isAdversaryCastle()) {
+                    c.setCaseActionable(R.color.colorBlue);
+                } else if (c.getCard().isAdversary()) {
+                    c.setCaseActionable(R.color.colorBlue);
+                } else {
+                    c.setCaseNonActionable();
+                }
+            }
         }
     }
 
-    public void chooseSpellAimPoint(Card card){
+    public void resetActionState() {
+        actionState = 0;
+        GameActivity.getBoard().clearBoardActions();
+    }
+
+    public int getActionState() {
+        return actionState;
+    }
+
+    public void chooseInitialCase(BoardCard card) {
         Board board = GameActivity.getBoard();
         actionState = 1;
         caseCard = card;
-        for(Case c : board.getCases()){
+
+        for (int i = 0; i < 5; ++i) {
+            Case c = board.getCaseWithLinearLayoutNumber(i, 4);
+            if (c.isCardThumbnailEmpty()) {
+                c.setCaseActionable(R.color.colorGreen);
+            } else c.setCaseActionable(R.color.colorRed);
+        }
+    }
+
+    public void chooseSpellAimPoint(Card card) {
+        Board board = GameActivity.getBoard();
+        actionState = 1;
+        caseCard = card;
+        for (Case c : board.getCases()) {
             if (c.isCardThumbnailEmpty()) {
                 c.setCaseActionable(R.color.colorGreen);
             } else c.setCaseActionable(R.color.colorBlue);
@@ -261,9 +267,11 @@ public class PlayerAction {
         return caseCard;
     }
 
-    public Case getMovingFrom() {return movingFrom;}
+    public Case getMovingFrom() {
+        return movingFrom;
+    }
 
-    public synchronized void clearUpdateHp(){
+    public synchronized void clearUpdateHp() {
         caseToUpdateHp.clear();
     }
 
@@ -271,9 +279,11 @@ public class PlayerAction {
         caseToUpdateHp.add(c);
     }
 
-    public synchronized ArrayList<Case> getCaseToUpdateHp(){return caseToUpdateHp;}
+    public synchronized ArrayList<Case> getCaseToUpdateHp() {
+        return caseToUpdateHp;
+    }
 
-    public synchronized void clearResetHp(){
+    public synchronized void clearResetHp() {
         caseToResetCard.clear();
     }
 
@@ -282,7 +292,9 @@ public class PlayerAction {
     }
 
 
-    public synchronized ArrayList<Case> getCaseToResetCard(){return caseToResetCard;}
+    public synchronized ArrayList<Case> getCaseToResetCard() {
+        return caseToResetCard;
+    }
 
     public boolean isUpdateHp() {
         return updateHp;
@@ -292,7 +304,7 @@ public class PlayerAction {
         this.updateHp = updateHp;
     }
 
-    public void setCaseCard(Card c){
+    public void setCaseCard(Card c) {
         caseCard = c;
     }
 
