@@ -91,7 +91,17 @@ public class XMLParser {
                         }
                         cards.add(new Spell(e.id, e.name,e.description,e.crystalCost,e.ap,e.rp,bg2,thmbn2,ability,adversary2));
                         break;
-                    //TODO: Hero cards
+                    case "hero":
+                        boolean adversary3 = e.adversary.equals("true");
+                        int bg3 = ImagesEnum.getDrawableIdWithImageId(e.bg);
+                        int thmbn3 = ImagesEnum.getDrawableIdWithImageId(e.thmbn);
+                        Ability ability2 = context.getAbilityById(e.abilityId);
+                        if(ability2.equals(context.emptyAbility)){
+                            Log.e("Parser","Ability is null");
+                            break;
+                        }
+                        cards.add(new Hero(e.id,e.name,e.description,e.crystalCost,e.ap,e.rp,e.hp,e.mp,thmbn3,thmbn3,ability2,adversary3));
+                        break;
                 }
             }
             return cards;
