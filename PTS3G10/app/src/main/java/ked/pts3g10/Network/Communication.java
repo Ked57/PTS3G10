@@ -23,7 +23,7 @@ public class Communication extends AsyncTask {
 
 	public Communication() {
 		buffer = new byte[2048];
-		port = 20000 + new Random().nextInt(100);
+		port = 20000 + new Random().nextInt(200);
 		//port = 20000;
 		receivePacket = new DatagramPacket(buffer, buffer.length);
 		serverPort = 25565;

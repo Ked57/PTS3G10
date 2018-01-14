@@ -16,6 +16,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".InscriptionActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity
             android:name=".GameActivity"
@@ -23,9 +24,12 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".DeckActivity"
-            android:theme="@style/DeckActivity" />
+            android:theme="@style/DeckActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ConnectionActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,17 +39,25 @@
         </activity>
         <activity
             android:name=".CreditActivity"
-            android:label="@string/credits" />
+            android:label="@string/credits"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".LaunchActivity"
-            android:label="@string/menu" />
+            android:label="@string/menu"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ConstructionDeckActivity"
             android:label="@string/construction_deck"
-            android:screenOrientation="portrait" />
-        <activity android:name=".WaitingForGameActivity" />
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".WaitingForGameActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait"/>
         <activity android:name=".TutorielActivity"
             android:label="@string/Tutoriel"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait"/>
     </application>
 
