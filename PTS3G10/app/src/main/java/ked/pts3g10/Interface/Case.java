@@ -184,7 +184,7 @@ public class Case extends FrameLayout {
                     new PacketPlayCard().call(ConnectionActivity.token,GameActivity.getBoard().getPlayer().getDeck().getCardList().indexOf(pa.getCaseCard()),pos);
                     pa.placeBoardCard(context, (BoardCard) pa.getCaseCard(), this);
                 }
-                else if(pa.getCaseCard() instanceof Spell)
+                else if(pa.getCaseCard() instanceof Spell || pa.getCaseCard() instanceof Hero)
                     pa.useSpellCard(this);
             } else if (!isCardThumbnailEmpty() && card != null && pa.getActionState() != 2) {
                 if(!card.hasMovedThisRound() && !card.isAdversary())
