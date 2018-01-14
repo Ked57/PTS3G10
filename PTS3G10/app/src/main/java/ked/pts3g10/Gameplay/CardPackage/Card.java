@@ -1,11 +1,5 @@
 package ked.pts3g10.Gameplay.CardPackage;
 
-
-import android.util.Log;
-import android.widget.ImageView;
-
-import ked.pts3g10.R;
-
 public abstract class Card {
     protected int id;
     protected String name;
@@ -29,18 +23,6 @@ public abstract class Card {
         hasMovedThisRound = false;
         this.adversary = adversary;
         thumbnail = thmbn;
-        /*if(adversary){
-           switch(name){
-               case "Archers":
-                   thmbn.setBackgroundResource(R.drawable.bowred);
-                   thmbn.setTag(R.drawable.bowred);
-                   break;
-               case "Légion":
-                   thmbn.setBackgroundResource(R.drawable.swordred);
-                   thmbn.setTag(R.drawable.swordred);
-           }
-        }*/
-
     }
 
     public int getId() {
