@@ -114,7 +114,7 @@ public class ConstructionDeckActivity extends AppCompatActivity {
     }
 
     private void addToDeckCall() {
-        Card selectedCard = card_list.get(index);
+        Card selectedCard = card_list.get(index).clone(false);
         int count = countCard(selectedCard);
         if(count < 2) {
             deck_card.addCard(selectedCard);

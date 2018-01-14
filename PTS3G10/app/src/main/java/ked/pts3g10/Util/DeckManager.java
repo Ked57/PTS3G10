@@ -75,7 +75,7 @@ public class DeckManager {
 
             Log.i("DATA", response.toString());
             for(String id : response.toString().split(",")) {
-                Card c = getCardById(Integer.parseInt(id)+offset);
+                Card c = getCardById(Integer.parseInt(id)+offset,adversary);
                 if(c != null) user_deck.add(c);
             }
         } catch(Exception ex) {
@@ -86,9 +86,9 @@ public class DeckManager {
         return new Deck(user_deck);
     }
 
-    private static Card getCardById(int id) {
+    private static Card getCardById(int id,boolean adversary) {
         for(Card card : LaunchActivity.cards) {
-            if(card.getId() == id) return card;
+            if(card.getId() == id) return card.clone(adversary);
         }
         return null;
     }

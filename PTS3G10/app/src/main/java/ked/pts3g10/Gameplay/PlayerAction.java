@@ -112,7 +112,7 @@ public class PlayerAction {
         player.getDeck().getCardList().remove(card);
         GameActivity.getBoard().updateTexts();
         resetActionState();
-        card.setHasMovedThisRound(true);
+        new_case.getCard().setHasMovedThisRound(true);
     }
     //Appelé quand c'est le joueur qui bouge une carte
     public void moveCard(GameActivity context, BoardCard card, Case new_case) {
@@ -124,7 +124,7 @@ public class PlayerAction {
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
         resetActionState();
-        card.setHasMovedThisRound(true);
+        new_case.getCard().setHasMovedThisRound(true);
     }
     //Appelé quand c'est l'adversaire
     public void moveCard(GameActivity context,Case movingFrom, Case new_case) {
@@ -134,7 +134,7 @@ public class PlayerAction {
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
         resetActionState();
-        card.setHasMovedThisRound(true);
+        new_case.getCard().setHasMovedThisRound(true);
     }
 
     public void useSpellCard(Case new_case) {
@@ -171,7 +171,7 @@ public class PlayerAction {
         }
         attack_case.playFireAnimation(); // TODO: différencier les spells des attaques normales
         resetActionState();
-        caseCard.setHasMovedThisRound(true);
+        attack_case.getCard().setHasMovedThisRound(true);
     }
 
     public void heal(Case heal_case){
@@ -182,7 +182,7 @@ public class PlayerAction {
             heal_case.updateHp(hp + ap);
             new PacketUpdateHP().call(ConnectionActivity.token,hp+ap,heal_case.getPos());
             resetActionState();
-            caseCard.setHasMovedThisRound(true);
+            heal_case.getCard().setHasMovedThisRound(true);
         }
     }
 
