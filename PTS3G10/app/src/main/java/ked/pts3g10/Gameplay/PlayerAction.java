@@ -116,7 +116,7 @@ public class PlayerAction {
         player.getDeck().getCardList().remove(card);
         GameActivity.getBoard().updateTexts();
         resetActionState();
-        new_case.getCard().setHasMovedThisRound(true);
+        caseCard.setHasMovedThisRound(true);
     }
 
     //Appelé quand c'est le joueur qui bouge une carte
@@ -129,7 +129,7 @@ public class PlayerAction {
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
         resetActionState();
-        new_case.getCard().setHasMovedThisRound(true);
+        caseCard.setHasMovedThisRound(true);
     }
 
     //Appelé quand c'est l'adversaire
@@ -140,7 +140,7 @@ public class PlayerAction {
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
         resetActionState();
-        new_case.getCard().setHasMovedThisRound(true);
+        caseCard.setHasMovedThisRound(true);
     }
 
     public void useSpellCard(Case new_case) {
@@ -185,7 +185,7 @@ public class PlayerAction {
         if(getCaseCard() instanceof Spell)
             attack_case.playFireAnimation();
         resetActionState();
-        attack_case.getCard().setHasMovedThisRound(true);
+        caseCard.setHasMovedThisRound(true);
     }
 
     public void heal(Case heal_case) {
@@ -196,7 +196,7 @@ public class PlayerAction {
             heal_case.updateHp(hp + ap);
             new PacketUpdateHP().call(ConnectionActivity.token, hp + ap, heal_case.getPos());
             resetActionState();
-            heal_case.getCard().setHasMovedThisRound(true);
+            caseCard.setHasMovedThisRound(true);
         }
     }
 
