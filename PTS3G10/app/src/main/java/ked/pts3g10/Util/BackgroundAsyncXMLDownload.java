@@ -70,6 +70,7 @@ public class BackgroundAsyncXMLDownload extends AsyncTask {
         if(s.equals("ok")){
             LaunchActivity.cards = cards;
             LaunchActivity.saveCards = true;
+            LaunchActivity.initDeck();
         }else Log.i("Parser","Error parsing distant file");
     }
 
