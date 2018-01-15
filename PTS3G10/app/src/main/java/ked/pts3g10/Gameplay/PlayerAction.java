@@ -116,7 +116,7 @@ public class PlayerAction {
         player.getDeck().getCardList().remove(card);
         GameActivity.getBoard().updateTexts();
         resetActionState();
-        caseCard.setHasMovedThisRound(true);
+        card.setHasMovedThisRound(true);
     }
 
     //Appelé quand c'est le joueur qui bouge une carte
@@ -129,7 +129,7 @@ public class PlayerAction {
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
         resetActionState();
-        caseCard.setHasMovedThisRound(true);
+        card.setHasMovedThisRound(true);
     }
 
     //Appelé quand c'est l'adversaire
