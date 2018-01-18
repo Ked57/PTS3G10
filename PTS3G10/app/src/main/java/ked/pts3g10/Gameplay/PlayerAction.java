@@ -140,7 +140,7 @@ public class PlayerAction {
         caseCard = null;
         GameActivity.getBoard().clearBoardActions();
         resetActionState();
-        caseCard.setHasMovedThisRound(true);
+        card.setHasMovedThisRound(true);
     }
 
     public void useSpellCard(Case new_case) {
